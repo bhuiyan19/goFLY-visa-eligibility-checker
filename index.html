@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goFLY - Visa Eligibility Checker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-check:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-check:active {
+            transform: translateY(0);
+        }
+
+        .result-container {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .result-container.visa-required {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+        }
+
+        .result-container.visa-free {
+            background: #d4edda;
+            border: 2px solid #28a745;
+        }
+
+        .result-container.visa-on-arrival {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+        }
+
+        .result-container.not-eligible {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+        }
+
+        .result-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-icon {
+            font-size: 1.5em;
+        }
+
+        .result-details {
+            font-size: 1em;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .result-details p {
+            margin-bottom: 10px;
+        }
+
+        .result-details ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .result-details li {
+            margin-bottom: 8px;
+        }
+
+        .reset-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #5a6268;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .info-box p {
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .btn-check {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✈️ goFLY</h1>
+            <p>Check Your Visa Eligibility in Seconds</p>
+        </div>
+
+        <form id="visaForm">
+            <div class="form-group">
+                <label for="nationality">Your Nationality</label>
+                <select id="nationality" required>
+                    <option value="">Select your country</option>
+                    <option value="BD">Bangladesh</option>
+                    <option value="IN">India</option>
+                    <option value="PK">Pakistan</option>
+                    <option value="US">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="CA">Canada</option>
+                    <option value="AU">Australia</option>
+                    <option value="DE">Germany</option>
+                    <option value="FR">France</option>
+                    <option value="JP">Japan</option>
+                    <option value="CN">China</option>
+                    <option value="SG">Singapore</option>
+                    <option value="MY">Malaysia</option>
+                    <option value="TH">Thailand</option>
+                    <option value="AE">UAE</option>
+                    <option value="SA">Saudi Arabia</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="destination">Destination Country</label>
+                <select id="destination" required>
+                    <option value="">Select destination</option>
+                    <option value="US">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="CA">Canada</option>
+                    <option value="AU">Australia</option>
+                    <option value="SG">Singapore</option>
+                    <option value="MY">Malaysia</option>
+                    <option value="TH">Thailand</option>
+                    <option value="AE">UAE</option>
+                    <option value="TR">Turkey</option>
+                    <option value="GE">Georgia</option>
+                    <option value="MV">Maldives</option>
+                    <option value="NP">Nepal</option>
+                    <option value="BT">Bhutan</option>
+                    <option value="LK">Sri Lanka</option>
+                    <option value="ID">Indonesia</option>
+                    <option value="VN">Vietnam</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="travelPurpose">Purpose of Travel</label>
+                <select id="travelPurpose" required>
+                    <option value="">Select purpose</option>
+                    <option value="tourism">Tourism</option>
+                    <option value="business">Business</option>
+                    <option value="study">Study</option>
+                    <option value="work">Work</option>
+                    <option value="transit">Transit</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration of Stay (days)</label>
+                <input type="number" id="duration" min="1" max="365" placeholder="Enter number of days" required>
+            </div>
+
+            <button type="submit" class="btn-check">Check Visa Eligibility</button>
+        </form>
+
+        <div id="result" class="result-container"></div>
+
+        <div class="info-box">
+            <p><strong>Note:</strong> This tool provides general visa information. Always verify requirements with the official embassy or consulate of your destination country before traveling.</p>
+        </div>
+    </div>
+
+    <script>
+        // Visa requirements database (simplified)
+        const visaRules = {
+            'BD': {
+                'US': { type: 'visa-required', notes: 'B1/B2 visa required. Apply at US Embassy in Dhaka.', processing: '5-10 business days' },
+                'UK': { type: 'visa-required', notes: 'Standard Visitor visa required. Apply online through UK Visa & Immigration.', processing: '3 weeks' },
+                'CA': { type: 'visa-required', notes: 'Visitor visa (TRV) required. Apply through VFS Global.', processing: '4-6 weeks' },
+                'AU': { type: 'visa-required', notes: 'Visitor visa (subclass 600) required. Apply online.', processing: '20-30 days' },
+                'SG': { type: 'visa-required', notes: 'Visa required for tourism. Apply through Singapore embassy.', processing: '3-5 days' },
+                'MY': { type: 'visa-on-arrival', notes: 'Visa on arrival available for up to 30 days.', fee: '$100 USD' },
+                'TH': { type: 'visa-on-arrival', notes: 'Visa on arrival for stays up to 15 days.', fee: '2000 THB' },
+                'AE': { type: 'visa-on-arrival', notes: 'Visa on arrival available for tourism.', fee: 'AED 100' },
+                'TR': { type: 'visa-on-arrival', notes: 'E-visa available online for tourism.', fee: '$50 USD' },
+                'GE': { type: 'visa-free', notes: 'Visa-free entry for up to 1 year!', duration: '365 days' },
+                'MV': { type: 'visa-on-arrival', notes: 'Free visa on arrival for 30 days.', fee: 'Free' },
+                'NP': { type: 'visa-on-arrival', notes: 'Visa on arrival available.', fee: '$25-100 USD depending on duration' },
+                'BT': { type: 'visa-required', notes: 'Tourist visa required. Must book through registered tour operator.', processing: '1-2 weeks' },
+                'LK': { type: 'visa-on-arrival', notes: 'Electronic Travel Authorization (ETA) required.', fee: '$35 USD' },
+                'ID': { type: 'visa-on-arrival', notes: 'Visa on arrival for 30 days.', fee: '$35 USD' },
+                'VN': { type: 'visa-required', notes: 'E-visa available online for tourism.', fee: '$25 USD' },
+            },
+            'IN': {
+                'US': { type: 'visa-required', notes: 'B1/B2 visa required. Apply at US Embassy.', processing: '5-10 business days' },
+                'UK': { type: 'visa-required', notes: 'Standard Visitor visa required.', processing: '3 weeks' },
+                'CA': { type: 'visa-required', notes: 'Visitor visa required.', processing: '4-6 weeks' },
+                'AU': { type: 'visa-required', notes: 'Visitor visa required.', processing: '20-30 days' },
+                'SG': { type: 'visa-required', notes: 'Visa required. Apply online.', processing: '3-5 days' },
+                'MY': { type: 'visa-free', notes: 'Visa-free entry for up to 30 days.', duration: '30 days' },
+                'TH': { type: 'visa-on-arrival', notes: 'Visa on arrival available.', fee: '2000 THB' },
+                'AE': { type: 'visa-on-arrival', notes: 'Visa on arrival for tourism.', fee: 'AED 100' },
+                'TR': { type: 'visa-on-arrival', notes: 'E-visa available.', fee: '$50 USD' },
+                'NP': { type: 'visa-free', notes: 'No visa required for Indian citizens.', duration: 'Unlimited' },
+                'BT': { type: 'visa-free', notes: 'No visa required for Indian citizens.', duration: 'Unlimited' },
+                'MV': { type: 'visa-on-arrival', notes: 'Free visa on arrival.', fee: 'Free' },
+            },
+            'US': {
+                'UK': { type: 'visa-free', notes: 'Visa-free for up to 6 months.', duration: '180 days' },
+                'CA': { type: 'visa-free', notes: 'Visa-free for tourism.', duration: '6 months' },
+                'AU': { type: 'visa-required', notes: 'ETA required. Apply online.', fee: 'AUD 20' },
+                'SG': { type: 'visa-free', notes: 'Visa-free for up to 90 days.', duration: '90 days' },
+                'MY': { type: 'visa-free', notes: 'Visa-free for up to 90 days.', duration: '90 days' },
+                'TH': { type: 'visa-free', notes: 'Visa-free for up to 30 days.', duration: '30 days' },
+                'AE': { type: 'visa-free', notes: 'Visa-free for up to 90 days.', duration: '90 days' },
+                'TR': { type: 'visa-free', notes: 'Visa-free for up to 90 days.', duration: '90 days' },
+            },
+            'UK': {
+                'US': { type: 'visa-free', notes: 'ESTA required for stays up to 90 days.', duration: '90 days', fee: '$21 USD' },
+                'CA': { type: 'visa-free', notes: 'eTA required for air travel.', duration: '6 months', fee: 'CAD 7' },
+                'AU': { type: 'visa-required', notes: 'ETA required.', fee: 'AUD 20' },
+                'SG': { type: 'visa-free', notes: 'Visa-free for up to 90 days.', duration: '90 days' },
+                'MY': { type: 'visa-free', notes: 'Visa-free for up to 90 days.', duration: '90 days' },
+            },
+        };
+
+        const countryNames = {
+            'BD': 'Bangladesh',
+            'IN': 'India',
+            'PK': 'Pakistan',
+            'US': 'United States',
+            'UK': 'United Kingdom',
+            'CA': 'Canada',
+            'AU': 'Australia',
+            'DE': 'Germany',
+            'FR': 'France',
+            'JP': 'Japan',
+            'CN': 'China',
+            'SG': 'Singapore',
+            'MY': 'Malaysia',
+            'TH': 'Thailand',
+            'AE': 'UAE',
+            'SA': 'Saudi Arabia',
+            'TR': 'Turkey',
+            'GE': 'Georgia',
+            'MV': 'Maldives',
+            'NP': 'Nepal',
+            'BT': 'Bhutan',
+            'LK': 'Sri Lanka',
+            'ID': 'Indonesia',
+            'VN': 'Vietnam'
+        };
+
+        document.getElementById('visaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            checkVisaEligibility();
+        });
+
+        function checkVisaEligibility() {
+            const nationality = document.getElementById('nationality').value;
+            const destination = document.getElementById('destination').value;
+            const purpose = document.getElementById('travelPurpose').value;
+            const duration = parseInt(document.getElementById('duration').value);
+
+            if (!nationality || !destination || !purpose || !duration) {
+                alert('Please fill in all fields!');
+                return;
+            }
+
+            if (nationality === destination) {
+                showResult('not-eligible', '⚠️ Invalid Selection',
+                    '<p>You cannot check visa eligibility for your own country!</p>');
+                return;
+            }
+
+            // Check visa rules
+            let visaInfo = null;
+            if (visaRules[nationality] && visaRules[nationality][destination]) {
+                visaInfo = visaRules[nationality][destination];
+            }
+
+            displayResult(nationality, destination, purpose, duration, visaInfo);
+        }
+
+        function displayResult(nationality, destination, purpose, duration, visaInfo) {
+            const resultDiv = document.getElementById('result');
+            const natName = countryNames[nationality];
+            const destName = countryNames[destination];
+
+            if (!visaInfo) {
+                showResult('visa-required', '📋 Visa Required',
+                    `<p>Based on our database, citizens of <strong>${natName}</strong> typically require a visa to visit <strong>${destName}</strong>.</p>
+                    <p><strong>Recommendation:</strong> Please contact the ${destName} embassy or consulate in your country for specific requirements.</p>
+                    <p><strong>Purpose:</strong> ${capitalizeFirst(purpose)}</p>
+                    <p><strong>Duration:</strong> ${duration} days</p>
+                    <button class="reset-btn" onclick="resetForm()">Check Another Country</button>`);
+                return;
+            }
+
+            let title, icon, content;
+
+            switch(visaInfo.type) {
+                case 'visa-free':
+                    icon = '✅';
+                    title = 'Visa-Free Entry';
+                    content = `
+                        <p>Great news! Citizens of <strong>${natName}</strong> can enter <strong>${destName}</strong> without a visa!</p>
+                        <p><strong>📅 Allowed Stay:</strong> ${visaInfo.duration || 'Check with embassy'}</p>
+                        <p><strong>🎯 Purpose:</strong> ${capitalizeFirst(purpose)}</p>
+                        <p><strong>⏱️ Your Duration:</strong> ${duration} days</p>
+                        ${visaInfo.notes ? `<p><strong>📝 Note:</strong> ${visaInfo.notes}</p>` : ''}
+                        <p style="margin-top: 15px;"><strong>Requirements:</strong></p>
+                        <ul>
+                            <li>Valid passport (6 months validity recommended)</li>
+                            <li>Return ticket</li>
+                            <li>Proof of accommodation</li>
+                            <li>Sufficient funds</li>
+                        </ul>
+                        <button class="reset-btn" onclick="resetForm()">Check Another Country</button>
+                    `;
+                    break;
+
+                case 'visa-on-arrival':
+                    icon = '🎫';
+                    title = 'Visa on Arrival Available';
+                    content = `
+                        <p>Good news! You can get a visa on arrival at <strong>${destName}</strong>!</p>
+                        <p><strong>💰 Fee:</strong> ${visaInfo.fee || 'Check with embassy'}</p>
+                        <p><strong>🎯 Purpose:</strong> ${capitalizeFirst(purpose)}</p>
+                        <p><strong>⏱️ Your Duration:</strong> ${duration} days</p>
+                        ${visaInfo.notes ? `<p><strong>📝 Note:</strong> ${visaInfo.notes}</p>` : ''}
+                        <p style="margin-top: 15px;"><strong>What to Bring:</strong></p>
+                        <ul>
+                            <li>Valid passport (6 months validity)</li>
+                            <li>Passport-sized photos</li>
+                            <li>Visa fee (cash)</li>
+                            <li>Return ticket</li>
+                            <li>Hotel booking confirmation</li>
+                        </ul>
+                        <button class="reset-btn" onclick="resetForm()">Check Another Country</button>
+                    `;
+                    break;
+
+                case 'visa-required':
+                    icon = '📋';
+                    title = 'Visa Required';
+                    content = `
+                        <p>You need to apply for a visa before traveling to <strong>${destName}</strong>.</p>
+                        <p><strong>⏱️ Processing Time:</strong> ${visaInfo.processing || 'Varies'}</p>
+                        ${visaInfo.fee ? `<p><strong>💰 Fee:</strong> ${visaInfo.fee}</p>` : ''}
+                        <p><strong>🎯 Purpose:</strong> ${capitalizeFirst(purpose)}</p>
+                        <p><strong>📅 Duration:</strong> ${duration} days</p>
+                        ${visaInfo.notes ? `<p><strong>📝 Note:</strong> ${visaInfo.notes}</p>` : ''}
+                        <p style="margin-top: 15px;"><strong>General Requirements:</strong></p>
+                        <ul>
+                            <li>Valid passport (6+ months validity)</li>
+                            <li>Completed visa application form</li>
+                            <li>Passport-sized photographs</li>
+                            <li>Proof of financial means</li>
+                            <li>Travel itinerary</li>
+                            <li>Hotel bookings</li>
+                            <li>Return flight tickets</li>
+                        </ul>
+                        <button class="reset-btn" onclick="resetForm()">Check Another Country</button>
+                    `;
+                    break;
+            }
+
+            showResult(visaInfo.type, `${icon} ${title}`, content);
+        }
+
+        function showResult(type, title, content) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = `result-container ${type}`;
+            resultDiv.innerHTML = `
+                <div class="result-title">${title}</div>
+                <div class="result-details">${content}</div>
+            `;
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetForm() {
+            document.getElementById('visaForm').reset();
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+    </script>
+</body>
+</html>
