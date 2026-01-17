@@ -614,47 +614,47 @@
             const progress = ((currentQuestionIndex + 1) / questionsData.questions.length) * 100;
 
             return `
-                <div class="max-w-2xl mx-auto space-y-6 animate-slide-in">
-                    <div class="bg-white rounded-2xl shadow-lg p-6 space-y-6">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="text-3xl">${selectedCountry.flag}</span>
-                                <div>
-                                    <h3 class="font-bold text-gray-800">${selectedCountry.nameBn}</h3>
-                                    <p class="text-xs text-gray-500">${selectedCountry.name}</p>
+                <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6 animate-slide-in">
+                    <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 space-y-4 sm:space-y-6">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2 flex-1 min-w-0">
+                                <span class="text-2xl sm:text-3xl flex-shrink-0">${selectedCountry.flag}</span>
+                                <div class="min-w-0">
+                                    <h3 class="font-bold text-gray-800 text-sm sm:text-base truncate">${selectedCountry.nameBn}</h3>
+                                    <p class="text-xs text-gray-500 truncate">${selectedCountry.name}</p>
                                 </div>
                             </div>
-                            <button onclick="backToCountries()" class="text-gray-500 hover:text-gray-700">← ফিরুন</button>
+                            <button onclick="backToCountries()" class="text-gray-500 hover:text-gray-700 flex-shrink-0 text-sm sm:text-base font-medium px-2 sm:px-3 py-1 sm:py-2 rounded hover:bg-gray-100 transition-all">← ফিরুন</button>
                         </div>
 
                         <div class="space-y-2">
-                            <div class="flex justify-between text-sm text-gray-600">
+                            <div class="flex justify-between text-xs sm:text-sm text-gray-600">
                                 <span>প্রশ্ন ${currentQuestionIndex + 1}/${questionsData.questions.length}</span>
-                                <span>${Math.round(progress)}%</span>
+                                <span class="font-medium">${Math.round(progress)}%</span>
                             </div>
-                            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="h-full bg-green-500 transition-all" style="width: ${progress}%"></div>
+                            <div class="h-2 sm:h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-green-500 transition-all duration-500" style="width: ${progress}%"></div>
                             </div>
                         </div>
 
-                        <div class="space-y-4">
-                            <h3 class="text-xl font-bold text-gray-800">${question.question}</h3>
+                        <div class="space-y-3 sm:space-y-4">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-800 leading-snug">${question.question}</h3>
 
                             ${question.type === 'select' ? `
-                                <div class="space-y-3">
+                                <div class="space-y-2 sm:space-y-3">
                                     ${question.options.map(opt => `
-                                        <button onclick="answerQuestion('${question.id}', '${opt.value}', ${opt.score})" class="w-full p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all text-left">
-                                            <span class="font-medium">${opt.label}</span>
+                                        <button onclick="answerQuestion('${question.id}', '${opt.value}', ${opt.score})" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all text-left focus:ring-2 focus:ring-green-300">
+                                            <span class="font-medium text-sm sm:text-base">${opt.label}</span>
                                         </button>
                                     `).join('')}
                                 </div>
                             ` : `
-                                <div class="space-y-3">
-                                    <button onclick="answerQuestion('${question.id}', true, ${question.weight})" class="w-full p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all">
-                                        <span class="font-medium">✅ হ্যাঁ</span>
+                                <div class="space-y-2 sm:space-y-3">
+                                    <button onclick="answerQuestion('${question.id}', true, ${question.weight})" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all focus:ring-2 focus:ring-green-300">
+                                        <span class="font-medium text-sm sm:text-base">✅ হ্যাঁ</span>
                                     </button>
-                                    <button onclick="answerQuestion('${question.id}', false, 0)" class="w-full p-4 rounded-xl border-2 border-gray-200 hover:border-red-500 hover:bg-red-50 transition-all">
-                                        <span class="font-medium">❌ না</span>
+                                    <button onclick="answerQuestion('${question.id}', false, 0)" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-red-500 hover:bg-red-50 transition-all focus:ring-2 focus:ring-red-300">
+                                        <span class="font-medium text-sm sm:text-base">❌ না</span>
                                     </button>
                                 </div>
                             `}
@@ -675,50 +675,59 @@
             else result = {emoji:'🎯',title:'চ্যালেঞ্জিং, কিন্তু অসম্ভব নয়!',color:'text-orange-600',bgColor:'bg-orange-50 border-orange-200',barColor:'bg-orange-500'};
 
             return `
-                <div class="max-w-2xl mx-auto space-y-6 animate-fade-in">
-                    <div class="${result.bgColor} border-2 rounded-2xl p-6 text-center space-y-4">
-                        <span class="text-6xl">${result.emoji}</span>
-                        <h2 class="text-2xl font-bold ${result.color}">${result.title}</h2>
-                        <div class="flex items-center justify-center gap-3">
-                            <span class="text-3xl">${selectedCountry.flag}</span>
-                            <span class="text-xl font-semibold">${selectedCountry.nameBn}</span>
+                <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6 animate-fade-in">
+                    <div class="${result.bgColor} border-2 rounded-2xl p-4 sm:p-6 text-center space-y-3 sm:space-y-4">
+                        <span class="text-5xl sm:text-6xl">${result.emoji}</span>
+                        <h2 class="text-xl sm:text-2xl font-bold ${result.color} leading-tight">${result.title}</h2>
+                        <div class="flex items-center justify-center gap-2 sm:gap-3">
+                            <span class="text-2xl sm:text-3xl">${selectedCountry.flag}</span>
+                            <span class="text-lg sm:text-xl font-semibold">${selectedCountry.nameBn}</span>
                         </div>
-                        <div class="bg-white rounded-xl p-4">
-                            <div class="text-4xl font-bold">${percentage}%</div>
-                            <div class="text-sm text-gray-500">স্কোর: ${score}/${questionsData.maxScore}</div>
-                            <div class="mt-3 h-3 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="h-full ${result.barColor}" style="width: ${percentage}%"></div>
+                        <div class="bg-white rounded-xl p-3 sm:p-4">
+                            <div class="text-3xl sm:text-4xl font-bold">${percentage}%</div>
+                            <div class="text-xs sm:text-sm text-gray-500">স্কোর: ${score}/${questionsData.maxScore}</div>
+                            <div class="mt-2 sm:mt-3 h-2.5 sm:h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full ${result.barColor} transition-all duration-500" style="width: ${percentage}%"></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-lg p-6">
-                        <h3 class="text-xl font-bold mb-4">📋 আপনার জন্য পরামর্শ</h3>
+                    <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">📋 আপনার জন্য পরামর্শ</h3>
                         <ul class="space-y-2">
-                            ${getTips().map(tip => `<li class="bg-gray-50 p-3 rounded-lg text-sm">${tip}</li>`).join('')}
+                            ${getTips().map(tip => `<li class="bg-gray-50 p-3 rounded-lg text-xs sm:text-sm leading-relaxed">${tip}</li>`).join('')}
                         </ul>
                     </div>
 
-                    <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-6 text-white space-y-4">
-                        <h3 class="text-2xl font-bold text-center">goFLY দিয়ে সহজ করুন</h3>
+                    <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-4 sm:p-6 text-white space-y-3 sm:space-y-4">
+                        <h3 class="text-xl sm:text-2xl font-bold text-center">goFLY দিয়ে সহজ করুন</h3>
                         <div class="grid grid-cols-3 gap-2 py-3 border-y border-green-500/30">
-                            <div class="text-center"><div class="text-2xl font-bold">১০,০০০+</div><div class="text-xs">কাস্টমার</div></div>
-                            <div class="text-center"><div class="text-2xl font-bold">৪.৮⭐</div><div class="text-xs">রিভিউ</div></div>
-                            <div class="text-center"><div class="text-2xl font-bold">৯০%+</div><div class="text-xs">সাকসেস</div></div>
+                            <div class="text-center">
+                                <div class="text-lg sm:text-2xl font-bold">১০k+</div>
+                                <div class="text-xs leading-tight">কাস্টমার</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg sm:text-2xl font-bold">৪.৮⭐</div>
+                                <div class="text-xs leading-tight">রিভিউ</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg sm:text-2xl font-bold">৯০%+</div>
+                                <div class="text-xs leading-tight">সাকসেস</div>
+                            </div>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="https://wa.me/8801713289175?text=আমি ${selectedCountry.nameBn} ভিসার জন্য আগ্রহী। স্কোর: ${percentage}%" target="_blank" class="flex-1 bg-white text-green-700 px-6 py-4 rounded-xl font-bold hover:bg-green-50 transition-all text-center">
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                            <a href="https://wa.me/8801713289175?text=আমি ${selectedCountry.nameBn} ভিসার জন্য আগ্রহী। স্কোর: ${percentage}%" target="_blank" class="flex-1 bg-white text-green-700 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:bg-green-50 transition-all text-center text-sm sm:text-base">
                                 💬 WhatsApp
                             </a>
-                            <a href="tel:+8801713289170" class="flex-1 bg-green-500 text-white px-6 py-4 rounded-xl font-bold hover:bg-green-400 transition-all text-center">
+                            <a href="tel:+8801713289170" class="flex-1 bg-green-500 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:bg-green-400 transition-all text-center text-sm sm:text-base">
                                 📞 কল করুন
                             </a>
                         </div>
                     </div>
 
-                    <div class="flex gap-4">
-                        <button onclick="resetApp()" class="flex-1 px-6 py-4 rounded-xl font-medium bg-gray-200 hover:bg-gray-300">🔄 আবার শুরু</button>
-                        <button onclick="backToCountries()" class="flex-1 px-6 py-4 rounded-xl font-medium bg-green-600 text-white hover:bg-green-700">🌍 অন্য দেশ</button>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <button onclick="resetApp()" class="w-full sm:flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-medium bg-gray-200 hover:bg-gray-300 transition-all text-sm sm:text-base">🔄 আবার শুরু</button>
+                        <button onclick="backToCountries()" class="w-full sm:flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-medium bg-green-600 text-white hover:bg-green-700 transition-all text-sm sm:text-base">🌍 অন্য দেশ</button>
                     </div>
                 </div>
             `;
