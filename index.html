@@ -452,9 +452,9 @@
 
         const DIFFICULTY_CONFIG = {
             easy: {label:'সহজ ভিসা',sublabel:'দ্রুত সার্ভিস',emoji:'⚡',color:'text-green-700',bgColor:'bg-green-100 border-green-200',tabActive:'bg-green-600 text-white shadow-lg',salesTag:'২-৭ দিনে',description:'VOA বা eVisa, সহজ প্রসেস'},
-            medium: {label:'মাঝারি',sublabel:'গাইডেড সাপোর্ট',emoji:'📋',color:'text-blue-700',bgColor:'bg-blue-100 border-blue-200',tabActive:'bg-blue-500 text-white shadow-lg',salesTag:'৯৫% সাকসেস',description:'স্ট্যান্ডার্ড প্রসেস, ভালো ডকুমেন্ট দরকার'},
-            hard: {label:'কঠিন ভিসা',sublabel:'প্রিমিয়াম সার্ভিস',emoji:'⭐',color:'text-purple-700',bgColor:'bg-purple-100 border-purple-200',tabActive:'bg-purple-600 text-white shadow-lg',salesTag:'৯০% সাকসেস',description:'উন্নত দেশ, শক্তিশালী প্রোফাইল লাগবে'},
-            'very-hard': {label:'অতি কঠিন',sublabel:'এক্সপার্ট টিম',emoji:'🏆',color:'text-orange-700',bgColor:'bg-gradient-to-r from-orange-100 to-amber-100 border-orange-300',tabActive:'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg',salesTag:'বিশেষজ্ঞ টিম',description:'USA/UK/Canada/Australia, সর্বোচ্চ প্রস্তুতি'}
+            medium: {label:'স্ট্যান্ডার্ড',sublabel:'গাইডেড সাপোর্ট',emoji:'📋',color:'text-blue-700',bgColor:'bg-blue-100 border-blue-200',tabActive:'bg-blue-500 text-white shadow-lg',salesTag:'৯৫% সাকসেস',description:'স্ট্যান্ডার্ড প্রসেস, ভালো ডকুমেন্ট দরকার'},
+            hard: {label:'প্রিমিয়াম',sublabel:'এক্সপার্ট সাপোর্ট',emoji:'⭐',color:'text-purple-700',bgColor:'bg-purple-100 border-purple-200',tabActive:'bg-purple-600 text-white shadow-lg',salesTag:'৯০% সাকসেস',description:'উন্নত দেশ, আমাদের বিশেষজ্ঞরা আছেন'},
+            'very-hard': {label:'এক্সক্লুসিভ',sublabel:'ভিআইপি সার্ভিস',emoji:'🏆',color:'text-orange-700',bgColor:'bg-gradient-to-r from-orange-100 to-amber-100 border-orange-300',tabActive:'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg',salesTag:'বিশেষজ্ঞ টিম',description:'USA/UK/Canada/Australia, ভিআইপি সাপোর্ট'}
         };
 
         // === STATE ===
@@ -464,6 +464,7 @@
         let answers = {};
         let score = 0;
         let activeTab = 'easy';
+        let leadData = {name: '', phone: '', email: ''};
 
         // === UTILITY FUNCTIONS ===
         function showLoading() {
@@ -483,6 +484,7 @@
                     answers,
                     score,
                     activeTab,
+                    leadData,
                     timestamp: Date.now()
                 };
                 localStorage.setItem('visaCheckerSession', JSON.stringify(sessionData));
@@ -518,6 +520,8 @@
                 app.innerHTML = renderCountrySelector();
             } else if (currentStep === 'questions') {
                 app.innerHTML = renderQuestions();
+            } else if (currentStep === 'lead-capture') {
+                app.innerHTML = renderLeadCapture();
             } else if (currentStep === 'result') {
                 app.innerHTML = renderResult();
             }
@@ -664,6 +668,95 @@
             `;
         }
 
+        function renderLeadCapture() {
+            const questionsData = QUESTIONS[selectedCountry.difficulty];
+            const percentage = Math.round((score / questionsData.maxScore) * 100);
+
+            return `
+                <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6 animate-slide-in">
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-4 sm:p-6 text-center space-y-3">
+                        <span class="text-4xl sm:text-5xl">🎊</span>
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-800">অভিনন্দন! আপনার মূল্যায়ন সম্পন্ন!</h2>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">আপনার রেজাল্ট দেখতে এবং বিশেষজ্ঞ পরামর্শ পেতে আপনার তথ্য দিন</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 space-y-4">
+                        <div class="flex items-center gap-2 sm:gap-3 pb-3 border-b border-gray-200">
+                            <span class="text-2xl sm:text-3xl">${selectedCountry.flag}</span>
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-sm sm:text-base">${selectedCountry.nameBn}</h3>
+                                <p class="text-xs text-gray-500">${selectedCountry.visaType}</p>
+                            </div>
+                        </div>
+
+                        <form onsubmit="submitLead(event)" class="space-y-3 sm:space-y-4">
+                            <div>
+                                <label for="leadName" class="block text-sm font-medium text-gray-700 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
+                                <input
+                                    type="text"
+                                    id="leadName"
+                                    required
+                                    class="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-sm sm:text-base"
+                                    placeholder="যেমন: আব্দুল করিম"
+                                    value="${leadData.name}"
+                                    oninput="leadData.name = this.value">
+                            </div>
+
+                            <div>
+                                <label for="leadPhone" class="block text-sm font-medium text-gray-700 mb-1">মোবাইল নম্বর <span class="text-red-500">*</span></label>
+                                <input
+                                    type="tel"
+                                    id="leadPhone"
+                                    required
+                                    pattern="[0-9]{11}"
+                                    class="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-sm sm:text-base"
+                                    placeholder="01XXXXXXXXX"
+                                    value="${leadData.phone}"
+                                    oninput="leadData.phone = this.value">
+                                <p class="text-xs text-gray-500 mt-1">১১ ডিজিটের বাংলাদেশী মোবাইল নম্বর</p>
+                            </div>
+
+                            <div>
+                                <label for="leadEmail" class="block text-sm font-medium text-gray-700 mb-1">ইমেইল <span class="text-gray-400">(ঐচ্ছিক)</span></label>
+                                <input
+                                    type="email"
+                                    id="leadEmail"
+                                    class="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-sm sm:text-base"
+                                    placeholder="example@email.com"
+                                    value="${leadData.email}"
+                                    oninput="leadData.email = this.value">
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 sm:py-4 rounded-xl font-bold hover:from-green-700 hover:to-green-800 transition-all shadow-lg text-sm sm:text-base">
+                                📊 রেজাল্ট দেখুন (${percentage}%)
+                            </button>
+                        </form>
+
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                            <p class="text-xs text-green-800 leading-relaxed">
+                                <span class="font-semibold">🔒 গোপনীয়তা সুরক্ষিত:</span> আপনার তথ্য সম্পূর্ণ নিরাপদ এবং শুধুমাত্র ভিসা পরামর্শের জন্য ব্যবহৃত হবে।
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-3 sm:p-4">
+                        <div class="flex items-center justify-between text-xs sm:text-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg sm:text-xl">✅</span>
+                                <span class="text-gray-700">১০,০০০+ সন্তুষ্ট কাস্টমার</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg sm:text-xl">⭐</span>
+                                <span class="font-bold text-amber-600">৪.৮ রেটিং</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         function renderResult() {
             const questionsData = QUESTIONS[selectedCountry.difficulty];
             const percentage = Math.round((score / questionsData.maxScore) * 100);
@@ -778,13 +871,53 @@
                         saveSession();
                         render();
                     } else {
-                        currentStep = 'result';
+                        currentStep = 'lead-capture';
                         saveSession();
                         render();
                     }
                     hideLoading();
                 }, 100);
             }, 200);
+        }
+
+        function submitLead(event) {
+            event.preventDefault();
+
+            // Validate required fields
+            if (!leadData.name || !leadData.phone) {
+                alert('দয়া করে নাম এবং মোবাইল নম্বর দিন');
+                return;
+            }
+
+            // Validate phone format
+            if (!/^[0-9]{11}$/.test(leadData.phone)) {
+                alert('দয়া করে সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন');
+                return;
+            }
+
+            showLoading();
+            setTimeout(() => {
+                // Save lead data to localStorage for potential backend sync
+                const leadInfo = {
+                    ...leadData,
+                    country: selectedCountry.nameBn,
+                    countryId: selectedCountry.id,
+                    score: score,
+                    percentage: Math.round((score / QUESTIONS[selectedCountry.difficulty].maxScore) * 100),
+                    timestamp: new Date().toISOString()
+                };
+
+                // Store lead (in production, this would go to a backend)
+                const leads = JSON.parse(localStorage.getItem('visaLeads') || '[]');
+                leads.push(leadInfo);
+                localStorage.setItem('visaLeads', JSON.stringify(leads));
+
+                // Move to result page
+                currentStep = 'result';
+                saveSession();
+                render();
+                hideLoading();
+            }, 300);
         }
 
         function backToCountries() {
@@ -848,6 +981,9 @@
                     answers = savedSession.answers;
                     score = savedSession.score;
                     activeTab = savedSession.activeTab;
+                    if (savedSession.leadData) {
+                        leadData = savedSession.leadData;
+                    }
                 } else {
                     clearSession();
                 }
@@ -857,7 +993,7 @@
 
         // Save on page unload
         window.addEventListener('beforeunload', function() {
-            if (currentStep === 'questions') {
+            if (currentStep === 'questions' || currentStep === 'lead-capture') {
                 saveSession();
             }
         });
