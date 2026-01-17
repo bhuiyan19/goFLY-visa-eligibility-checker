@@ -307,24 +307,23 @@
                         {value:'self-employed',label:'ব্যবসায়ী',score:15},
                         {value:'employed',label:'চাকরিজীবী',score:20}
                     ]},
-                    {id:'bank_balance',question:'আপনার ব্যাংক ব্যালেন্স কত?',type:'select',weight:20,options:[
-                        {value:'less-50k',label:'৫০,০০০ টাকার কম',score:3},
-                        {value:'50k-2lakh',label:'৫০,০০০ - ২,০০,০০০ টাকা',score:10},
-                        {value:'2-5lakh',label:'২-৫ লাখ টাকা',score:15},
-                        {value:'more-5lakh',label:'৫ লাখ টাকার বেশি',score:20}
+                    {id:'bank_balance',question:'আপনার ব্যাংক ব্যালেন্স কত?',type:'select',weight:25,options:[
+                        {value:'less-50k',label:'৫০,০০০ টাকার কম',score:4},
+                        {value:'50k-2lakh',label:'৫০,০০০ - ২,০০,০০০ টাকা',score:12},
+                        {value:'2-5lakh',label:'২-৫ লাখ টাকা',score:19},
+                        {value:'more-5lakh',label:'৫ লাখ টাকার বেশি',score:25}
                     ]},
-                    {id:'previous_travel',question:'আপনি কি আগে বিদেশ ভ্রমণ করেছেন?',type:'select',weight:15,options:[
-                        {value:'never',label:'না, কখনো না',score:3},
-                        {value:'once',label:'১-২টি দেশ',score:10},
-                        {value:'multiple',label:'৩+ দেশ',score:15}
+                    {id:'previous_travel',question:'আপনি কি আগে বিদেশ ভ্রমণ করেছেন?',type:'select',weight:20,options:[
+                        {value:'never',label:'না, কখনো না',score:4},
+                        {value:'once',label:'১-২টি দেশ',score:12},
+                        {value:'multiple',label:'৩+ দেশ',score:20}
                     ]},
-                    {id:'sponsor',question:'আপনার ট্রিপ কে স্পন্সর করছে?',type:'select',weight:15,options:[
-                        {value:'self',label:'নিজে',score:15},
-                        {value:'family',label:'পরিবারের সদস্য',score:12},
-                        {value:'company',label:'কোম্পানি',score:15},
-                        {value:'other',label:'অন্যান্য',score:5}
-                    ]},
-                    {id:'travel_insurance',question:'আপনার কি ট্রাভেল ইন্স্যুরেন্স আছে?',type:'boolean',weight:15}
+                    {id:'sponsor',question:'আপনার ট্রিপ কে স্পন্সর করছে?',type:'select',weight:20,options:[
+                        {value:'self',label:'নিজে',score:20},
+                        {value:'family',label:'পরিবারের সদস্য',score:16},
+                        {value:'company',label:'কোম্পানি',score:20},
+                        {value:'other',label:'অন্যান্য',score:7}
+                    ]}
                 ]
             },
             hard: {
@@ -355,30 +354,31 @@
                         {value:'5-10lakh',label:'৫-১০ লাখ টাকা',score:12},
                         {value:'more-10lakh',label:'১০ লাখ টাকার বেশি',score:15}
                     ]},
-                    {id:'property',question:'বাংলাদেশে আপনার কোনো সম্পত্তি আছে?',type:'select',weight:10,options:[
+                    {id:'property',question:'বাংলাদেশে আপনার কোনো সম্পত্তি আছে?',type:'select',weight:8,options:[
                         {value:'none',label:'না',score:0},
-                        {value:'land',label:'শুধু জমি',score:5},
-                        {value:'house',label:'বাড়ি/ফ্ল্যাট',score:8},
-                        {value:'multiple',label:'একাধিক সম্পত্তি',score:10}
+                        {value:'land',label:'শুধু জমি',score:4},
+                        {value:'house',label:'বাড়ি/ফ্ল্যাট',score:6},
+                        {value:'multiple',label:'একাধিক সম্পত্তি',score:8}
                     ]},
-                    {id:'previous_travel',question:'আগে কোন কোন দেশে ভ্রমণ করেছেন?',type:'select',weight:12,options:[
+                    {id:'previous_travel',question:'আগে কোন কোন দেশে ভ্রমণ করেছেন?',type:'select',weight:10,options:[
                         {value:'never',label:'কখনো বিদেশ যাইনি',score:0},
-                        {value:'asia',label:'শুধু এশিয়ান দেশ',score:6},
-                        {value:'developed',label:'উন্নত দেশ (US/UK/EU)',score:12}
+                        {value:'asia',label:'শুধু এশিয়ান দেশ',score:5},
+                        {value:'developed',label:'উন্নত দেশ (US/UK/EU)',score:10}
                     ]},
-                    {id:'visa_rejection',question:'আপনার কি কখনো ভিসা রিজেক্ট হয়েছে?',type:'select',weight:10,options:[
+                    {id:'visa_rejection',question:'আপনার কি কখনো ভিসা রিজেক্ট হয়েছে?',type:'select',weight:8,options:[
                         {value:'multiple',label:'হ্যাঁ, বহুবার',score:0},
-                        {value:'once',label:'হ্যাঁ, একবার',score:3},
-                        {value:'never',label:'না, কখনো না',score:10}
+                        {value:'once',label:'হ্যাঁ, একবার',score:2},
+                        {value:'never',label:'না, কখনো না',score:8}
                     ]},
-                    {id:'purpose',question:'আপনার ভ্রমণের উদ্দেশ্য কী?',type:'select',weight:8,options:[
-                        {value:'tourism',label:'পর্যটন',score:8},
-                        {value:'business',label:'ব্যবসা',score:8},
-                        {value:'family',label:'পরিবার দেখা',score:6},
-                        {value:'medical',label:'চিকিৎসা',score:7},
-                        {value:'other',label:'অন্যান্য',score:4}
+                    {id:'purpose',question:'আপনার ভ্রমণের উদ্দেশ্য কী?',type:'select',weight:6,options:[
+                        {value:'tourism',label:'পর্যটন',score:6},
+                        {value:'business',label:'ব্যবসা',score:6},
+                        {value:'family',label:'পরিবার দেখা',score:5},
+                        {value:'medical',label:'চিকিৎসা',score:5},
+                        {value:'other',label:'অন্যান্য',score:3}
                     ]},
-                    {id:'invitation',question:'আপনার কি ইনভিটেশন লেটার আছে?',type:'boolean',weight:8}
+                    {id:'invitation',question:'আপনার কি ইনভিটেশন লেটার আছে?',type:'boolean',weight:6},
+                    {id:'travel_insurance',question:'আপনার কি ট্রাভেল ইন্স্যুরেন্স আছে? (€30,000 কভারেজ)',type:'boolean',weight:10}
                 ]
             },
             'very-hard': {
@@ -438,14 +438,13 @@
                         {value:'other',label:'হ্যাঁ, অন্য দেশ থেকে',score:3},
                         {value:'never',label:'না, কখনো না',score:10}
                     ]},
-                    {id:'purpose',question:'আপনার ভ্রমণের উদ্দেশ্য কী?',type:'select',weight:6,options:[
-                        {value:'tourism',label:'পর্যটন',score:6},
-                        {value:'business',label:'বিজনেস মিটিং',score:6},
-                        {value:'family',label:'পরিবার দেখা',score:5},
-                        {value:'medical',label:'চিকিৎসা',score:5},
-                        {value:'other',label:'অন্যান্য',score:3}
-                    ]},
-                    {id:'travel_insurance',question:'আপনার কি ট্রাভেল ইন্স্যুরেন্স আছে?',type:'boolean',weight:6}
+                    {id:'purpose',question:'আপনার ভ্রমণের উদ্দেশ্য কী?',type:'select',weight:12,options:[
+                        {value:'tourism',label:'পর্যটন',score:12},
+                        {value:'business',label:'বিজনেস মিটিং',score:12},
+                        {value:'family',label:'পরিবার দেখা',score:10},
+                        {value:'medical',label:'চিকিৎসা',score:10},
+                        {value:'other',label:'অন্যান্য',score:6}
+                    ]}
                 ]
             }
         };
