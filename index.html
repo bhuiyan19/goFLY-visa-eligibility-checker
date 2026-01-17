@@ -137,7 +137,11 @@
             <span class="logo-fallback text-white">✈️ goFLY</span>
             <div class="flex-1">
                 <h1 class="text-xl md:text-2xl font-bold">ভিসা যোগ্যতা চেকার</h1>
-                <p class="text-green-100 text-sm">by goFLY Limited | IATA Certified | Since 2017</p>
+                <p class="text-green-100 text-xs sm:text-sm leading-tight">
+                    <span class="block sm:inline">by goFLY Limited</span>
+                    <span class="hidden sm:inline"> | </span>
+                    <span class="block sm:inline">IATA Certified | Since 2017</span>
+                </p>
             </div>
             <a href="tel:+8801713289170" class="hidden sm:flex items-center gap-1 bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg text-sm transition-all" aria-label="কল করুন: ০১৭১৩-২৮৯১৭০">
                 <span aria-hidden="true">📞</span>
@@ -150,33 +154,78 @@
     <main class="max-w-4xl mx-auto px-4 py-8" id="app" role="main" aria-live="polite"></main>
 
     <!-- Footer -->
-    <footer class="bg-gray-100 py-6 mt-auto">
-        <div class="max-w-4xl mx-auto px-4 text-center space-y-3">
-            <div class="flex items-center justify-center gap-2 text-gray-700">
-                <span class="text-xl">✈️</span>
-                <span class="font-semibold">goFLY Limited</span>
+    <footer class="bg-gradient-to-br from-gray-50 to-gray-100 py-8 mt-auto border-t border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 text-center space-y-4">
+            <!-- Company Name -->
+            <div class="flex items-center justify-center gap-2 text-gray-800">
+                <span class="text-2xl">✈️</span>
+                <span class="font-bold text-lg">goFLY Limited</span>
             </div>
-            <div class="flex flex-wrap justify-center gap-2 md:gap-3 text-xs text-gray-500">
-                <span class="whitespace-nowrap">🏆 IATA: 42337956</span>
-                <span class="whitespace-nowrap">📋 ATAB: 4298</span>
-                <span class="whitespace-nowrap">✈️ Civil Aviation: 0007726</span>
-            </div>
-            <div class="text-sm text-gray-600 space-y-1">
-                <p class="text-xs sm:text-sm">📍 1 Shukrabad Road Motiur Nibash, Beside New Model Degree College<br>Opposite of Metro Shopping Mall, Dhaka 1207</p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
-                    <a href="tel:+8801713289170" class="hover:underline whitespace-nowrap">📞 01713-289170</a>
-                    <span class="hidden sm:inline">|</span>
-                    <a href="https://wa.me/8801713289175" class="hover:underline whitespace-nowrap">💬 01713-289175 (WhatsApp)</a>
+
+            <!-- Credentials -->
+            <div class="bg-white rounded-lg shadow-sm py-3 px-4">
+                <div class="flex flex-wrap justify-center gap-3 md:gap-4 text-xs">
+                    <span class="flex items-center gap-1 whitespace-nowrap text-amber-700 font-medium">
+                        <span>🏆</span> IATA: 42337956
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1 whitespace-nowrap text-blue-700 font-medium">
+                        <span>📋</span> ATAB: 4298
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1 whitespace-nowrap text-green-700 font-medium">
+                        <span>✈️</span> Civil Aviation: 0007726
+                    </span>
                 </div>
             </div>
-            <div class="flex flex-wrap justify-center gap-4 text-xs text-gray-500 pt-2">
-                <span>⭐ 4.8★ (431+ Reviews)</span>
-                <span>👥 10,000+ Customers</span>
-                <span>🔄 70% Repeat</span>
-                <span>📅 Since 2017</span>
+
+            <!-- Contact Info -->
+            <div class="space-y-2">
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                    <span class="font-semibold text-gray-700">📍 Office:</span> 1 Shukrabad Road Motiur Nibash<br class="sm:hidden">
+                    <span class="hidden sm:inline">, </span>Beside New Model Degree College<br>
+                    Opposite of Metro Shopping Mall, Dhaka 1207
+                </p>
+                <div class="flex items-center justify-center gap-2 text-sm">
+                    <a href="tel:+8801713289170" class="flex items-center gap-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all font-medium shadow-sm">
+                        <span>📞</span> 01713-289170
+                    </a>
+                    <a href="https://wa.me/8801713289175" class="flex items-center gap-1 bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-all font-medium shadow-sm">
+                        <span>💬</span> 01713-289175
+                    </a>
+                </div>
             </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="text-lg font-bold text-amber-600">⭐ 4.8</div>
+                    <div class="text-xs text-gray-500">431+ Reviews</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="text-lg font-bold text-blue-600">👥 10k+</div>
+                    <div class="text-xs text-gray-500">Customers</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="text-lg font-bold text-green-600">🔄 70%</div>
+                    <div class="text-xs text-gray-500">Repeat</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="text-lg font-bold text-purple-600">📅 2017</div>
+                    <div class="text-xs text-gray-500">Since</div>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 mt-4">
+                <p class="text-xs text-amber-800 leading-relaxed">
+                    <span class="font-semibold">⚠️ বিশেষ দ্রষ্টব্য:</span> এই টুলটি শুধুমাত্র সাধারণ গাইডলাইন প্রদান করে। ভিসার চূড়ান্ত সিদ্ধান্ত সংশ্লিষ্ট দেশের দূতাবাসের উপর নির্ভরশীল।
+                </p>
+            </div>
+
+            <!-- Copyright -->
             <p class="text-xs text-gray-400 pt-2">
-                ⚠️ এই টুলটি শুধুমাত্র সাধারণ গাইডলাইন। ভিসার চূড়ান্ত সিদ্ধান্ত সংশ্লিষ্ট দূতাবাসের উপর নির্ভরশীল।
+                © 2017-2026 goFLY Limited. All rights reserved.
             </p>
         </div>
     </footer>
