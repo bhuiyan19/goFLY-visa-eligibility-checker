@@ -79,6 +79,13 @@
         @media (max-width: 375px) {
             .text-4xl { font-size: 2rem; }
             .text-3xl { font-size: 1.5rem; }
+            .text-2xl { font-size: 1.25rem; }
+        }
+
+        /* Mobile-optimized spacing */
+        @media (max-width: 640px) {
+            .offer-banner { font-size: 0.8rem; }
+            footer .text-xs { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -109,11 +116,13 @@
     </div>
 
     <!-- Offer Banner -->
-    <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2 px-4 text-center text-sm offer-banner">
-        <span class="font-bold">🎁 জানুয়ারি অফার:</span> যেকোনো ভিসা সার্ভিসে <span class="underline">ফ্রি ট্রাভেল ইন্স্যুরেন্স</span> |
-        <a href="tel:+8801713289170" class="ml-2 bg-white/20 px-2 py-0.5 rounded hover:bg-white/30 transition-all">
-            📞 এখনই কল করুন
-        </a>
+    <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2 px-4 text-center text-xs sm:text-sm offer-banner">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+            <span><span class="font-bold">🎁 জানুয়ারি অফার:</span> যেকোনো ভিসা সার্ভিসে <span class="underline">ফ্রি ট্রাভেল ইন্স্যুরেন্স</span></span>
+            <a href="tel:+8801713289170" class="bg-white/20 px-3 py-1 rounded hover:bg-white/30 transition-all whitespace-nowrap">
+                📞 এখনই কল করুন
+            </a>
+        </div>
     </div>
 
     <!-- Header -->
@@ -147,14 +156,18 @@
                 <span class="text-xl">✈️</span>
                 <span class="font-semibold">goFLY Limited</span>
             </div>
-            <div class="flex flex-wrap justify-center gap-3 text-xs text-gray-500">
-                <span>🏆 IATA: 42337956</span>
-                <span>📋 ATAB: 4298</span>
-                <span>✈️ Civil Aviation: 0007726</span>
+            <div class="flex flex-wrap justify-center gap-2 md:gap-3 text-xs text-gray-500">
+                <span class="whitespace-nowrap">🏆 IATA: 42337956</span>
+                <span class="whitespace-nowrap">📋 ATAB: 4298</span>
+                <span class="whitespace-nowrap">✈️ Civil Aviation: 0007726</span>
             </div>
             <div class="text-sm text-gray-600 space-y-1">
-                <p>📍 1 Shukrabad Road Motiur Nibash, Beside New Model Degree College<br>Opposite of Metro Shopping Mall, Dhaka 1207</p>
-                <p>📞 💬 <a href="tel:+8801713289170" class="hover:underline">01713-289170</a> | <a href="https://wa.me/8801713289175" class="hover:underline">01713-289175 (WhatsApp)</a></p>
+                <p class="text-xs sm:text-sm">📍 1 Shukrabad Road Motiur Nibash, Beside New Model Degree College<br>Opposite of Metro Shopping Mall, Dhaka 1207</p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+                    <a href="tel:+8801713289170" class="hover:underline whitespace-nowrap">📞 01713-289170</a>
+                    <span class="hidden sm:inline">|</span>
+                    <a href="https://wa.me/8801713289175" class="hover:underline whitespace-nowrap">💬 01713-289175 (WhatsApp)</a>
+                </div>
             </div>
             <div class="flex flex-wrap justify-center gap-4 text-xs text-gray-500 pt-2">
                 <span>⭐ 4.8★ (431+ Reviews)</span>
@@ -491,9 +504,9 @@
                                         aria-label="${cfg.label} - ${count}টি দেশ"
                                         aria-pressed="${isActive}"
                                         role="tab">
-                                        <div class="flex flex-col items-center gap-1">
-                                            <span class="text-2xl" aria-hidden="true">${cfg.emoji}</span>
-                                            <span class="font-semibold text-sm">${cfg.label}</span>
+                                        <div class="flex flex-col items-center gap-0.5 sm:gap-1">
+                                            <span class="text-xl sm:text-2xl" aria-hidden="true">${cfg.emoji}</span>
+                                            <span class="font-semibold text-xs sm:text-sm leading-tight text-center">${cfg.label}</span>
                                             <span class="text-xs opacity-80">${count}টি</span>
                                         </div>
                                     </button>
@@ -502,19 +515,19 @@
                         </div>
                     </div>
 
-                    <div class="${config.bgColor} border-2 rounded-xl p-4">
-                        <div class="flex items-center gap-3">
-                            <span class="text-3xl" aria-hidden="true">${config.emoji}</span>
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <h3 class="font-bold ${config.color}">${config.label}</h3>
-                                    <span class="bg-white/80 text-xs font-semibold px-2 py-1 rounded-full text-orange-600">🔥 ${config.salesTag}</span>
+                    <div class="${config.bgColor} border-2 rounded-xl p-3 sm:p-4">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <span class="text-2xl sm:text-3xl" aria-hidden="true">${config.emoji}</span>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                                    <h3 class="font-bold ${config.color} text-sm sm:text-base">${config.label}</h3>
+                                    <span class="bg-white/80 text-xs font-semibold px-2 py-0.5 sm:py-1 rounded-full text-orange-600 self-start">🔥 ${config.salesTag}</span>
                                 </div>
-                                <p class="text-xs text-gray-600">${config.description}</p>
+                                <p class="text-xs text-gray-600 leading-snug">${config.description}</p>
                             </div>
-                            <div class="text-right">
-                                <span class="text-2xl font-bold ${config.color}">${countries.length}</span>
-                                <span class="text-sm text-gray-500 block">টি দেশ</span>
+                            <div class="text-right flex-shrink-0">
+                                <span class="text-xl sm:text-2xl font-bold ${config.color} block">${countries.length}</span>
+                                <span class="text-xs sm:text-sm text-gray-500">টি দেশ</span>
                             </div>
                         </div>
                     </div>
@@ -525,17 +538,17 @@
                             return `
                                 <button
                                     onclick="selectCountry('${country.id}')"
-                                    class="relative p-4 rounded-xl border-2 ${DIFFICULTY_CONFIG[country.difficulty].bgColor} hover:shadow-lg transition-all text-left group hover:scale-[1.02]"
+                                    class="relative p-3 sm:p-4 rounded-xl border-2 ${DIFFICULTY_CONFIG[country.difficulty].bgColor} hover:shadow-lg transition-all text-left group hover:scale-[1.02]"
                                     aria-label="${country.nameBn} - ${country.visaType}, প্রসেসিং টাইম: ${country.processingTime}">
                                     ${popular ? '<span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full" aria-label="জনপ্রিয়">🔥 জনপ্রিয়</span>' : ''}
-                                    <div class="flex items-start gap-3">
-                                        <span class="text-4xl" aria-hidden="true">${country.flag}</span>
-                                        <div class="flex-1">
-                                            <h4 class="font-bold text-gray-800">${country.nameBn}</h4>
-                                            <p class="text-sm text-gray-600">${country.name}</p>
-                                            <p class="text-xs ${DIFFICULTY_CONFIG[country.difficulty].color} mt-2">${country.visaType}</p>
-                                            <p class="text-xs text-gray-500">⏱️ ${country.processingTime}</p>
-                                            ${country.description ? `<p class="text-xs text-gray-500 mt-1">${country.description}</p>` : ''}
+                                    <div class="flex items-start gap-2 sm:gap-3">
+                                        <span class="text-3xl sm:text-4xl flex-shrink-0" aria-hidden="true">${country.flag}</span>
+                                        <div class="flex-1 min-w-0">
+                                            <h4 class="font-bold text-gray-800 text-sm sm:text-base">${country.nameBn}</h4>
+                                            <p class="text-xs sm:text-sm text-gray-600">${country.name}</p>
+                                            <p class="text-xs ${DIFFICULTY_CONFIG[country.difficulty].color} mt-1 sm:mt-2">${country.visaType}</p>
+                                            <p class="text-xs text-gray-500 leading-tight">⏱️ ${country.processingTime}</p>
+                                            ${country.description ? `<p class="text-xs text-gray-500 mt-1 leading-tight">${country.description}</p>` : ''}
                                         </div>
                                     </div>
                                 </button>
