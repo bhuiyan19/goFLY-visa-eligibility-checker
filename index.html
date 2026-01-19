@@ -234,7 +234,6 @@
         // === DATA ===
         const COUNTRIES = [
             {id:'nepal',name:'Nepal',nameBn:'নেপাল',flag:'🇳🇵',difficulty:'easy',visaType:'Visa on Arrival',processingTime:'তাৎক্ষণিক',description:'ভিসা অন অ্যারাইভাল'},
-            {id:'maldives',name:'Maldives',nameBn:'মালদ্বীপ',flag:'🇲🇻',difficulty:'easy',visaType:'Visa on Arrival',processingTime:'তাৎক্ষণিক',description:'৩০ দিন ফ্রি VOA'},
             {id:'sri-lanka',name:'Sri Lanka',nameBn:'শ্রীলঙ্কা',flag:'🇱🇰',difficulty:'easy',visaType:'ETA Online',processingTime:'১-২ দিন',description:'অনলাইন ETA'},
             {id:'vietnam',name:'Vietnam',nameBn:'ভিয়েতনাম',flag:'🇻🇳',difficulty:'easy',visaType:'e-Visa',processingTime:'৩-৫ দিন',description:'৯০ দিন | goFLY: ৯৫% সাকসেস'},
             {id:'turkey',name:'Turkey',nameBn:'তুরস্ক',flag:'🇹🇷',difficulty:'medium',visaType:'e-Visa (শর্তসাপেক্ষ)',processingTime:'৩-৫ দিন',description:'Schengen/US/UK visa লাগবে'},
@@ -273,9 +272,52 @@
             {id:'uk',name:'United Kingdom',nameBn:'যুক্তরাজ্য (UK)',flag:'🇬🇧',difficulty:'very-hard',visaType:'Visitor Visa',processingTime:'১৫-২০ দিন',description:'goFLY: ৯০%'},
             {id:'usa',name:'United States',nameBn:'যুক্তরাষ্ট্র (USA)',flag:'🇺🇸',difficulty:'very-hard',visaType:'B1/B2 Visa',processingTime:'ইন্টারভিউ নির্ভর',description:'⚠️ Visa Bond $5k-$15k | Jan 2026 থেকে'},
             {id:'canada',name:'Canada',nameBn:'কানাডা',flag:'🇨🇦',difficulty:'very-hard',visaType:'Visitor (TRV)',processingTime:'৩০+ দিন',description:'goFLY: ৯০%'},
-            {id:'australia',name:'Australia',nameBn:'অস্ট্রেলিয়া',flag:'🇦🇺',difficulty:'very-hard',visaType:'Visitor (600)',processingTime:'২০-৪০ দিন',description:'goFLY: ৯০%'},
-            {id:'new-zealand',name:'New Zealand',nameBn:'নিউজিল্যান্ড',flag:'🇳🇿',difficulty:'very-hard',visaType:'Visitor',processingTime:'২০-৪৫ দিন',description:'এক্সপার্ট সার্ভিস'}
+            {id:'australia',name:'Australia',nameBn:'অস্ট্রেলিয়া',flag:'🇦🇺',difficulty:'very-hard',visaType:'Visitor (600)',processingTime:'২০-৪০ দিন',description:'goFLY: ৯০%'}
         ];
+
+        // Country URL mapping for internal linking
+        const COUNTRY_URLS = {
+            'australia': 'https://goflybd.com/australia-visa-from-bangladesh/',
+            'belgium': 'https://goflybd.com/belgium-visa-from-bangladesh/',
+            'canada': 'https://goflybd.com/canada-visa-from-bangladesh/',
+            'china': 'https://goflybd.com/china-visa-for-bangladeshi/',
+            'czech': 'https://goflybd.com/czech-republic-visa-from-bangladesh/',
+            'denmark': 'https://goflybd.com/denmark-visa-from-bangladesh/',
+            'estonia': 'https://goflybd.com/estonia-visa-from-bangladesh/',
+            'ethiopia': 'https://goflybd.com/ethiopia-visa-from-bangladesh/',
+            'france': 'https://goflybd.com/france-visa-from-bangladesh/',
+            'germany': 'https://goflybd.com/germany-visa-from-bangladesh/',
+            'greece': 'https://goflybd.com/greece-visa-from-bangladesh/',
+            'hong-kong': 'https://goflybd.com/hong-kong-visa-from-bangladesh/',
+            'hungary': 'https://goflybd.com/hungary-visa-from-bangladesh/',
+            'india': 'https://goflybd.com/indian-visa-for-bangladeshi/',
+            'indonesia': 'https://goflybd.com/indonesia-visa-for-bangladeshi/',
+            'italy': 'https://goflybd.com/italy-visa-from-bangladesh/',
+            'japan': 'https://goflybd.com/japan-visa-from-bangladesh/',
+            'kenya': 'https://goflybd.com/kenya-visa-for-bangladeshi/',
+            'malaysia': 'https://goflybd.com/malaysia-visa-from-bangladesh/',
+            'nepal': 'https://goflybd.com/nepal-visa-from-bangladesh/',
+            'netherlands': 'https://goflybd.com/netherlands-visa-from-bangladesh/',
+            'norway': 'https://goflybd.com/norway-visa-from-bangladesh/',
+            'pakistan': 'https://goflybd.com/pakistan-visa-for-bangladeshi/',
+            'philippines': 'https://goflybd.com/philippines-visa-from-bangladesh/',
+            'poland': 'https://goflybd.com/poland-visa-from-bangladesh/',
+            'portugal': 'https://goflybd.com/portugal-visa-for-bangladeshi/',
+            'schengen': 'https://goflybd.com/schengen-visa-for-bangladeshi/',
+            'singapore': 'https://goflybd.com/singapore-visa-from-bangladesh/',
+            'south-korea': 'https://goflybd.com/south-korea-visa-for-bangladeshi/',
+            'spain': 'https://goflybd.com/spain-visa-from-bangladesh/',
+            'sri-lanka': 'https://goflybd.com/sri-lanka-visa-from-bangladesh/',
+            'sweden': 'https://goflybd.com/sweden-visa-from-bangladesh/',
+            'switzerland': 'https://goflybd.com/switzerland-visa-from-bangladesh/',
+            'thailand': 'https://goflybd.com/thailand-visa-from-bangladesh/',
+            'turkey': 'https://goflybd.com/turkey-visa-from-bangladesh/',
+            'saudi-arabia': 'https://goflybd.com/umrah-visa-from-bangladesh/',
+            'uae': 'https://goflybd.com/dubai-visa-from-bangladesh/',
+            'usa': 'https://goflybd.com/usa-visa-from-bangladesh/',
+            'uk': 'https://goflybd.com/uk-visa-from-bangladesh/',
+            'vietnam': 'https://goflybd.com/vietnam-visa-from-bangladesh/'
+        };
 
         const QUESTIONS = {
             easy: {
@@ -790,6 +832,26 @@
                             ${getTips().map(tip => `<li class="bg-gray-50 p-3 rounded-lg text-xs sm:text-sm leading-relaxed">${tip}</li>`).join('')}
                         </ul>
                     </div>
+
+                    ${COUNTRY_URLS[selectedCountry.id] ? `
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-4 sm:p-6">
+                        <div class="flex items-start gap-3">
+                            <span class="text-3xl sm:text-4xl flex-shrink-0">${selectedCountry.flag}</span>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2">📖 ${selectedCountry.nameBn} ভিসা বিস্তারিত গাইড</h3>
+                                <p class="text-xs sm:text-sm text-gray-600 mb-3 leading-relaxed">
+                                    ${selectedCountry.nameBn} ভিসা সম্পর্কে সম্পূর্ণ তথ্য, প্রয়োজনীয় ডকুমেন্ট, ফি, প্রসেসিং টাইম এবং আবেদন প্রক্রিয়া জানতে আমাদের বিস্তারিত গাইড পড়ুন।
+                                </p>
+                                <a href="${COUNTRY_URLS[selectedCountry.id]}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold hover:bg-blue-700 transition-all text-xs sm:text-sm shadow-lg">
+                                    📚 সম্পূর্ণ গাইড পড়ুন
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
 
                     <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-4 sm:p-6 text-white space-y-3 sm:space-y-4">
                         <h3 class="text-xl sm:text-2xl font-bold text-center">goFLY দিয়ে সহজ করুন</h3>
