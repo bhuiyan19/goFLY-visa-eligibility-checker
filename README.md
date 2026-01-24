@@ -33,21 +33,24 @@ Then open: http://localhost:8000
 
 ### Vercel (Recommended)
 
-1. **Import project:**
-   ```bash
-   vercel
-   ```
+**Important:** This is a static HTML file - NO build process needed!
 
-2. **Settings in Vercel Dashboard:**
-   - Framework Preset: **Other**
-   - Build Command: *Leave empty*
-   - Output Directory: `.`
-   - Install Command: *Leave empty*
+1. **Via Vercel Dashboard (Easiest):**
+   - Go to vercel.com → Add New Project
+   - Import your GitHub repo
+   - **DO NOT change any settings** - vercel.json handles everything
+   - Click Deploy
 
-3. **Deploy:**
+2. **Via CLI:**
    ```bash
    vercel --prod
    ```
+
+**Settings (already in vercel.json):**
+- ✅ Build Command: `null` (disabled)
+- ✅ Install Command: `null` (disabled)
+- ✅ Output Directory: `.` (root)
+- ✅ Framework: `null` (static HTML)
 
 ### GitHub Pages
 
