@@ -1,0 +1,14 @@
+{
+  "name": "gofly-visa-eligibility-checker",
+  "version": "1.0.0",
+  "description": "Visa eligibility checker tool for goFLY Limited",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "build": "echo 'No build required - static HTML'"
+  },
+  "keywords": ["visa", "eligibility", "checker", "bangladesh"],
+  "author": "goFLY Limited",
+  "license": "UNLICENSED",
+  "private": true
+}

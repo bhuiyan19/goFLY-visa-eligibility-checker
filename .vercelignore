@@ -1,0 +1,16 @@
+# Documentation files
+*.md
+!README.md
+
+# Backend files (not needed for static deployment)
+wordpress-backend.php
+fluent-forms-integration.js
+
+# Git files
+.git
+.gitignore
+.github
+
+# System files
+.DS_Store
+Thumbs.db
