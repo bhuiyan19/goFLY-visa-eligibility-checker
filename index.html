@@ -957,28 +957,68 @@
             }
 
             showLoading();
-            setTimeout(() => {
-                // Save lead data to localStorage for potential backend sync
-                const leadInfo = {
-                    ...leadData,
-                    country: selectedCountry.nameBn,
-                    countryId: selectedCountry.id,
-                    score: score,
-                    percentage: Math.round((score / QUESTIONS[selectedCountry.difficulty].maxScore) * 100),
-                    timestamp: new Date().toISOString()
-                };
 
-                // Store lead (in production, this would go to a backend)
-                const leads = JSON.parse(localStorage.getItem('visaLeads') || '[]');
-                leads.push(leadInfo);
-                localStorage.setItem('visaLeads', JSON.stringify(leads));
+            // Prepare lead data
+            const leadInfo = {
+                name: leadData.name,
+                phone: leadData.phone,
+                email: leadData.email || '',
+                country: selectedCountry.nameBn,
+                countryId: selectedCountry.id,
+                score: score,
+                percentage: Math.round((score / QUESTIONS[selectedCountry.difficulty].maxScore) * 100),
+                timestamp: new Date().toISOString()
+            };
 
-                // Move to result page
+            // Store lead in localStorage as backup
+            const leads = JSON.parse(localStorage.getItem('visaLeads') || '[]');
+            leads.push(leadInfo);
+            localStorage.setItem('visaLeads', JSON.stringify(leads));
+
+            // Submit to WordPress backend
+            submitToWordPress(leadInfo);
+        }
+
+        async function submitToWordPress(leadInfo) {
+            const WORDPRESS_URL = 'https://goflybd.com';
+            const THEME_NAME = 'travel-agency';
+
+            try {
+                const response = await fetch(
+                    `${WORDPRESS_URL}/wp-content/themes/${THEME_NAME}/visa-checker-api/api.php`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: leadInfo.name,
+                            phone: leadInfo.phone,
+                            email: leadInfo.email,
+                            country: leadInfo.country,
+                            countryId: leadInfo.countryId,
+                            score: leadInfo.score,
+                            percentage: leadInfo.percentage,
+                            timestamp: leadInfo.timestamp
+                        })
+                    }
+                );
+
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('✅ Lead saved successfully!', result);
+                } else {
+                    console.error('❌ Failed to save lead:', result.message || 'Unknown error');
+                }
+            } catch (error) {
+                console.error('❌ Network error submitting lead:', error);
+                // Lead is still saved in localStorage as backup
+            } finally {
+                // Always show result page to user
                 currentStep = 'result';
                 saveSession();
                 render();
                 hideLoading();
-            }, 300);
+            }
         }
 
         function backToCountries() {
