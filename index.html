@@ -983,6 +983,28 @@
             const WORDPRESS_URL = 'https://goflybd.com';
             const THEME_NAME = 'travel-agency';
 
+            // Get question details with answers
+            const questionsData = QUESTIONS[selectedCountry.difficulty];
+            const answersWithLabels = {};
+
+            questionsData.questions.forEach(question => {
+                const answerValue = answers[question.id];
+                let answerLabel = '';
+
+                if (question.type === 'select') {
+                    const selectedOption = question.options.find(opt => opt.value === answerValue);
+                    answerLabel = selectedOption ? selectedOption.label : answerValue;
+                } else {
+                    answerLabel = answerValue === true ? 'হ্যাঁ' : 'না';
+                }
+
+                answersWithLabels[question.id] = {
+                    question: question.question,
+                    answer: answerLabel,
+                    rawValue: answerValue
+                };
+            });
+
             try {
                 const response = await fetch(
                     `${WORDPRESS_URL}/wp-content/themes/${THEME_NAME}/visa-checker-api/api.php`,
@@ -997,6 +1019,8 @@
                             countryId: leadInfo.countryId,
                             score: leadInfo.score,
                             percentage: leadInfo.percentage,
+                            difficulty: selectedCountry.difficulty,
+                            answers: answersWithLabels,
                             timestamp: leadInfo.timestamp
                         })
                     }
