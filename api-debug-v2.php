@@ -157,7 +157,13 @@ try {
     $table_columns = $wpdb->get_col("DESCRIBE $submissions_table");
 
     if (in_array('browser', $table_columns)) {
-        $insert_data['browser'] = isset($_SERVER['HTTP_USER_AGENT']) ? substr($_SERVER['HTTP_USER_AGENT'], 0, 254) : '';
+        // Use shorter, safer browser string to avoid validation errors
+        $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+        if (function_exists('mb_substr')) {
+            $insert_data['browser'] = mb_substr($user_agent, 0, 200, 'UTF-8');
+        } else {
+            $insert_data['browser'] = substr($user_agent, 0, 200);
+        }
     }
 
     if (in_array('device', $table_columns)) {
