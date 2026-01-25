@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলাদেশী ভিসা চেকার | BD Visa Eligibility Tool - goFLY</title>
+    <meta name="description" content="বাংলাদেশী পাসপোর্ট ধারীদের জন্য ভিসা যোগ্যতা যাচাই টুল। ৪২টি দেশের জন্য। goFLY Limited - Since 2017">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇧🇩</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-slide-in { animation: slideIn 0.5s ease-out; }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out; }
+
+        /* Loading Spinner */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .loading-overlay.active {
+            display: flex;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #10b981;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        /* Focus States for Accessibility */
+        button:focus,
+        a:focus {
+            outline: 3px solid #10b981;
+            outline-offset: 2px;
+        }
+
+        /* Answer Selection Feedback */
+        .answer-selected {
+            background: #d1fae5 !important;
+            border-color: #10b981 !important;
+            transform: scale(0.98);
+            transition: all 0.2s;
+        }
+
+        /* Logo Fallback */
+        .logo-fallback {
+            display: none;
+            font-size: 1.5rem;
+        }
+
+        /* Landscape Mobile Optimization */
+        @media (max-height: 500px) and (orientation: landscape) {
+            header { padding: 0.5rem 1.5rem; }
+            .offer-banner { display: none; }
+            main { padding: 1rem; }
+        }
+
+        /* Better small screen support */
+        @media (max-width: 375px) {
+            .text-4xl { font-size: 2rem; }
+            .text-3xl { font-size: 1.5rem; }
+            .text-2xl { font-size: 1.25rem; }
+        }
+
+        /* Mobile-optimized spacing */
+        @media (max-width: 640px) {
+            .offer-banner { font-size: 0.8rem; }
+            footer .text-xs { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 via-white to-red-50 min-h-screen">
+    <!-- NoScript Fallback -->
+    <noscript>
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: white; z-index: 99999; display: flex; align-items: center; justify-content: center; padding: 2rem; text-align: center;">
+            <div style="max-width: 500px;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; color: #1f2937;">দুঃখিত! JavaScript প্রয়োজন</h2>
+                <p style="color: #6b7280; margin-bottom: 1.5rem;">এই ভিসা চেকার টুলটি ব্যবহারের জন্য আপনার ব্রাউজারে JavaScript enable করা থাকতে হবে।</p>
+                <div style="background: #f3f4f6; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <p style="font-weight: 600; color: #059669; margin-bottom: 0.5rem;">📞 সরাসরি যোগাযোগ করুন:</p>
+                    <p style="color: #374151;">Phone: 09639-203090</p>
+                    <p style="color: #374151;">WhatsApp: 01713-289175</p>
+                </div>
+                <p style="font-size: 0.875rem; color: #9ca3af;">অথবা আপনার ব্রাউজারের Settings থেকে JavaScript enable করুন</p>
+            </div>
+        </div>
+    </noscript>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div style="text-align: center;">
+            <div class="spinner"></div>
+            <p style="margin-top: 1rem; color: #6b7280; font-weight: 500;">লোড হচ্ছে...</p>
+        </div>
+    </div>
+
+    <!-- Offer Banner -->
+    <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2 px-4 text-center text-sm">
+        <span class="font-bold">🎁 জানুয়ারি অফার:</span> যেকোনো ভিসা সার্ভিসে <span class="underline">ফ্রি ট্রাভেল ইন্স্যুরেন্স</span> |
+        <a href="tel:+8809639203090" class="ml-2 bg-white/20 px-2 py-0.5 rounded hover:bg-white/30 transition-all">
+            📞 এখনই কল করুন
+        </a>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 shadow-lg">
+        <div class="max-w-4xl mx-auto flex items-center gap-3">
+            <div class="text-3xl">🇧🇩</div>
+            <div class="flex-1">
+                <h1 class="text-xl md:text-2xl font-bold">ভিসা যোগ্যতা চেকার</h1>
+                <p class="text-green-100 text-sm">by goFLY Limited | IATA Certified | Since 2017</p>
+            </div>
+            <a href="tel:+8809639203090" class="hidden sm:flex items-center gap-1 bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg text-sm transition-all">
+                <span>📞</span>
+                <span>09639-203090</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8" id="app" role="main" aria-live="polite"></main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-gray-50 to-gray-100 py-8 mt-auto border-t border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 text-center space-y-4">
+            <!-- Company Name -->
+            <div class="flex items-center justify-center gap-2 text-gray-800">
+                <span class="text-2xl">✈️</span>
+                <span class="font-bold text-lg">goFLY Limited</span>
+            </div>
+
+            <!-- Credentials -->
+            <div class="bg-white rounded-lg shadow-sm py-3 px-4">
+                <div class="flex flex-wrap justify-center gap-3 md:gap-4 text-xs">
+                    <span class="flex items-center gap-1 whitespace-nowrap text-amber-700 font-medium">
+                        <span>🏆</span> IATA: 42337956
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1 whitespace-nowrap text-blue-700 font-medium">
+                        <span>📋</span> ATAB: 4298
+                    </span>
+                    <span class="hidden sm:inline text-gray-300">|</span>
+                    <span class="flex items-center gap-1 whitespace-nowrap text-green-700 font-medium">
+                        <span>✈️</span> Civil Aviation: 0007726
+                    </span>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="space-y-2">
+                <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                    <span class="font-semibold text-gray-700">📍 Office:</span> 1 Shukrabad Road Motiur Nibash<br class="sm:hidden">
+                    <span class="hidden sm:inline">, </span>Beside New Model Degree College<br>
+                    Opposite of Metro Shopping Mall, Dhaka 1207
+                </p>
+                <div class="flex items-center justify-center gap-2 text-sm">
+                    <a href="tel:+8809639203090" class="flex items-center gap-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all font-medium shadow-sm">
+                        <span>📞</span> 09639-203090
+                    </a>
+                    <a href="https://wa.me/8801713289175" class="flex items-center gap-1 bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-all font-medium shadow-sm">
+                        <span>💬</span> 01713-289175
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="text-lg font-bold text-amber-600">⭐ 4.8</div>
+                    <div class="text-xs text-gray-500">431+ Reviews</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="text-lg font-bold text-blue-600">👥 10k+</div>
+                    <div class="text-xs text-gray-500">Customers</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="text-lg font-bold text-green-600">🔄 70%</div>
+                    <div class="text-xs text-gray-500">Repeat</div>
+                </div>
+                <div class="bg-white rounded-lg p-3 shadow-sm">
+                    <div class="text-lg font-bold text-purple-600">📅 2017</div>
+                    <div class="text-xs text-gray-500">Since</div>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 mt-4">
+                <p class="text-xs text-amber-800 leading-relaxed">
+                    <span class="font-semibold">⚠️ বিশেষ দ্রষ্টব্য:</span> এই টুলটি শুধুমাত্র সাধারণ গাইডলাইন প্রদান করে। ভিসার চূড়ান্ত সিদ্ধান্ত সংশ্লিষ্ট দেশের দূতাবাসের উপর নির্ভরশীল।
+                </p>
+            </div>
+
+            <!-- Copyright -->
+            <p class="text-xs text-gray-400 pt-2">
+                © 2017-2026 goFLY Limited. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // === DATA ===
+        const COUNTRIES = [
+            {id:'nepal',name:'Nepal',nameBn:'নেপাল',flag:'🇳🇵',difficulty:'easy',visaType:'Visa on Arrival',processingTime:'তাৎক্ষণিক',description:'ভিসা অন অ্যারাইভাল'},
+            {id:'maldives',name:'Maldives',nameBn:'মালদ্বীপ',flag:'🇲🇻',difficulty:'easy',visaType:'Visa on Arrival',processingTime:'তাৎক্ষণিক',description:'৩০ দিন ফ্রি VOA'},
+            {id:'sri-lanka',name:'Sri Lanka',nameBn:'শ্রীলঙ্কা',flag:'🇱🇰',difficulty:'easy',visaType:'ETA Online',processingTime:'১-২ দিন',description:'অনলাইন ETA'},
+            {id:'vietnam',name:'Vietnam',nameBn:'ভিয়েতনাম',flag:'🇻🇳',difficulty:'easy',visaType:'e-Visa',processingTime:'৩-৫ দিন',description:'৯০ দিন | goFLY: ৯৫% সাকসেস'},
+            {id:'turkey',name:'Turkey',nameBn:'তুরস্ক',flag:'🇹🇷',difficulty:'medium',visaType:'e-Visa (শর্তসাপেক্ষ)',processingTime:'৩-৫ দিন',description:'Schengen/US/UK visa লাগবে'},
+            {id:'kenya',name:'Kenya',nameBn:'কেনিয়া',flag:'🇰🇪',difficulty:'easy',visaType:'eTA',processingTime:'২-৩ দিন',description:'৯০ দিন eTA'},
+            {id:'ethiopia',name:'Ethiopia',nameBn:'ইথিওপিয়া',flag:'🇪🇹',difficulty:'easy',visaType:'eVisa',processingTime:'৩-৫ দিন',description:'৯০ দিন eVisa'},
+            {id:'malaysia',name:'Malaysia',nameBn:'মালয়েশিয়া',flag:'🇲🇾',difficulty:'medium',visaType:'eVisa',processingTime:'২-৭ দিন',description:'৩০ দিন | goFLY: ৯৮% সাকসেস'},
+            {id:'thailand',name:'Thailand',nameBn:'থাইল্যান্ড',flag:'🇹🇭',difficulty:'medium',visaType:'Tourist Visa',processingTime:'১৫-২০ দিন',description:'goFLY: ৯৫% সাকসেস'},
+            {id:'singapore',name:'Singapore',nameBn:'সিঙ্গাপুর',flag:'🇸🇬',difficulty:'medium',visaType:'Entry Visa',processingTime:'৫-৭ দিন',description:'goFLY: ৯৫% সাকসেস'},
+            {id:'uae',name:'UAE (Dubai)',nameBn:'দুবাই/UAE',flag:'🇦🇪',difficulty:'medium',visaType:'Tourist Visa',processingTime:'৩-৫ দিন',description:'goFLY: ৯৫% সাকসেস'},
+            {id:'india',name:'India',nameBn:'ভারত',flag:'🇮🇳',difficulty:'medium',visaType:'Tourist Visa',processingTime:'৭-১৫ দিন',description:'বর্তমানে সীমিত'},
+            {id:'indonesia',name:'Indonesia',nameBn:'ইন্দোনেশিয়া',flag:'🇮🇩',difficulty:'medium',visaType:'eVisa',processingTime:'৩-৫ দিন',description:'goFLY: ৯৫% সাকসেস'},
+            {id:'china',name:'China',nameBn:'চীন',flag:'🇨🇳',difficulty:'medium',visaType:'Tourist Visa (L)',processingTime:'৭-১৫ দিন',description:'goFLY: ৯০% সাকসেস'},
+            {id:'south-korea',name:'South Korea',nameBn:'দক্ষিণ কোরিয়া',flag:'🇰🇷',difficulty:'medium',visaType:'Tourist Visa',processingTime:'৭-১৫ দিন',description:'ডকুমেন্ট প্রয়োজন'},
+            {id:'saudi-arabia',name:'Saudi Arabia',nameBn:'সৌদি আরব',flag:'🇸🇦',difficulty:'medium',visaType:'Umrah/Tourist',processingTime:'৩-৭ দিন',description:'Nusuk অ্যাপ'},
+            {id:'philippines',name:'Philippines',nameBn:'ফিলিপাইন',flag:'🇵🇭',difficulty:'medium',visaType:'Tourist Visa',processingTime:'১৫-২০ দিন',description:'goFLY: ৯২%'},
+            {id:'hong-kong',name:'Hong Kong',nameBn:'হংকং',flag:'🇭🇰',difficulty:'medium',visaType:'PAR',processingTime:'৩-৫ দিন',description:'১৪ দিন PAR'},
+            {id:'pakistan',name:'Pakistan',nameBn:'পাকিস্তান',flag:'🇵🇰',difficulty:'medium',visaType:'eVisa',processingTime:'৫-৭ দিন',description:'৩০ দিন'},
+            {id:'japan',name:'Japan',nameBn:'জাপান',flag:'🇯🇵',difficulty:'hard',visaType:'Tourist Visa',processingTime:'৭-১৫ দিন',description:'goFLY: ৯০%'},
+            {id:'schengen',name:'Schengen',nameBn:'শেনজেন',flag:'🇪🇺',difficulty:'hard',visaType:'Short Stay (Type C)',processingTime:'১৫-৬০ দিন',description:'২০২৬ থেকে অনলাইন | goFLY: ৯০%'},
+            {id:'france',name:'France',nameBn:'ফ্রান্স',flag:'🇫🇷',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'germany',name:'Germany',nameBn:'জার্মানি',flag:'🇩🇪',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'italy',name:'Italy',nameBn:'ইতালি',flag:'🇮🇹',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'spain',name:'Spain',nameBn:'স্পেন',flag:'🇪🇸',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'netherlands',name:'Netherlands',nameBn:'নেদারল্যান্ডস',flag:'🇳🇱',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'belgium',name:'Belgium',nameBn:'বেলজিয়াম',flag:'🇧🇪',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'switzerland',name:'Switzerland',nameBn:'সুইজারল্যান্ড',flag:'🇨🇭',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'greece',name:'Greece',nameBn:'গ্রিস',flag:'🇬🇷',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'portugal',name:'Portugal',nameBn:'পর্তুগাল',flag:'🇵🇹',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'denmark',name:'Denmark',nameBn:'ডেনমার্ক',flag:'🇩🇰',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'sweden',name:'Sweden',nameBn:'সুইডেন',flag:'🇸🇪',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'norway',name:'Norway',nameBn:'নরওয়ে',flag:'🇳🇴',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'czech',name:'Czech Republic',nameBn:'চেক প্রজাতন্ত্র',flag:'🇨🇿',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'hungary',name:'Hungary',nameBn:'হাঙ্গেরি',flag:'🇭🇺',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'poland',name:'Poland',nameBn:'পোল্যান্ড',flag:'🇵🇱',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'উচ্চ রিজেকশন'},
+            {id:'estonia',name:'Estonia',nameBn:'এস্তোনিয়া',flag:'🇪🇪',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
+            {id:'uk',name:'United Kingdom',nameBn:'যুক্তরাজ্য (UK)',flag:'🇬🇧',difficulty:'very-hard',visaType:'Visitor Visa',processingTime:'১৫-২০ দিন',description:'goFLY: ৯০%'},
+            {id:'usa',name:'United States',nameBn:'যুক্তরাষ্ট্র (USA)',flag:'🇺🇸',difficulty:'very-hard',visaType:'B1/B2 Visa',processingTime:'ইন্টারভিউ নির্ভর',description:'⚠️ Visa Bond $5k-$15k | Jan 2026 থেকে'},
+            {id:'canada',name:'Canada',nameBn:'কানাডা',flag:'🇨🇦',difficulty:'very-hard',visaType:'Visitor (TRV)',processingTime:'৩০+ দিন',description:'goFLY: ৯০%'},
+            {id:'australia',name:'Australia',nameBn:'অস্ট্রেলিয়া',flag:'🇦🇺',difficulty:'very-hard',visaType:'Visitor (600)',processingTime:'২০-৪০ দিন',description:'goFLY: ৯০%'},
+            {id:'new-zealand',name:'New Zealand',nameBn:'নিউজিল্যান্ড',flag:'🇳🇿',difficulty:'very-hard',visaType:'Visitor',processingTime:'২০-৪৫ দিন',description:'এক্সপার্ট সার্ভিস'}
+        ];
+
+        // Country URL mapping for internal linking
+        const COUNTRY_URLS = {
+            'australia': 'https://goflybd.com/australia-visa-from-bangladesh/',
+            'belgium': 'https://goflybd.com/belgium-visa-from-bangladesh/',
+            'canada': 'https://goflybd.com/canada-visa-from-bangladesh/',
+            'china': 'https://goflybd.com/china-visa-for-bangladeshi/',
+            'czech': 'https://goflybd.com/czech-republic-visa-from-bangladesh/',
+            'denmark': 'https://goflybd.com/denmark-visa-from-bangladesh/',
+            'estonia': 'https://goflybd.com/estonia-visa-from-bangladesh/',
+            'ethiopia': 'https://goflybd.com/ethiopia-visa-from-bangladesh/',
+            'france': 'https://goflybd.com/france-visa-from-bangladesh/',
+            'germany': 'https://goflybd.com/germany-visa-from-bangladesh/',
+            'greece': 'https://goflybd.com/greece-visa-from-bangladesh/',
+            'hong-kong': 'https://goflybd.com/hong-kong-visa-from-bangladesh/',
+            'hungary': 'https://goflybd.com/hungary-visa-from-bangladesh/',
+            'india': 'https://goflybd.com/indian-visa-for-bangladeshi/',
+            'indonesia': 'https://goflybd.com/indonesia-visa-for-bangladeshi/',
+            'italy': 'https://goflybd.com/italy-visa-from-bangladesh/',
+            'japan': 'https://goflybd.com/japan-visa-from-bangladesh/',
+            'kenya': 'https://goflybd.com/kenya-visa-for-bangladeshi/',
+            'malaysia': 'https://goflybd.com/malaysia-visa-from-bangladesh/',
+            'nepal': 'https://goflybd.com/nepal-visa-from-bangladesh/',
+            'netherlands': 'https://goflybd.com/netherlands-visa-from-bangladesh/',
+            'norway': 'https://goflybd.com/norway-visa-from-bangladesh/',
+            'pakistan': 'https://goflybd.com/pakistan-visa-for-bangladeshi/',
+            'philippines': 'https://goflybd.com/philippines-visa-from-bangladesh/',
+            'poland': 'https://goflybd.com/poland-visa-from-bangladesh/',
+            'portugal': 'https://goflybd.com/portugal-visa-for-bangladeshi/',
+            'schengen': 'https://goflybd.com/schengen-visa-for-bangladeshi/',
+            'singapore': 'https://goflybd.com/singapore-visa-from-bangladesh/',
+            'south-korea': 'https://goflybd.com/south-korea-visa-for-bangladeshi/',
+            'spain': 'https://goflybd.com/spain-visa-from-bangladesh/',
+            'sri-lanka': 'https://goflybd.com/sri-lanka-visa-from-bangladesh/',
+            'sweden': 'https://goflybd.com/sweden-visa-from-bangladesh/',
+            'switzerland': 'https://goflybd.com/switzerland-visa-from-bangladesh/',
+            'thailand': 'https://goflybd.com/thailand-visa-from-bangladesh/',
+            'turkey': 'https://goflybd.com/turkey-visa-from-bangladesh/',
+            'saudi-arabia': 'https://goflybd.com/umrah-visa-from-bangladesh/',
+            'uae': 'https://goflybd.com/dubai-visa-from-bangladesh/',
+            'usa': 'https://goflybd.com/usa-visa-from-bangladesh/',
+            'uk': 'https://goflybd.com/uk-visa-from-bangladesh/',
+            'vietnam': 'https://goflybd.com/vietnam-visa-from-bangladesh/'
+        };
+
+        const QUESTIONS = {
+            easy: {
+                passingScore: 40,
+                maxScore: 100,
+                questions: [
+                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',type:'select',weight:30,options:[
+                        {value:'less-3',label:'৩ মাসের কম',score:0},
+                        {value:'3-6',label:'৩-৬ মাস',score:15},
+                        {value:'more-6',label:'৬ মাসের বেশি',score:30}
+                    ]},
+                    {id:'return_ticket',question:'আপনার কি রিটার্ন টিকেট আছে?',type:'boolean',weight:25},
+                    {id:'hotel_booking',question:'আপনার কি হোটেল বুকিং আছে?',type:'boolean',weight:25},
+                    {id:'travel_funds',question:'আপনার কি পর্যাপ্ত ভ্রমণ খরচ আছে?',type:'boolean',weight:20}
+                ]
+            },
+            medium: {
+                passingScore: 55,
+                maxScore: 100,
+                questions: [
+                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',type:'select',weight:15,options:[
+                        {value:'less-3',label:'৩ মাসের কম',score:0},
+                        {value:'3-6',label:'৩-৬ মাস',score:8},
+                        {value:'more-6',label:'৬ মাসের বেশি',score:15}
+                    ]},
+                    {id:'employment_status',question:'আপনার বর্তমান কর্মসংস্থান কী?',type:'select',weight:20,options:[
+                        {value:'unemployed',label:'বেকার',score:2},
+                        {value:'student',label:'ছাত্র/ছাত্রী',score:10},
+                        {value:'self-employed',label:'ব্যবসায়ী',score:15},
+                        {value:'employed',label:'চাকরিজীবী',score:20}
+                    ]},
+                    {id:'bank_balance',question:'আপনার ব্যাংক ব্যালেন্স কত?',type:'select',weight:25,options:[
+                        {value:'less-50k',label:'৫০,০০০ টাকার কম',score:4},
+                        {value:'50k-2lakh',label:'৫০,০০০ - ২,০০,০০০ টাকা',score:12},
+                        {value:'2-5lakh',label:'২-৫ লাখ টাকা',score:19},
+                        {value:'more-5lakh',label:'৫ লাখ টাকার বেশি',score:25}
+                    ]},
+                    {id:'previous_travel',question:'আপনি কি আগে বিদেশ ভ্রমণ করেছেন?',type:'select',weight:20,options:[
+                        {value:'never',label:'না, কখনো না',score:4},
+                        {value:'once',label:'১-২টি দেশ',score:12},
+                        {value:'multiple',label:'৩+ দেশ',score:20}
+                    ]},
+                    {id:'sponsor',question:'আপনার ট্রিপ কে স্পন্সর করছে?',type:'select',weight:20,options:[
+                        {value:'self',label:'নিজে',score:20},
+                        {value:'family',label:'পরিবারের সদস্য',score:16},
+                        {value:'company',label:'কোম্পানি',score:20},
+                        {value:'other',label:'অন্যান্য',score:7}
+                    ]}
+                ]
+            },
+            hard: {
+                passingScore: 65,
+                maxScore: 100,
+                questions: [
+                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',type:'select',weight:10,options:[
+                        {value:'less-6',label:'৬ মাসের কম',score:0},
+                        {value:'6-12',label:'৬-১২ মাস',score:7},
+                        {value:'more-12',label:'১২ মাসের বেশি',score:10}
+                    ]},
+                    {id:'employment_status',question:'আপনার বর্তমান কর্মসংস্থান কী?',type:'select',weight:15,options:[
+                        {value:'unemployed',label:'বেকার',score:0},
+                        {value:'student',label:'ছাত্র/ছাত্রী',score:8},
+                        {value:'self-employed',label:'ব্যবসায়ী',score:12},
+                        {value:'employed',label:'বেসরকারি চাকরিজীবী',score:13},
+                        {value:'govt',label:'সরকারি চাকরিজীবী',score:15}
+                    ]},
+                    {id:'monthly_income',question:'আপনার মাসিক আয় কত?',type:'select',weight:12,options:[
+                        {value:'less-30k',label:'৩০,০০০ টাকার কম',score:2},
+                        {value:'30-60k',label:'৩০,০০০ - ৬০,০০০ টাকা',score:6},
+                        {value:'60-100k',label:'৬০,০০০ - ১,০০,০০০ টাকা',score:9},
+                        {value:'more-100k',label:'১ লাখ টাকার বেশি',score:12}
+                    ]},
+                    {id:'bank_balance',question:'গত ৬ মাসে ব্যাংক ব্যালেন্স গড়ে কত ছিল?',type:'select',weight:15,options:[
+                        {value:'less-2lakh',label:'২ লাখ টাকার কম',score:2},
+                        {value:'2-5lakh',label:'২-৫ লাখ টাকা',score:8},
+                        {value:'5-10lakh',label:'৫-১০ লাখ টাকা',score:12},
+                        {value:'more-10lakh',label:'১০ লাখ টাকার বেশি',score:15}
+                    ]},
+                    {id:'property',question:'বাংলাদেশে আপনার কোনো সম্পত্তি আছে?',type:'select',weight:8,options:[
+                        {value:'none',label:'না',score:0},
+                        {value:'land',label:'শুধু জমি',score:4},
+                        {value:'house',label:'বাড়ি/ফ্ল্যাট',score:6},
+                        {value:'multiple',label:'একাধিক সম্পত্তি',score:8}
+                    ]},
+                    {id:'previous_travel',question:'আগে কোন কোন দেশে ভ্রমণ করেছেন?',type:'select',weight:10,options:[
+                        {value:'never',label:'কখনো বিদেশ যাইনি',score:0},
+                        {value:'asia',label:'শুধু এশিয়ান দেশ',score:5},
+                        {value:'developed',label:'উন্নত দেশ (US/UK/EU)',score:10}
+                    ]},
+                    {id:'visa_rejection',question:'আপনার কি কখনো ভিসা রিজেক্ট হয়েছে?',type:'select',weight:8,options:[
+                        {value:'multiple',label:'হ্যাঁ, বহুবার',score:0},
+                        {value:'once',label:'হ্যাঁ, একবার',score:2},
+                        {value:'never',label:'না, কখনো না',score:8}
+                    ]},
+                    {id:'purpose',question:'আপনার ভ্রমণের উদ্দেশ্য কী?',type:'select',weight:6,options:[
+                        {value:'tourism',label:'পর্যটন',score:6},
+                        {value:'business',label:'ব্যবসা',score:6},
+                        {value:'family',label:'পরিবার দেখা',score:5},
+                        {value:'medical',label:'চিকিৎসা',score:5},
+                        {value:'other',label:'অন্যান্য',score:3}
+                    ]},
+                    {id:'invitation',question:'আপনার কি ইনভিটেশন লেটার আছে?',type:'boolean',weight:6},
+                    {id:'travel_insurance',question:'আপনার কি ট্রাভেল ইন্স্যুরেন্স আছে? (€30,000 কভারেজ)',type:'boolean',weight:10}
+                ]
+            },
+            'very-hard': {
+                passingScore: 70,
+                maxScore: 100,
+                questions: [
+                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',type:'select',weight:8,options:[
+                        {value:'less-6',label:'৬ মাসের কম',score:0},
+                        {value:'6-12',label:'৬-১২ মাস',score:5},
+                        {value:'more-12',label:'১২ মাসের বেশি',score:8}
+                    ]},
+                    {id:'employment_status',question:'আপনার বর্তমান কর্মসংস্থান কী?',type:'select',weight:12,options:[
+                        {value:'unemployed',label:'বেকার',score:0},
+                        {value:'student',label:'ছাত্র/ছাত্রী',score:6},
+                        {value:'self-employed',label:'ব্যবসায়ী',score:9},
+                        {value:'employed',label:'বেসরকারি চাকরিজীবী',score:10},
+                        {value:'govt',label:'সরকারি চাকরিজীবী',score:12}
+                    ]},
+                    {id:'job_duration',question:'বর্তমান চাকরিতে কতদিন ধরে আছেন?',type:'select',weight:8,options:[
+                        {value:'less-1',label:'১ বছরের কম',score:2},
+                        {value:'1-3',label:'১-৩ বছর',score:5},
+                        {value:'3-5',label:'৩-৫ বছর',score:7},
+                        {value:'more-5',label:'৫ বছরের বেশি',score:8}
+                    ]},
+                    {id:'monthly_income',question:'আপনার মাসিক আয় কত?',type:'select',weight:10,options:[
+                        {value:'less-50k',label:'৫০,০০০ টাকার কম',score:1},
+                        {value:'50-100k',label:'৫০,০০০ - ১,০০,০০০ টাকা',score:5},
+                        {value:'100-200k',label:'১-২ লাখ টাকা',score:8},
+                        {value:'more-200k',label:'২ লাখ টাকার বেশি',score:10}
+                    ]},
+                    {id:'bank_balance',question:'গত ৬ মাসে ব্যাংক ব্যালেন্স গড়ে কত ছিল?',type:'select',weight:12,options:[
+                        {value:'less-5lakh',label:'৫ লাখ টাকার কম',score:2},
+                        {value:'5-10lakh',label:'৫-১০ লাখ টাকা',score:6},
+                        {value:'10-25lakh',label:'১০-২৫ লাখ টাকা',score:9},
+                        {value:'more-25lakh',label:'২৫ লাখ টাকার বেশি',score:12}
+                    ]},
+                    {id:'property',question:'বাংলাদেশে আপনার কোনো সম্পত্তি আছে?',type:'select',weight:10,options:[
+                        {value:'none',label:'না',score:0},
+                        {value:'land',label:'শুধু জমি',score:4},
+                        {value:'house',label:'বাড়ি/ফ্ল্যাট',score:7},
+                        {value:'multiple',label:'একাধিক সম্পত্তি',score:10}
+                    ]},
+                    {id:'family_ties',question:'বাংলাদেশে পারিবারিক বন্ধন?',type:'select',weight:8,options:[
+                        {value:'none',label:'কাছের কেউ নেই',score:1},
+                        {value:'parents',label:'শুধু বাবা-মা',score:5},
+                        {value:'spouse',label:'স্বামী/স্ত্রী/সন্তান',score:8},
+                        {value:'all',label:'সবাই আছেন',score:8}
+                    ]},
+                    {id:'previous_travel',question:'আগে কোন কোন দেশে ভ্রমণ করেছেন?',type:'select',weight:10,options:[
+                        {value:'never',label:'কখনো বিদেশ যাইনি',score:0},
+                        {value:'asia',label:'শুধু এশিয়ান দেশ',score:4},
+                        {value:'mixed',label:'কিছু উন্নত দেশ',score:7},
+                        {value:'developed',label:'বহুবার US/UK/EU/Canada',score:10}
+                    ]},
+                    {id:'visa_rejection',question:'আপনার কি কখনো ভিসা রিজেক্ট হয়েছে?',type:'select',weight:10,options:[
+                        {value:'same-country',label:'হ্যাঁ, এই দেশ থেকেই',score:0},
+                        {value:'other',label:'হ্যাঁ, অন্য দেশ থেকে',score:3},
+                        {value:'never',label:'না, কখনো না',score:10}
+                    ]},
+                    {id:'purpose',question:'আপনার ভ্রমণের উদ্দেশ্য কী?',type:'select',weight:12,options:[
+                        {value:'tourism',label:'পর্যটন',score:12},
+                        {value:'business',label:'বিজনেস মিটিং',score:12},
+                        {value:'family',label:'পরিবার দেখা',score:10},
+                        {value:'medical',label:'চিকিৎসা',score:10},
+                        {value:'other',label:'অন্যান্য',score:6}
+                    ]}
+                ]
+            }
+        };
+
+        const DIFFICULTY_CONFIG = {
+            easy: {label:'সহজ ভিসা',sublabel:'দ্রুত সার্ভিস',emoji:'⚡',color:'text-green-700',bgColor:'bg-green-100 border-green-200',tabActive:'bg-green-600 text-white shadow-lg',salesTag:'২-৭ দিনে',description:'VOA বা eVisa, সহজ প্রসেস'},
+            medium: {label:'স্ট্যান্ডার্ড',sublabel:'গাইডেড সাপোর্ট',emoji:'📋',color:'text-blue-700',bgColor:'bg-blue-100 border-blue-200',tabActive:'bg-blue-500 text-white shadow-lg',salesTag:'৯৫% সাকসেস',description:'স্ট্যান্ডার্ড প্রসেস, ভালো ডকুমেন্ট দরকার'},
+            hard: {label:'প্রিমিয়াম',sublabel:'এক্সপার্ট সাপোর্ট',emoji:'⭐',color:'text-purple-700',bgColor:'bg-purple-100 border-purple-200',tabActive:'bg-purple-600 text-white shadow-lg',salesTag:'৯০% সাকসেস',description:'উন্নত দেশ, আমাদের বিশেষজ্ঞরা আছেন'},
+            'very-hard': {label:'এক্সক্লুসিভ',sublabel:'ভিআইপি সার্ভিস',emoji:'🏆',color:'text-orange-700',bgColor:'bg-gradient-to-r from-orange-100 to-amber-100 border-orange-300',tabActive:'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg',salesTag:'বিশেষজ্ঞ টিম',description:'USA/UK/Canada/Australia, ভিআইপি সাপোর্ট'}
+        };
+
+        // === STATE ===
+        let currentStep = 'select-country';
+        let selectedCountry = null;
+        let currentQuestionIndex = 0;
+        let answers = {};
+        let score = 0;
+        let activeTab = 'easy';
+        let leadData = {name: '', phone: '', email: ''};
+
+        // === UTILITY FUNCTIONS ===
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        }
+
+        function saveSession() {
+            if (selectedCountry) {
+                const sessionData = {
+                    currentStep,
+                    countryId: selectedCountry.id,
+                    currentQuestionIndex,
+                    answers,
+                    score,
+                    activeTab,
+                    leadData,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem('visaCheckerSession', JSON.stringify(sessionData));
+            }
+        }
+
+        function loadSession() {
+            try {
+                const saved = localStorage.getItem('visaCheckerSession');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    // Only restore if less than 1 hour old
+                    if (Date.now() - data.timestamp < 3600000) {
+                        return data;
+                    } else {
+                        localStorage.removeItem('visaCheckerSession');
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to load session:', e);
+            }
+            return null;
+        }
+
+        function clearSession() {
+            localStorage.removeItem('visaCheckerSession');
+        }
+
+        // === RENDER FUNCTIONS ===
+        function render() {
+            const app = document.getElementById('app');
+            if (currentStep === 'select-country') {
+                app.innerHTML = renderCountrySelector();
+            } else if (currentStep === 'questions') {
+                app.innerHTML = renderQuestions();
+            } else if (currentStep === 'lead-capture') {
+                app.innerHTML = renderLeadCapture();
+            } else if (currentStep === 'result') {
+                app.innerHTML = renderResult();
+            }
+        }
+
+        function renderCountrySelector() {
+            const grouped = {
+                easy: COUNTRIES.filter(c => c.difficulty === 'easy'),
+                medium: COUNTRIES.filter(c => c.difficulty === 'medium'),
+                hard: COUNTRIES.filter(c => c.difficulty === 'hard'),
+                'very-hard': COUNTRIES.filter(c => c.difficulty === 'very-hard')
+            };
+            const config = DIFFICULTY_CONFIG[activeTab];
+            const countries = grouped[activeTab];
+
+            return `
+                <div class="space-y-6 animate-slide-in">
+                    <div class="text-center space-y-3">
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-800">কোন দেশে যেতে চান?</h2>
+                        <p class="text-gray-600">আপনার গন্তব্য দেশ নির্বাচন করুন</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-2">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                            ${['easy', 'medium', 'hard', 'very-hard'].map(tab => {
+                                const cfg = DIFFICULTY_CONFIG[tab];
+                                const count = grouped[tab].length;
+                                const isActive = activeTab === tab;
+                                return `
+                                    <button
+                                        onclick="changeTab('${tab}')"
+                                        class="p-3 md:p-4 rounded-xl transition-all ${isActive ? cfg.tabActive : 'bg-gray-50 hover:bg-gray-100'}"
+                                        aria-label="${cfg.label} - ${count}টি দেশ"
+                                        aria-pressed="${isActive}"
+                                        role="tab">
+                                        <div class="flex flex-col items-center gap-0.5 sm:gap-1">
+                                            <span class="text-xl sm:text-2xl" aria-hidden="true">${cfg.emoji}</span>
+                                            <span class="font-semibold text-xs sm:text-sm leading-tight text-center">${cfg.label}</span>
+                                            <span class="text-xs opacity-80">${count}টি</span>
+                                        </div>
+                                    </button>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <div class="${config.bgColor} border-2 rounded-xl p-3 sm:p-4">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <span class="text-2xl sm:text-3xl" aria-hidden="true">${config.emoji}</span>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                                    <h3 class="font-bold ${config.color} text-sm sm:text-base">${config.label}</h3>
+                                    <span class="bg-white/80 text-xs font-semibold px-2 py-0.5 sm:py-1 rounded-full text-orange-600 self-start">🔥 ${config.salesTag}</span>
+                                </div>
+                                <p class="text-xs text-gray-600 leading-snug">${config.description}</p>
+                            </div>
+                            <div class="text-right flex-shrink-0">
+                                <span class="text-xl sm:text-2xl font-bold ${config.color} block">${countries.length}</span>
+                                <span class="text-xs sm:text-sm text-gray-500">টি দেশ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${countries.map(country => {
+                            const popular = ['malaysia','thailand','singapore','uae','usa','canada','uk','schengen','australia'].includes(country.id);
+                            return `
+                                <button
+                                    onclick="selectCountry('${country.id}')"
+                                    class="relative p-3 sm:p-4 rounded-xl border-2 ${DIFFICULTY_CONFIG[country.difficulty].bgColor} hover:shadow-lg transition-all text-left group hover:scale-[1.02]"
+                                    aria-label="${country.nameBn} - ${country.visaType}, প্রসেসিং টাইম: ${country.processingTime}">
+                                    ${popular ? '<span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full" aria-label="জনপ্রিয়">🔥 জনপ্রিয়</span>' : ''}
+                                    <div class="flex items-start gap-2 sm:gap-3">
+                                        <span class="text-3xl sm:text-4xl flex-shrink-0" aria-hidden="true">${country.flag}</span>
+                                        <div class="flex-1 min-w-0">
+                                            <h4 class="font-bold text-gray-800 text-sm sm:text-base">${country.nameBn}</h4>
+                                            <p class="text-xs sm:text-sm text-gray-600">${country.name}</p>
+                                            <p class="text-xs ${DIFFICULTY_CONFIG[country.difficulty].color} mt-1 sm:mt-2">${country.visaType}</p>
+                                            <p class="text-xs text-gray-500 leading-tight">⏱️ ${country.processingTime}</p>
+                                            ${country.description ? `<p class="text-xs text-gray-500 mt-1 leading-tight">${country.description}</p>` : ''}
+                                        </div>
+                                    </div>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderQuestions() {
+            const questionsData = QUESTIONS[selectedCountry.difficulty];
+            const question = questionsData.questions[currentQuestionIndex];
+            const progress = ((currentQuestionIndex + 1) / questionsData.questions.length) * 100;
+
+            return `
+                <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6 animate-slide-in">
+                    <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 space-y-4 sm:space-y-6">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2 flex-1 min-w-0">
+                                <span class="text-2xl sm:text-3xl flex-shrink-0">${selectedCountry.flag}</span>
+                                <div class="min-w-0">
+                                    <h3 class="font-bold text-gray-800 text-sm sm:text-base truncate">${selectedCountry.nameBn}</h3>
+                                    <p class="text-xs text-gray-500 truncate">${selectedCountry.name}</p>
+                                </div>
+                            </div>
+                            <button onclick="backToCountries()" class="text-gray-500 hover:text-gray-700 flex-shrink-0 text-sm sm:text-base font-medium px-2 sm:px-3 py-1 sm:py-2 rounded hover:bg-gray-100 transition-all">← ফিরুন</button>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-xs sm:text-sm text-gray-600">
+                                <span>প্রশ্ন ${currentQuestionIndex + 1}/${questionsData.questions.length}</span>
+                                <span class="font-medium">${Math.round(progress)}%</span>
+                            </div>
+                            <div class="h-2 sm:h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-green-500 transition-all duration-500" style="width: ${progress}%"></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 sm:space-y-4">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-800 leading-snug">${question.question}</h3>
+
+                            ${question.type === 'select' ? `
+                                <div class="space-y-2 sm:space-y-3">
+                                    ${question.options.map(opt => `
+                                        <button onclick="answerQuestion('${question.id}', '${opt.value}', ${opt.score})" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all text-left focus:ring-2 focus:ring-green-300">
+                                            <span class="font-medium text-sm sm:text-base">${opt.label}</span>
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            ` : `
+                                <div class="space-y-2 sm:space-y-3">
+                                    <button onclick="answerQuestion('${question.id}', true, ${question.weight})" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all focus:ring-2 focus:ring-green-300">
+                                        <span class="font-medium text-sm sm:text-base">✅ হ্যাঁ</span>
+                                    </button>
+                                    <button onclick="answerQuestion('${question.id}', false, 0)" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-red-500 hover:bg-red-50 transition-all focus:ring-2 focus:ring-red-300">
+                                        <span class="font-medium text-sm sm:text-base">❌ না</span>
+                                    </button>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLeadCapture() {
+            const questionsData = QUESTIONS[selectedCountry.difficulty];
+            const percentage = Math.round((score / questionsData.maxScore) * 100);
+
+            return `
+                <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6 animate-slide-in">
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-4 sm:p-6 text-center space-y-3">
+                        <span class="text-4xl sm:text-5xl">🎊</span>
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-800">অভিনন্দন! আপনার মূল্যায়ন সম্পন্ন!</h2>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">আপনার রেজাল্ট দেখতে এবং বিশেষজ্ঞ পরামর্শ পেতে আপনার তথ্য দিন</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 space-y-4">
+                        <div class="flex items-center gap-2 sm:gap-3 pb-3 border-b border-gray-200">
+                            <span class="text-2xl sm:text-3xl">${selectedCountry.flag}</span>
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-sm sm:text-base">${selectedCountry.nameBn}</h3>
+                                <p class="text-xs text-gray-500">${selectedCountry.visaType}</p>
+                            </div>
+                        </div>
+
+                        <form onsubmit="submitLead(event)" class="space-y-3 sm:space-y-4">
+                            <div>
+                                <label for="leadName" class="block text-sm font-medium text-gray-700 mb-1">আপনার নাম <span class="text-red-500">*</span></label>
+                                <input
+                                    type="text"
+                                    id="leadName"
+                                    required
+                                    class="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-sm sm:text-base"
+                                    placeholder="যেমন: আব্দুল করিম"
+                                    value="${leadData.name}"
+                                    oninput="leadData.name = this.value">
+                            </div>
+
+                            <div>
+                                <label for="leadPhone" class="block text-sm font-medium text-gray-700 mb-1">মোবাইল নম্বর <span class="text-red-500">*</span></label>
+                                <input
+                                    type="tel"
+                                    id="leadPhone"
+                                    required
+                                    pattern="[0-9]{11}"
+                                    class="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-sm sm:text-base"
+                                    placeholder="01XXXXXXXXX"
+                                    value="${leadData.phone}"
+                                    oninput="leadData.phone = this.value">
+                                <p class="text-xs text-gray-500 mt-1">১১ ডিজিটের বাংলাদেশী মোবাইল নম্বর</p>
+                            </div>
+
+                            <div>
+                                <label for="leadEmail" class="block text-sm font-medium text-gray-700 mb-1">ইমেইল <span class="text-gray-400">(ঐচ্ছিক)</span></label>
+                                <input
+                                    type="email"
+                                    id="leadEmail"
+                                    class="w-full px-3 sm:px-4 py-2 sm:py-3 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all text-sm sm:text-base"
+                                    placeholder="example@email.com"
+                                    value="${leadData.email}"
+                                    oninput="leadData.email = this.value">
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 sm:py-4 rounded-xl font-bold hover:from-green-700 hover:to-green-800 transition-all shadow-lg text-sm sm:text-base">
+                                📊 রেজাল্ট দেখুন (${percentage}%)
+                            </button>
+                        </form>
+
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                            <p class="text-xs text-green-800 leading-relaxed">
+                                <span class="font-semibold">🔒 গোপনীয়তা সুরক্ষিত:</span> আপনার তথ্য সম্পূর্ণ নিরাপদ এবং শুধুমাত্র ভিসা পরামর্শের জন্য ব্যবহৃত হবে।
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-3 sm:p-4">
+                        <div class="flex items-center justify-between text-xs sm:text-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg sm:text-xl">✅</span>
+                                <span class="text-gray-700">১০,০০০+ সন্তুষ্ট কাস্টমার</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg sm:text-xl">⭐</span>
+                                <span class="font-bold text-amber-600">৪.৮ রেটিং</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderResult() {
+            const questionsData = QUESTIONS[selectedCountry.difficulty];
+            const percentage = Math.round((score / questionsData.maxScore) * 100);
+
+            let result;
+            if (percentage >= 80) result = {emoji:'🎉',title:'অভিনন্দন! শক্তিশালী প্রোফাইল!',color:'text-green-600',bgColor:'bg-green-50 border-green-200',barColor:'bg-green-500'};
+            else if (percentage >= 65) result = {emoji:'👍',title:'ভালো প্রোফাইল!',color:'text-blue-600',bgColor:'bg-blue-50 border-blue-200',barColor:'bg-blue-500'};
+            else if (percentage >= 50) result = {emoji:'💪',title:'সঠিক প্রস্তুতি দরকার',color:'text-purple-600',bgColor:'bg-purple-50 border-purple-200',barColor:'bg-purple-500'};
+            else result = {emoji:'🎯',title:'চ্যালেঞ্জিং, কিন্তু অসম্ভব নয়!',color:'text-orange-600',bgColor:'bg-orange-50 border-orange-200',barColor:'bg-orange-500'};
+
+            return `
+                <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6 animate-fade-in">
+                    <div class="${result.bgColor} border-2 rounded-2xl p-4 sm:p-6 text-center space-y-3 sm:space-y-4">
+                        <span class="text-5xl sm:text-6xl">${result.emoji}</span>
+                        <h2 class="text-xl sm:text-2xl font-bold ${result.color} leading-tight">${result.title}</h2>
+                        <div class="flex items-center justify-center gap-2 sm:gap-3">
+                            <span class="text-2xl sm:text-3xl">${selectedCountry.flag}</span>
+                            <span class="text-lg sm:text-xl font-semibold">${selectedCountry.nameBn}</span>
+                        </div>
+                        <div class="bg-white rounded-xl p-3 sm:p-4">
+                            <div class="text-3xl sm:text-4xl font-bold">${percentage}%</div>
+                            <div class="text-xs sm:text-sm text-gray-500">স্কোর: ${score}/${questionsData.maxScore}</div>
+                            <div class="mt-2 sm:mt-3 h-2.5 sm:h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full ${result.barColor} transition-all duration-500" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">📋 আপনার জন্য পরামর্শ</h3>
+                        <ul class="space-y-2">
+                            ${getTips().map(tip => `<li class="bg-gray-50 p-3 rounded-lg text-xs sm:text-sm leading-relaxed">${tip}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    ${COUNTRY_URLS[selectedCountry.id] ? `
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-4 sm:p-6">
+                        <div class="flex items-start gap-3">
+                            <span class="text-3xl sm:text-4xl flex-shrink-0">${selectedCountry.flag}</span>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2">📖 ${selectedCountry.nameBn} ভিসা বিস্তারিত গাইড</h3>
+                                <p class="text-xs sm:text-sm text-gray-600 mb-3 leading-relaxed">
+                                    ${selectedCountry.nameBn} ভিসা সম্পর্কে সম্পূর্ণ তথ্য, প্রয়োজনীয় ডকুমেন্ট, ফি, প্রসেসিং টাইম এবং আবেদন প্রক্রিয়া জানতে আমাদের বিস্তারিত গাইড পড়ুন।
+                                </p>
+                                <a href="${COUNTRY_URLS[selectedCountry.id]}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold hover:bg-blue-700 transition-all text-xs sm:text-sm shadow-lg">
+                                    📚 সম্পূর্ণ গাইড পড়ুন
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
+
+                    <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-4 sm:p-6 text-white space-y-3 sm:space-y-4">
+                        <h3 class="text-xl sm:text-2xl font-bold text-center">goFLY দিয়ে সহজ করুন</h3>
+                        <div class="grid grid-cols-3 gap-2 py-3 border-y border-green-500/30">
+                            <div class="text-center">
+                                <div class="text-lg sm:text-2xl font-bold">১০k+</div>
+                                <div class="text-xs leading-tight">কাস্টমার</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg sm:text-2xl font-bold">৪.৮⭐</div>
+                                <div class="text-xs leading-tight">রিভিউ</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg sm:text-2xl font-bold">৯০%+</div>
+                                <div class="text-xs leading-tight">সাকসেস</div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                            <a href="https://wa.me/8801713289175?text=আমি ${selectedCountry.nameBn} ভিসার জন্য আগ্রহী। স্কোর: ${percentage}%" target="_blank" class="flex-1 bg-white text-green-700 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:bg-green-50 transition-all text-center text-sm sm:text-base">
+                                💬 WhatsApp
+                            </a>
+                            <a href="tel:+8809639203090" class="flex-1 bg-green-500 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:bg-green-400 transition-all text-center text-sm sm:text-base">
+                                📞 কল করুন
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <button onclick="resetApp()" class="w-full sm:flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-medium bg-gray-200 hover:bg-gray-300 transition-all text-sm sm:text-base">🔄 আবার শুরু</button>
+                        <button onclick="backToCountries()" class="w-full sm:flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-medium bg-green-600 text-white hover:bg-green-700 transition-all text-sm sm:text-base">🌍 অন্য দেশ</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // === EVENT HANDLERS ===
+        function changeTab(tab) {
+            showLoading();
+            setTimeout(() => {
+                activeTab = tab;
+                render();
+                hideLoading();
+            }, 100);
+        }
+
+        function selectCountry(countryId) {
+            showLoading();
+            setTimeout(() => {
+                selectedCountry = COUNTRIES.find(c => c.id === countryId);
+                currentStep = 'questions';
+                currentQuestionIndex = 0;
+                answers = {};
+                score = 0;
+                saveSession();
+                render();
+                hideLoading();
+            }, 150);
+        }
+
+        function answerQuestion(questionId, value, questionScore) {
+            // Visual feedback on selection
+            if (event && event.target) {
+                const button = event.target.closest('button');
+                if (button) {
+                    button.classList.add('answer-selected');
+                }
+            }
+
+            setTimeout(() => {
+                showLoading();
+                setTimeout(() => {
+                    answers[questionId] = value;
+                    score += questionScore;
+
+                    const questionsData = QUESTIONS[selectedCountry.difficulty];
+                    if (currentQuestionIndex < questionsData.questions.length - 1) {
+                        currentQuestionIndex++;
+                        saveSession();
+                        render();
+                    } else {
+                        currentStep = 'lead-capture';
+                        saveSession();
+                        render();
+                    }
+                    hideLoading();
+                }, 100);
+            }, 200);
+        }
+
+        function submitLead(event) {
+            event.preventDefault();
+
+            // Validate required fields
+            if (!leadData.name || !leadData.phone) {
+                alert('দয়া করে নাম এবং মোবাইল নম্বর দিন');
+                return;
+            }
+
+            // Validate phone format
+            if (!/^[0-9]{11}$/.test(leadData.phone)) {
+                alert('দয়া করে সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন');
+                return;
+            }
+
+            showLoading();
+
+            // Prepare lead data
+            const leadInfo = {
+                name: leadData.name,
+                phone: leadData.phone,
+                email: leadData.email || '',
+                country: selectedCountry.nameBn,
+                countryId: selectedCountry.id,
+                score: score,
+                percentage: Math.round((score / QUESTIONS[selectedCountry.difficulty].maxScore) * 100),
+                timestamp: new Date().toISOString()
+            };
+
+            // Store lead in localStorage as backup
+            const leads = JSON.parse(localStorage.getItem('visaLeads') || '[]');
+            leads.push(leadInfo);
+            localStorage.setItem('visaLeads', JSON.stringify(leads));
+
+            // Submit to WordPress backend
+            submitToWordPress(leadInfo);
+        }
+
+        async function submitToWordPress(leadInfo) {
+            const WORDPRESS_URL = 'https://goflybd.com';
+            const THEME_NAME = 'travel-agency';
+
+            // Get question details with answers
+            const questionsData = QUESTIONS[selectedCountry.difficulty];
+            const answersWithLabels = {};
+
+            questionsData.questions.forEach(question => {
+                const answerValue = answers[question.id];
+                let answerLabel = '';
+
+                if (question.type === 'select') {
+                    const selectedOption = question.options.find(opt => opt.value === answerValue);
+                    answerLabel = selectedOption ? selectedOption.label : answerValue;
+                } else {
+                    answerLabel = answerValue === true ? 'হ্যাঁ' : 'না';
+                }
+
+                answersWithLabels[question.id] = {
+                    question: question.question,
+                    answer: answerLabel,
+                    rawValue: answerValue
+                };
+            });
+
+            try {
+                const response = await fetch(
+                    `${WORDPRESS_URL}/wp-content/themes/${THEME_NAME}/visa-checker-api/api.php`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: leadInfo.name,
+                            phone: leadInfo.phone,
+                            email: leadInfo.email,
+                            country: leadInfo.country,
+                            countryId: leadInfo.countryId,
+                            score: leadInfo.score,
+                            percentage: leadInfo.percentage,
+                            difficulty: selectedCountry.difficulty,
+                            answers: answersWithLabels,
+                            timestamp: leadInfo.timestamp
+                        })
+                    }
+                );
+
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('✅ Lead saved successfully!', result);
+                } else {
+                    console.error('❌ Failed to save lead:', result.message || 'Unknown error');
+                }
+            } catch (error) {
+                console.error('❌ Network error submitting lead:', error);
+                // Lead is still saved in localStorage as backup
+            } finally {
+                // Always show result page to user
+                currentStep = 'result';
+                saveSession();
+                render();
+                hideLoading();
+            }
+        }
+
+        function backToCountries() {
+            showLoading();
+            setTimeout(() => {
+                currentStep = 'select-country';
+                selectedCountry = null;
+                currentQuestionIndex = 0;
+                answers = {};
+                score = 0;
+                clearSession();
+                render();
+                hideLoading();
+            }, 100);
+        }
+
+        function resetApp() {
+            showLoading();
+            setTimeout(() => {
+                currentStep = 'select-country';
+                selectedCountry = null;
+                currentQuestionIndex = 0;
+                answers = {};
+                score = 0;
+                activeTab = 'easy';
+                clearSession();
+                render();
+                hideLoading();
+            }, 100);
+        }
+
+        function getTips() {
+            const tips = [];
+            if (answers.passport_validity === 'less-3' || answers.passport_validity === 'less-6') {
+                tips.push('📌 পাসপোর্ট রিনিউ করুন - goFLY সাহায্য করে');
+            }
+            if (answers.employment_status === 'unemployed') {
+                tips.push('💼 চাকরি/ব্যবসার প্রমাণ দরকার');
+            }
+            if (answers.previous_travel === 'never') {
+                tips.push('✈️ প্রথম ট্রাভেল? চিন্তা নেই - আমরা সাহায্য করব');
+            }
+            if (selectedCountry.difficulty === 'very-hard') {
+                tips.push('🏆 USA/Canada/Australia - আমাদের স্পেশালিটি');
+            }
+            tips.push('✅ goFLY ১০,০০০+ কাস্টমারকে ভিসা পেতে সাহায্য করেছে');
+            return tips;
+        }
+
+        // === INIT ===
+        window.addEventListener('DOMContentLoaded', function() {
+            // Try to restore previous session
+            const savedSession = loadSession();
+            if (savedSession) {
+                // Show restore prompt
+                const shouldRestore = confirm('আপনার আগের সেশন পাওয়া গেছে। সেখান থেকে চালিয়ে যেতে চান?');
+                if (shouldRestore) {
+                    selectedCountry = COUNTRIES.find(c => c.id === savedSession.countryId);
+                    currentStep = savedSession.currentStep;
+                    currentQuestionIndex = savedSession.currentQuestionIndex;
+                    answers = savedSession.answers;
+                    score = savedSession.score;
+                    activeTab = savedSession.activeTab;
+                    if (savedSession.leadData) {
+                        leadData = savedSession.leadData;
+                    }
+                } else {
+                    clearSession();
+                }
+            }
+            render();
+        });
+
+        // Save on page unload
+        window.addEventListener('beforeunload', function() {
+            if (currentStep === 'questions' || currentStep === 'lead-capture') {
+                saveSession();
+            }
+        });
+    </script>
+</body>
+</html>
