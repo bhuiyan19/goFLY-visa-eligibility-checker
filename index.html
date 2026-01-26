@@ -357,28 +357,60 @@
                 passingScore: 55,
                 maxScore: 100,
                 questions: [
-                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',type:'select',weight:15,options:[
-                        {value:'less-3',label:'৩ মাসের কম',score:0},
-                        {value:'3-6',label:'৩-৬ মাস',score:8},
-                        {value:'more-6',label:'৬ মাসের বেশি',score:15}
-                    ]},
-                    {id:'employment_status',question:'আপনার বর্তমান কর্মসংস্থান কী?',type:'select',weight:20,options:[
-                        {value:'unemployed',label:'বেকার',score:2},
-                        {value:'student',label:'ছাত্র/ছাত্রী',score:10},
-                        {value:'self-employed',label:'ব্যবসায়ী',score:15},
-                        {value:'employed',label:'চাকরিজীবী',score:20}
-                    ]},
-                    {id:'bank_balance',question:'আপনার ব্যাংক ব্যালেন্স কত?',type:'select',weight:25,options:[
-                        {value:'less-50k',label:'৫০,০০০ টাকার কম',score:4},
-                        {value:'50k-2lakh',label:'৫০,০০০ - ২,০০,০০০ টাকা',score:12},
-                        {value:'2-5lakh',label:'২-৫ লাখ টাকা',score:19},
-                        {value:'more-5lakh',label:'৫ লাখ টাকার বেশি',score:25}
-                    ]},
-                    {id:'previous_travel',question:'আপনি কি আগে বিদেশ ভ্রমণ করেছেন?',type:'select',weight:20,options:[
-                        {value:'never',label:'না, কখনো না',score:4},
-                        {value:'once',label:'১-২টি দেশ',score:12},
-                        {value:'multiple',label:'৩+ দেশ',score:20}
-                    ]},
+                    {
+                        id:'passport_validity',
+                        question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',
+                        questionEn:'How many months validity does your passport have?',
+                        explanation:'🔍 দূতাবাস পাসপোর্টে কমপক্ষে ৬ মাস মেয়াদ চায়',
+                        type:'select',
+                        weight:15,
+                        options:[
+                            {value:'less-3',label:'৩ মাসের কম',labelEn:'Less than 3 months',score:0},
+                            {value:'3-6',label:'৩-৬ মাস',labelEn:'3-6 months',score:8},
+                            {value:'more-6',label:'৬ মাসের বেশি',labelEn:'More than 6 months',score:15}
+                        ]
+                    },
+                    {
+                        id:'employment_status',
+                        question:'আপনার বর্তমান কর্মসংস্থান কী?',
+                        questionEn:'What is your current employment status?',
+                        explanation:'💼 স্থিতিশীল চাকরি/ব্যবসা দেশে ফেরার শক্ত কারণ',
+                        type:'select',
+                        weight:20,
+                        options:[
+                            {value:'unemployed',label:'বেকার',labelEn:'Unemployed',score:2},
+                            {value:'student',label:'ছাত্র/ছাত্রী',labelEn:'Student',score:10},
+                            {value:'self-employed',label:'ব্যবসায়ী',labelEn:'Self-employed',score:15},
+                            {value:'employed',label:'চাকরিজীবী',labelEn:'Employed',score:20}
+                        ]
+                    },
+                    {
+                        id:'bank_balance',
+                        question:'আপনার ব্যাংক ব্যালেন্স কত?',
+                        questionEn:'What is your bank balance?',
+                        explanation:'💰 পর্যাপ্ত আর্থিক সামর্থ্য দেখাতে এই প্রশ্ন',
+                        type:'select',
+                        weight:25,
+                        options:[
+                            {value:'less-50k',label:'৫০,০০০ টাকার কম',labelEn:'Less than ৳50k',score:4},
+                            {value:'50k-2lakh',label:'৫০,০০০ - ২,০০,০০০ টাকা',labelEn:'৳50k - ৳2 lakh',score:12},
+                            {value:'2-5lakh',label:'২-৫ লাখ টাকা',labelEn:'৳2-5 lakh',score:19},
+                            {value:'more-5lakh',label:'৫ লাখ টাকার বেশি',labelEn:'More than ৳5 lakh',score:25}
+                        ]
+                    },
+                    {
+                        id:'previous_travel',
+                        question:'আপনি কি আগে বিদেশ ভ্রমণ করেছেন?',
+                        questionEn:'Have you traveled abroad before?',
+                        explanation:'✈️ আগের ভ্রমণ ইতিহাস আপনার বিশ্বাসযোগ্যতা বাড়ায়',
+                        type:'select',
+                        weight:20,
+                        options:[
+                            {value:'never',label:'না, কখনো না',labelEn:'Never',score:4},
+                            {value:'once',label:'১-২টি দেশ',labelEn:'1-2 countries',score:12},
+                            {value:'multiple',label:'৩+ দেশ',labelEn:'3+ countries',score:20}
+                        ]
+                    },
                     {id:'sponsor',question:'আপনার ট্রিপ কে স্পন্সর করছে?',type:'select',weight:20,options:[
                         {value:'self',label:'নিজে',score:20},
                         {value:'family',label:'পরিবারের সদস্য',score:16},
@@ -705,8 +737,16 @@
                             <div>
                                 <h3 class="text-lg sm:text-xl font-bold text-gray-800 leading-snug">${question.question}</h3>
                                 ${question.questionEn ? `<p class="text-sm text-gray-500 mt-1">${question.questionEn}</p>` : ''}
+                                ${question.explanation ? `
+                                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-2.5 mt-2">
+                                        <p class="text-xs text-gray-600 flex items-start gap-2">
+                                            <span class="flex-shrink-0">❓</span>
+                                            <span><strong>কেন জিজ্ঞাসা করা হচ্ছে:</strong> ${question.explanation}</span>
+                                        </p>
+                                    </div>
+                                ` : ''}
                                 ${question.tip ? `
-                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3">
+                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-2">
                                         <p class="text-xs sm:text-sm text-blue-800 flex items-start gap-2">
                                             <span class="text-base flex-shrink-0">💡</span>
                                             <span>${question.tip}</span>
@@ -1173,13 +1213,19 @@
                 }
             }
 
+            // Get current question for feedback
+            const questionsData = QUESTIONS[selectedCountry.difficulty];
+            const currentQuestion = questionsData.questions[currentQuestionIndex];
+
+            // Show instant feedback
+            showInstantFeedback(currentQuestion, questionScore);
+
             setTimeout(() => {
                 showLoading();
                 setTimeout(() => {
                     answers[questionId] = value;
                     score += questionScore;
 
-                    const questionsData = QUESTIONS[selectedCountry.difficulty];
                     if (currentQuestionIndex < questionsData.questions.length - 1) {
                         currentQuestionIndex++;
                         saveSession();
@@ -1191,7 +1237,58 @@
                     }
                     hideLoading();
                 }, 100);
-            }, 200);
+            }, 800);
+        }
+
+        function showInstantFeedback(question, earnedScore) {
+            const percentage = (earnedScore / question.weight) * 100;
+            let feedback = {
+                emoji: '',
+                text: '',
+                color: ''
+            };
+
+            if (percentage >= 80) {
+                feedback = {
+                    emoji: '✅',
+                    text: 'চমৎকার! এটা আপনার স্কোর বাড়াবে',
+                    color: 'bg-green-100 border-green-300 text-green-800'
+                };
+            } else if (percentage >= 50) {
+                feedback = {
+                    emoji: '👍',
+                    text: 'ভালো! মোটামুটি ভালো উত্তর',
+                    color: 'bg-blue-100 border-blue-300 text-blue-800'
+                };
+            } else if (percentage >= 20) {
+                feedback = {
+                    emoji: '⚠️',
+                    text: 'দুর্বল পয়েন্ট - goFLY সাহায্য করতে পারে',
+                    color: 'bg-yellow-100 border-yellow-300 text-yellow-800'
+                };
+            } else {
+                feedback = {
+                    emoji: '❌',
+                    text: 'এটি আপনার স্কোর কমাতে পারে - এক্সপার্ট সাপোর্ট নিন',
+                    color: 'bg-red-100 border-red-300 text-red-800'
+                };
+            }
+
+            const feedbackEl = document.createElement('div');
+            feedbackEl.className = `fixed top-24 left-1/2 transform -translate-x-1/2 z-50 ${feedback.color} border-2 rounded-xl px-6 py-3 shadow-lg animate-fade-in max-w-md`;
+            feedbackEl.innerHTML = `
+                <p class="flex items-center gap-2 font-medium text-sm sm:text-base">
+                    <span class="text-xl">${feedback.emoji}</span>
+                    <span>${feedback.text}</span>
+                </p>
+            `;
+            document.body.appendChild(feedbackEl);
+
+            setTimeout(() => {
+                feedbackEl.style.opacity = '0';
+                feedbackEl.style.transition = 'opacity 0.3s';
+                setTimeout(() => feedbackEl.remove(), 300);
+            }, 600);
         }
 
         function submitLead(event) {
