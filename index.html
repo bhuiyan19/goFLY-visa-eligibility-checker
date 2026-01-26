@@ -1037,18 +1037,50 @@
                     </div>
 
                     <!-- Premium Service Info -->
-                    <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
-                        <div class="flex items-start gap-3">
-                            <span class="text-2xl">💎</span>
-                            <div>
-                                <h4 class="font-bold text-amber-800">goFLY প্রিমিয়াম ভিসা সার্ভিস</h4>
-                                <p class="text-sm text-amber-700 mt-1">
-                                    সার্ভিস ফি: ৳১২,০০০ - ৳২০,০০০ (এম্বাসি ফি আলাদা)<br>
-                                    <span class="font-semibold">✅ ফ্রি কনসালটেশন | ✅ ডকুমেন্ট রিভিউ | ✅ ইন্টারভিউ প্রিপারেশন</span>
-                                </p>
+                    ${(() => {
+                        const serviceInfo = {
+                            'easy': {
+                                price: '৳৫,০০০ - ৳৮,০০০',
+                                features: '✅ ফ্রি কনসালটেশন | ✅ ডকুমেন্ট চেক | ✅ অনলাইন সাপোর্ট',
+                                turnaround: '২-৫ দিন',
+                                icon: '⚡'
+                            },
+                            'medium': {
+                                price: '৳৮,০০০ - ৳১২,০০০',
+                                features: '✅ ফ্রি কনসালটেশন | ✅ ডকুমেন্ট রিভিউ | ✅ ফর্ম ফিলআপ | ✅ ট্র্যাকিং সাপোর্ট',
+                                turnaround: '৫-১০ দিন',
+                                icon: '📋'
+                            },
+                            'hard': {
+                                price: '৳১২,০০০ - ৳১৮,০০০',
+                                features: '✅ ফ্রি কনসালটেশন | ✅ ডকুমেন্ট রিভিউ | ✅ ফর্ম ফিলআপ | ✅ ইন্টারভিউ প্রিপারেশন | ✅ ফলো-আপ',
+                                turnaround: '১০-২০ দিন',
+                                icon: '⭐'
+                            },
+                            'very-hard': {
+                                price: '৳১৮,০০০ - ৳৩৫,০০০',
+                                features: '✅ ফ্রি কনসালটেশন | ✅ ডকুমেন্ট রিভিউ | ✅ ফর্ম ফিলআপ | ✅ ইন্টারভিউ প্রিপারেশন | ✅ ফলো-আপ | ✅ ডেডিকেটেড সাপোর্ট',
+                                turnaround: '২০-৪৫ দিন',
+                                icon: '💎'
+                            }
+                        };
+                        const info = serviceInfo[selectedCountry.difficulty] || serviceInfo['medium'];
+                        return `
+                            <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-2xl">${info.icon}</span>
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-amber-800">goFLY প্রিমিয়াম ভিসা সার্ভিস</h4>
+                                        <p class="text-sm text-amber-700 mt-1">
+                                            সার্ভিস ফি: <span class="font-bold">${info.price}</span> (এম্বাসি ফি আলাদা)<br>
+                                            <span class="text-xs text-amber-600 mt-1 inline-block">⏱️ স্বাভাবিক সময়: ${info.turnaround}</span><br>
+                                            <span class="font-semibold mt-2 inline-block">${info.features}</span>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        `;
+                    })()}
 
                     <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4">
