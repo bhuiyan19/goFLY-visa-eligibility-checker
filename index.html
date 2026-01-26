@@ -314,14 +314,43 @@
                 passingScore: 40,
                 maxScore: 100,
                 questions: [
-                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',type:'select',weight:30,options:[
-                        {value:'less-3',label:'৩ মাসের কম',score:0},
-                        {value:'3-6',label:'৩-৬ মাস',score:15},
-                        {value:'more-6',label:'৬ মাসের বেশি',score:30}
-                    ]},
-                    {id:'return_ticket',question:'আপনার কি রিটার্ন টিকেট আছে?',type:'boolean',weight:25},
-                    {id:'hotel_booking',question:'আপনার কি হোটেল বুকিং আছে?',type:'boolean',weight:25},
-                    {id:'travel_funds',question:'আপনার কি পর্যাপ্ত ভ্রমণ খরচ আছে?',type:'boolean',weight:20}
+                    {
+                        id:'passport_validity',
+                        question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',
+                        questionEn:'How many months validity does your passport have?',
+                        tip:'পাসপোর্টের কমপক্ষে ৬ মাস মেয়াদ থাকা প্রয়োজন',
+                        type:'select',
+                        weight:30,
+                        options:[
+                            {value:'less-3',label:'৩ মাসের কম',labelEn:'Less than 3 months',score:0},
+                            {value:'3-6',label:'৩-৬ মাস',labelEn:'3-6 months',score:15},
+                            {value:'more-6',label:'৬ মাসের বেশি',labelEn:'More than 6 months',score:30}
+                        ]
+                    },
+                    {
+                        id:'return_ticket',
+                        question:'আপনার কি রিটার্ন টিকেট আছে?',
+                        questionEn:'Do you have a return ticket?',
+                        tip:'রিফান্ডেবল টিকেট থাকলে ভিসা পাওয়া সহজ হয়',
+                        type:'boolean',
+                        weight:25
+                    },
+                    {
+                        id:'hotel_booking',
+                        question:'আপনার কি হোটেল বুকিং আছে?',
+                        questionEn:'Do you have hotel booking?',
+                        tip:'হোটেল রিজার্ভেশন দেখাতে পারলে আবেদন সহজ হয়',
+                        type:'boolean',
+                        weight:25
+                    },
+                    {
+                        id:'travel_funds',
+                        question:'আপনার কি পর্যাপ্ত ভ্রমণ খরচ আছে?',
+                        questionEn:'Do you have sufficient travel funds?',
+                        tip:'প্রতিদিন কমপক্ষে $50-100 করা উচিত',
+                        type:'boolean',
+                        weight:20
+                    }
                 ]
             },
             medium: {
@@ -673,26 +702,67 @@
                         </div>
 
                         <div class="space-y-3 sm:space-y-4">
-                            <h3 class="text-lg sm:text-xl font-bold text-gray-800 leading-snug">${question.question}</h3>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-800 leading-snug">${question.question}</h3>
+                                ${question.questionEn ? `<p class="text-sm text-gray-500 mt-1">${question.questionEn}</p>` : ''}
+                                ${question.tip ? `
+                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-3">
+                                        <p class="text-xs sm:text-sm text-blue-800 flex items-start gap-2">
+                                            <span class="text-base flex-shrink-0">💡</span>
+                                            <span>${question.tip}</span>
+                                        </p>
+                                    </div>
+                                ` : ''}
+                            </div>
 
                             ${question.type === 'select' ? `
                                 <div class="space-y-2 sm:space-y-3">
                                     ${question.options.map(opt => `
                                         <button onclick="answerQuestion('${question.id}', '${opt.value}', ${opt.score})" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all text-left focus:ring-2 focus:ring-green-300">
-                                            <span class="font-medium text-sm sm:text-base">${opt.label}</span>
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-5 h-5 rounded-full border-2 border-gray-300 flex-shrink-0"></div>
+                                                <div class="flex-1">
+                                                    <span class="font-medium text-sm sm:text-base block">${opt.label}</span>
+                                                    ${opt.labelEn ? `<span class="text-xs text-gray-500">${opt.labelEn}</span>` : ''}
+                                                </div>
+                                            </div>
                                         </button>
                                     `).join('')}
                                 </div>
                             ` : `
                                 <div class="space-y-2 sm:space-y-3">
                                     <button onclick="answerQuestion('${question.id}', true, ${question.weight})" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all focus:ring-2 focus:ring-green-300">
-                                        <span class="font-medium text-sm sm:text-base">✅ হ্যাঁ</span>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-5 h-5 rounded-full border-2 border-gray-300 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <span class="font-medium text-sm sm:text-base block">হ্যাঁ</span>
+                                                <span class="text-xs text-gray-500">Yes</span>
+                                            </div>
+                                            <span class="text-xl">✅</span>
+                                        </div>
                                     </button>
                                     <button onclick="answerQuestion('${question.id}', false, 0)" class="w-full p-3 sm:p-4 rounded-xl border-2 border-gray-200 hover:border-red-500 hover:bg-red-50 transition-all focus:ring-2 focus:ring-red-300">
-                                        <span class="font-medium text-sm sm:text-base">❌ না</span>
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-5 h-5 rounded-full border-2 border-gray-300 flex-shrink-0"></div>
+                                            <div class="flex-1">
+                                                <span class="font-medium text-sm sm:text-base block">না</span>
+                                                <span class="text-xs text-gray-500">No</span>
+                                            </div>
+                                            <span class="text-xl">❌</span>
+                                        </div>
                                     </button>
                                 </div>
                             `}
+
+                            ${currentQuestionIndex > 0 ? `
+                                <div class="pt-4 border-t border-gray-200">
+                                    <button
+                                        onclick="previousQuestion()"
+                                        class="text-gray-600 hover:text-gray-800 font-medium text-sm flex items-center gap-2 transition-all hover:gap-3">
+                                        <span>←</span> পূর্ববর্তী
+                                    </button>
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
                 </div>
@@ -1223,6 +1293,32 @@
                 render();
                 hideLoading();
             }, 100);
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                showLoading();
+                setTimeout(() => {
+                    currentQuestionIndex--;
+                    const questionsData = QUESTIONS[selectedCountry.difficulty];
+                    const previousQuestion = questionsData.questions[currentQuestionIndex];
+                    // Remove answer for current question
+                    if (answers[previousQuestion.id] !== undefined) {
+                        const previousAnswer = answers[previousQuestion.id];
+                        // Subtract score
+                        if (previousQuestion.type === 'boolean') {
+                            score -= previousAnswer ? previousQuestion.weight : 0;
+                        } else {
+                            const option = previousQuestion.options.find(opt => opt.value === previousAnswer);
+                            if (option) score -= option.score;
+                        }
+                        delete answers[previousQuestion.id];
+                    }
+                    saveSession();
+                    render();
+                    hideLoading();
+                }, 100);
+            }
         }
 
         function getTips() {
