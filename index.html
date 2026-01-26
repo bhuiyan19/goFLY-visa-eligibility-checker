@@ -423,110 +423,110 @@
                 passingScore: 65,
                 maxScore: 100,
                 questions: [
-                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',type:'select',weight:10,options:[
+                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',explanation:'🔒 Schengen/UK-এ কমপক্ষে ৬ মাস, আদর্শ ১২ মাস মেয়াদ প্রয়োজন',type:'select',weight:10,options:[
                         {value:'less-6',label:'৬ মাসের কম',score:0},
                         {value:'6-12',label:'৬-১২ মাস',score:7},
                         {value:'more-12',label:'১২ মাসের বেশি',score:10}
                     ]},
-                    {id:'employment_status',question:'আপনার বর্তমান কর্মসংস্থান কী?',type:'select',weight:15,options:[
+                    {id:'employment_status',question:'আপনার বর্তমান কর্মসংস্থান কী?',explanation:'💼 সরকারি চাকরি বা প্রতিষ্ঠিত ব্যবসা সবচেয়ে ভালো',type:'select',weight:15,options:[
                         {value:'unemployed',label:'বেকার',score:0},
                         {value:'student',label:'ছাত্র/ছাত্রী',score:8},
                         {value:'self-employed',label:'ব্যবসায়ী',score:12},
                         {value:'employed',label:'বেসরকারি চাকরিজীবী',score:13},
                         {value:'govt',label:'সরকারি চাকরিজীবী',score:15}
                     ]},
-                    {id:'monthly_income',question:'আপনার মাসিক আয় কত?',type:'select',weight:12,options:[
+                    {id:'monthly_income',question:'আপনার মাসিক আয় কত?',explanation:'💵 স্থিতিশীল আয় দেশে ফিরে আসার প্রমাণ',type:'select',weight:12,options:[
                         {value:'less-30k',label:'৩০,০০০ টাকার কম',score:2},
                         {value:'30-60k',label:'৩০,০০০ - ৬০,০০০ টাকা',score:6},
                         {value:'60-100k',label:'৬০,০০০ - ১,০০,০০০ টাকা',score:9},
                         {value:'more-100k',label:'১ লাখ টাকার বেশি',score:12}
                     ]},
-                    {id:'bank_balance',question:'গত ৬ মাসে ব্যাংক ব্যালেন্স গড়ে কত ছিল?',type:'select',weight:15,options:[
+                    {id:'bank_balance',question:'গত ৬ মাসে ব্যাংক ব্যালেন্স গড়ে কত ছিল?',explanation:'🏦 নিয়মিত লেনদেন + ভালো ব্যালেন্স = শক্তিশালী প্রোফাইল',type:'select',weight:15,options:[
                         {value:'less-2lakh',label:'২ লাখ টাকার কম',score:2},
                         {value:'2-5lakh',label:'২-৫ লাখ টাকা',score:8},
                         {value:'5-10lakh',label:'৫-১০ লাখ টাকা',score:12},
                         {value:'more-10lakh',label:'১০ লাখ টাকার বেশি',score:15}
                     ]},
-                    {id:'property',question:'বাংলাদেশে আপনার কোনো সম্পত্তি আছে?',type:'select',weight:8,options:[
+                    {id:'property',question:'বাংলাদেশে আপনার কোনো সম্পত্তি আছে?',explanation:'🏠 সম্পত্তি = দেশে ফেরার শক্তিশালী বন্ধন',type:'select',weight:8,options:[
                         {value:'none',label:'না',score:0},
                         {value:'land',label:'শুধু জমি',score:4},
                         {value:'house',label:'বাড়ি/ফ্ল্যাট',score:6},
                         {value:'multiple',label:'একাধিক সম্পত্তি',score:8}
                     ]},
-                    {id:'previous_travel',question:'আগে কোন কোন দেশে ভ্রমণ করেছেন?',type:'select',weight:10,options:[
+                    {id:'previous_travel',question:'আগে কোন কোন দেশে ভ্রমণ করেছেন?',explanation:'✈️ পূর্ব ভ্রমণ ইতিহাস সবচেয়ে বড় প্লাস পয়েন্ট',type:'select',weight:10,options:[
                         {value:'never',label:'কখনো বিদেশ যাইনি',score:0},
                         {value:'asia',label:'শুধু এশিয়ান দেশ',score:5},
                         {value:'developed',label:'উন্নত দেশ (US/UK/EU)',score:10}
                     ]},
-                    {id:'visa_rejection',question:'আপনার কি কখনো ভিসা রিজেক্ট হয়েছে?',type:'select',weight:8,options:[
+                    {id:'visa_rejection',question:'আপনার কি কখনো ভিসা রিজেক্ট হয়েছে?',explanation:'⚠️ রিজেকশন হিস্ট্রি ভিসা পেতে বড় বাধা হতে পারে',type:'select',weight:8,options:[
                         {value:'multiple',label:'হ্যাঁ, বহুবার',score:0},
                         {value:'once',label:'হ্যাঁ, একবার',score:2},
                         {value:'never',label:'না, কখনো না',score:8}
                     ]},
-                    {id:'purpose',question:'আপনার ভ্রমণের উদ্দেশ্য কী?',type:'select',weight:6,options:[
+                    {id:'purpose',question:'আপনার ভ্রমণের উদ্দেশ্য কী?',explanation:'🎯 স্পষ্ট উদ্দেশ্য দেখাতে হবে',type:'select',weight:6,options:[
                         {value:'tourism',label:'পর্যটন',score:6},
                         {value:'business',label:'ব্যবসা',score:6},
                         {value:'family',label:'পরিবার দেখা',score:5},
                         {value:'medical',label:'চিকিৎসা',score:5},
                         {value:'other',label:'অন্যান্য',score:3}
                     ]},
-                    {id:'invitation',question:'আপনার কি ইনভিটেশন লেটার আছে?',type:'boolean',weight:6},
-                    {id:'travel_insurance',question:'আপনার কি ট্রাভেল ইন্স্যুরেন্স আছে? (€30,000 কভারেজ)',type:'boolean',weight:10}
+                    {id:'invitation',question:'আপনার কি ইনভিটেশন লেটার আছে?',explanation:'📧 স্থানীয় নাগরিকের ইনভিটেশন সহায়ক',type:'boolean',weight:6},
+                    {id:'travel_insurance',question:'আপনার কি ট্রাভেল ইন্স্যুরেন্স আছে? (€30,000 কভারেজ)',explanation:'🛡️ Schengen ভিসার জন্য বাধ্যতামূলক',type:'boolean',weight:10}
                 ]
             },
             'very-hard': {
                 passingScore: 70,
                 maxScore: 100,
                 questions: [
-                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',type:'select',weight:8,options:[
+                    {id:'passport_validity',question:'আপনার পাসপোর্টের মেয়াদ কত মাস আছে?',explanation:'🔐 US/Canada/Australia-এ কমপক্ষে ১২ মাস মেয়াদ প্রয়োজন',type:'select',weight:8,options:[
                         {value:'less-6',label:'৬ মাসের কম',score:0},
                         {value:'6-12',label:'৬-১২ মাস',score:5},
                         {value:'more-12',label:'১২ মাসের বেশি',score:8}
                     ]},
-                    {id:'employment_status',question:'আপনার বর্তমান কর্মসংস্থান কী?',type:'select',weight:12,options:[
+                    {id:'employment_status',question:'আপনার বর্তমান কর্মসংস্থান কী?',explanation:'💼 স্থিতিশীল + দীর্ঘমেয়াদী কর্মসংস্থান অত্যন্ত জরুরি',type:'select',weight:12,options:[
                         {value:'unemployed',label:'বেকার',score:0},
                         {value:'student',label:'ছাত্র/ছাত্রী',score:6},
                         {value:'self-employed',label:'ব্যবসায়ী',score:9},
                         {value:'employed',label:'বেসরকারি চাকরিজীবী',score:10},
                         {value:'govt',label:'সরকারি চাকরিজীবী',score:12}
                     ]},
-                    {id:'job_duration',question:'বর্তমান চাকরিতে কতদিন ধরে আছেন?',type:'select',weight:8,options:[
+                    {id:'job_duration',question:'বর্তমান চাকরিতে কতদিন ধরে আছেন?',explanation:'📅 দীর্ঘমেয়াদী চাকরি = শক্তিশালী রুট টাইস',type:'select',weight:8,options:[
                         {value:'less-1',label:'১ বছরের কম',score:2},
                         {value:'1-3',label:'১-৩ বছর',score:5},
                         {value:'3-5',label:'৩-৫ বছর',score:7},
                         {value:'more-5',label:'৫ বছরের বেশি',score:8}
                     ]},
-                    {id:'monthly_income',question:'আপনার মাসিক আয় কত?',type:'select',weight:10,options:[
+                    {id:'monthly_income',question:'আপনার মাসিক আয় কত?',explanation:'💵 উচ্চ আয় = দেশে ফেরার শক্তিশালী প্রণোদনা',type:'select',weight:10,options:[
                         {value:'less-50k',label:'৫০,০০০ টাকার কম',score:1},
                         {value:'50-100k',label:'৫০,০০০ - ১,০০,০০০ টাকা',score:5},
                         {value:'100-200k',label:'১-২ লাখ টাকা',score:8},
                         {value:'more-200k',label:'২ লাখ টাকার বেশি',score:10}
                     ]},
-                    {id:'bank_balance',question:'গত ৬ মাসে ব্যাংক ব্যালেন্স গড়ে কত ছিল?',type:'select',weight:12,options:[
+                    {id:'bank_balance',question:'গত ৬ মাসে ব্যাংক ব্যালেন্স গড়ে কত ছিল?',explanation:'🏦 উচ্চ ব্যালেন্স + নিয়মিত লেনদেন অপরিহার্য',type:'select',weight:12,options:[
                         {value:'less-5lakh',label:'৫ লাখ টাকার কম',score:2},
                         {value:'5-10lakh',label:'৫-১০ লাখ টাকা',score:6},
                         {value:'10-25lakh',label:'১০-২৫ লাখ টাকা',score:9},
                         {value:'more-25lakh',label:'২৫ লাখ টাকার বেশি',score:12}
                     ]},
-                    {id:'property',question:'বাংলাদেশে আপনার কোনো সম্পত্তি আছে?',type:'select',weight:10,options:[
+                    {id:'property',question:'বাংলাদেশে আপনার কোনো সম্পত্তি আছে?',explanation:'🏠 একাধিক সম্পত্তি = অত্যন্ত শক্তিশালী রুট টাইস',type:'select',weight:10,options:[
                         {value:'none',label:'না',score:0},
                         {value:'land',label:'শুধু জমি',score:4},
                         {value:'house',label:'বাড়ি/ফ্ল্যাট',score:7},
                         {value:'multiple',label:'একাধিক সম্পত্তি',score:10}
                     ]},
-                    {id:'family_ties',question:'বাংলাদেশে পারিবারিক বন্ধন?',type:'select',weight:8,options:[
+                    {id:'family_ties',question:'বাংলাদেশে পারিবারিক বন্ধন?',explanation:'👨‍👩‍👧‍👦 শক্তিশালী পারিবারিক বন্ধন দেশে ফেরার প্রমাণ',type:'select',weight:8,options:[
                         {value:'none',label:'কাছের কেউ নেই',score:1},
                         {value:'parents',label:'শুধু বাবা-মা',score:5},
                         {value:'spouse',label:'স্বামী/স্ত্রী/সন্তান',score:8},
                         {value:'all',label:'সবাই আছেন',score:8}
                     ]},
-                    {id:'previous_travel',question:'আগে কোন কোন দেশে ভ্রমণ করেছেন?',type:'select',weight:10,options:[
+                    {id:'previous_travel',question:'আগে কোন কোন দেশে ভ্রমণ করেছেন?',explanation:'✈️ US/UK/EU ভ্রমণ ইতিহাস সবচেয়ে গুরুত্বপূর্ণ',type:'select',weight:10,options:[
                         {value:'never',label:'কখনো বিদেশ যাইনি',score:0},
                         {value:'asia',label:'শুধু এশিয়ান দেশ',score:4},
                         {value:'mixed',label:'কিছু উন্নত দেশ',score:7},
                         {value:'developed',label:'বহুবার US/UK/EU/Canada',score:10}
                     ]},
-                    {id:'visa_rejection',question:'আপনার কি কখনো ভিসা রিজেক্ট হয়েছে?',type:'select',weight:10,options:[
+                    {id:'visa_rejection',question:'আপনার কি কখনো ভিসা রিজেক্ট হয়েছে?',explanation:'🚫 এই দেশে রিজেকশন হলে পুনরায় আবেদন অত্যন্ত কঠিন',type:'select',weight:10,options:[
                         {value:'same-country',label:'হ্যাঁ, এই দেশ থেকেই',score:0},
                         {value:'other',label:'হ্যাঁ, অন্য দেশ থেকে',score:3},
                         {value:'never',label:'না, কখনো না',score:10}
@@ -983,80 +983,17 @@
                     <div class="bg-white rounded-2xl shadow-lg p-6 space-y-4">
                         <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
                             <span>📁</span> প্রয়োজনীয় ডকুমেন্ট
+                            <span class="text-xs font-normal text-gray-500">(${selectedCountry.difficulty === 'easy' ? 'সহজ দেশ' : selectedCountry.difficulty === 'medium' ? 'মাঝারি দেশ' : 'কঠিন দেশ'})</span>
                         </h3>
                         <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">বৈধ পাসপোর্ট (কমপক্ষে ৬ মাস মেয়াদ)</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">পাসপোর্ট সাইজ ছবি</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">ভিসা আবেদন ফর্ম</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">ব্যাংক স্টেটমেন্ট (৬ মাস)</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">ইনকাম ট্যাক্স রিটার্ন</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">NOC / ছুটির অনুমতিপত্র</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">সম্পত্তির কাগজপত্র</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">ইনভিটেশন লেটার (যদি থাকে)</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">হোটেল বুকিং / হোস্টের ঠিকানা</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">ট্রাভেল ইন্স্যুরেন্স</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">বিস্তারিত ভ্রমণ পরিকল্পনা</span>
-                            </li>
-                            <li class="flex items-center gap-2 text-gray-700">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="text-sm">চাকরির প্রমাণপত্র / বিজনেস ডকুমেন্ট</span>
-                            </li>
+                            ${getRequiredDocuments().map(doc => `
+                                <li class="flex items-center gap-2 text-gray-700">
+                                    <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-sm">${doc}</span>
+                                </li>
+                            `).join('')}
                         </ul>
                     </div>
 
@@ -1687,6 +1624,70 @@
                     return diffOrder.indexOf(a.difficulty) - diffOrder.indexOf(b.difficulty);
                 })
                 .slice(0, 3);
+        }
+
+        function getRequiredDocuments() {
+            const baseDocuments = [
+                'বৈধ পাসপোর্ট (কমপক্ষে ৬ মাস মেয়াদ)',
+                'পাসপোর্ট সাইজ ছবি (সাদা ব্যাকগ্রাউন্ড)',
+                'ভিসা আবেদন ফর্ম (পূরণকৃত)',
+                'ব্যাংক স্টেটমেন্ট (৬ মাস)',
+                'হোটেল বুকিং বা হোস্টের ঠিকানা',
+                'বিমান টিকেট (রিটার্ন/রিফান্ডেবল)'
+            ];
+
+            const easyDocuments = [
+                ...baseDocuments,
+                'ট্রাভেল ইন্স্যুরেন্স (প্রস্তাবিত)',
+                'ভ্রমণ পরিকল্পনা (সংক্ষিপ্ত)'
+            ];
+
+            const mediumDocuments = [
+                ...baseDocuments,
+                'ইনকাম ট্যাক্স রিটার্ন (সর্বশেষ ১-২ বছর)',
+                'চাকরির প্রমাণপত্র / ব্যবসা লাইসেন্স',
+                'ব্যাংক সলভেন্সি সার্টিফিকেট',
+                'ট্রাভেল ইন্স্যুরেন্স (বাধ্যতামূলক)',
+                'NOC / ছুটির অনুমতিপত্র'
+            ];
+
+            const hardDocuments = [
+                ...baseDocuments,
+                'ইনকাম ট্যাক্স রিটার্ন (সর্বশেষ ৩ বছর)',
+                'চাকরির প্রমাণপত্র + স্যালারি স্লিপ (৬ মাস)',
+                'সম্পত্তির কাগজপত্র (জমি/ফ্ল্যাট)',
+                'ব্যাংক সলভেন্সি সার্টিফিকেট',
+                'ইনভিটেশন লেটার (যদি প্রযোজ্য)',
+                'ট্রাভেল ইন্স্যুরেন্স (বাধ্যতামূলক)',
+                'NOC / ছুটির অনুমতিপত্র',
+                'বিস্তারিত ভ্রমণ পরিকল্পনা (দিন-ভিত্তিক)',
+                'পরিবারের সম্পর্কের প্রমাণ (বার্থ সার্টিফিকেট)',
+                'পলিস ভেরিফিকেশন (যদি প্রযোজ্য)'
+            ];
+
+            const veryHardDocuments = [
+                ...hardDocuments,
+                'স্পন্সরশিপ লেটার (যদি স্পন্সরড হয়)',
+                'স্পন্সরের আয় ও সম্পত্তির প্রমাণ',
+                'আগের ভ্রমণের প্রমাণ (পাসপোর্ট কপি)',
+                'সকল পরিবার সদস্যদের তথ্য',
+                'ইনকাম সোর্স ডিটেইলস (ব্যবসা/চাকরি)',
+                'ভিসা ইন্টারভিউ প্রস্তুতি ডকুমেন্ট'
+            ];
+
+            // Return based on difficulty
+            switch (selectedCountry.difficulty) {
+                case 'easy':
+                    return easyDocuments;
+                case 'medium':
+                    return mediumDocuments;
+                case 'hard':
+                    return hardDocuments;
+                case 'very-hard':
+                    return veryHardDocuments;
+                default:
+                    return mediumDocuments;
+            }
         }
 
         function getTips() {
