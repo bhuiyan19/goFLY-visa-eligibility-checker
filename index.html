@@ -793,85 +793,246 @@
             const percentage = Math.round((score / questionsData.maxScore) * 100);
 
             let result;
-            if (percentage >= 80) result = {emoji:'🎉',title:'অভিনন্দন! শক্তিশালী প্রোফাইল!',color:'text-green-600',bgColor:'bg-green-50 border-green-200',barColor:'bg-green-500'};
-            else if (percentage >= 65) result = {emoji:'👍',title:'ভালো প্রোফাইল!',color:'text-blue-600',bgColor:'bg-blue-50 border-blue-200',barColor:'bg-blue-500'};
-            else if (percentage >= 50) result = {emoji:'💪',title:'সঠিক প্রস্তুতি দরকার',color:'text-purple-600',bgColor:'bg-purple-50 border-purple-200',barColor:'bg-purple-500'};
-            else result = {emoji:'🎯',title:'চ্যালেঞ্জিং, কিন্তু অসম্ভব নয়!',color:'text-orange-600',bgColor:'bg-orange-50 border-orange-200',barColor:'bg-orange-500'};
+            if (percentage >= 80) result = {emoji:'🎉',title:'অভিনন্দন! শক্তিশালী প্রোফাইল!',subtitle:'Excellent Profile!',color:'text-green-600',bgColor:'bg-green-50 border-green-200',barColor:'bg-green-500'};
+            else if (percentage >= 65) result = {emoji:'👍',title:'ভালো প্রোফাইল! সফল হওয়ার সম্ভাবনা আছে।',subtitle:'Good Profile!',color:'text-blue-600',bgColor:'bg-blue-50 border-blue-200',barColor:'bg-blue-500'};
+            else if (percentage >= 50) result = {emoji:'💪',title:'সঠিক প্রস্তুতি নিন এবং এগিয়ে যান।',subtitle:'Needs Preparation',color:'text-purple-600',bgColor:'bg-purple-50 border-purple-200',barColor:'bg-purple-500'};
+            else result = {emoji:'🎯',title:'চ্যালেঞ্জিং, কিন্তু অসম্ভব নয়!',subtitle:'Challenging But Possible',color:'text-orange-600',bgColor:'bg-orange-50 border-orange-200',barColor:'bg-orange-500'};
 
             return `
                 <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6 animate-fade-in">
-                    <div class="${result.bgColor} border-2 rounded-2xl p-4 sm:p-6 text-center space-y-3 sm:space-y-4">
-                        <span class="text-5xl sm:text-6xl">${result.emoji}</span>
-                        <h2 class="text-xl sm:text-2xl font-bold ${result.color} leading-tight">${result.title}</h2>
-                        <div class="flex items-center justify-center gap-2 sm:gap-3">
-                            <span class="text-2xl sm:text-3xl">${selectedCountry.flag}</span>
-                            <span class="text-lg sm:text-xl font-semibold">${selectedCountry.nameBn}</span>
+                    <!-- Welcome Banner -->
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl p-4 text-center">
+                        <p class="text-lg">🎉 <span class="font-bold">${leadData.name}</span>, আপনার ফলাফল তৈরি!</p>
+                    </div>
+
+                    <!-- Score Display Card -->
+                    <div class="${result.bgColor} border-2 rounded-2xl p-6 md:p-8 text-center space-y-4">
+                        <span class="text-6xl block">${result.emoji}</span>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold ${result.color}">${result.title}</h2>
+                            <p class="text-gray-600 mt-1">${result.subtitle}</p>
                         </div>
-                        <div class="bg-white rounded-xl p-3 sm:p-4">
-                            <div class="text-3xl sm:text-4xl font-bold">${percentage}%</div>
-                            <div class="text-xs sm:text-sm text-gray-500">স্কোর: ${score}/${questionsData.maxScore}</div>
-                            <div class="mt-2 sm:mt-3 h-2.5 sm:h-3 bg-gray-200 rounded-full overflow-hidden">
-                                <div class="h-full ${result.barColor} transition-all duration-500" style="width: ${percentage}%"></div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-center gap-3">
+                                <span class="text-3xl">${selectedCountry.flag}</span>
+                                <span class="text-xl font-semibold text-gray-700">${selectedCountry.nameBn}</span>
+                            </div>
+                            <div class="bg-white rounded-xl p-4 shadow-sm">
+                                <div class="text-4xl font-bold text-gray-800">${percentage}%</div>
+                                <div class="text-sm text-gray-500">স্কোর: ${score}/${questionsData.maxScore}</div>
+                                <div class="mt-3 h-3 bg-gray-200 rounded-full overflow-hidden">
+                                    <div class="h-full ${result.barColor} transition-all duration-500" style="width: ${percentage}%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6">
-                        <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">📋 আপনার জন্য পরামর্শ</h3>
-                        <ul class="space-y-2">
-                            ${getTips().map(tip => `<li class="bg-gray-50 p-3 rounded-lg text-xs sm:text-sm leading-relaxed">${tip}</li>`).join('')}
+                    <!-- Advice Section -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 space-y-4">
+                        <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <span>📋</span> আপনার জন্য পরামর্শ
+                        </h3>
+                        <ul class="space-y-3">
+                            ${getTips().map(tip => `
+                                <li class="flex items-start gap-2 text-gray-700 bg-gray-50 p-3 rounded-lg">${tip}</li>
+                            `).join('')}
                         </ul>
                     </div>
 
-                    ${COUNTRY_URLS[selectedCountry.id] ? `
-                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-4 sm:p-6">
-                        <div class="flex items-start gap-3">
-                            <span class="text-3xl sm:text-4xl flex-shrink-0">${selectedCountry.flag}</span>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-2">📖 ${selectedCountry.nameBn} ভিসা বিস্তারিত গাইড</h3>
-                                <p class="text-xs sm:text-sm text-gray-600 mb-3 leading-relaxed">
-                                    ${selectedCountry.nameBn} ভিসা সম্পর্কে সম্পূর্ণ তথ্য, প্রয়োজনীয় ডকুমেন্ট, ফি, প্রসেসিং টাইম এবং আবেদন প্রক্রিয়া জানতে আমাদের বিস্তারিত গাইড পড়ুন।
-                                </p>
-                                <a href="${COUNTRY_URLS[selectedCountry.id]}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold hover:bg-blue-700 transition-all text-xs sm:text-sm shadow-lg">
-                                    📚 সম্পূর্ণ গাইড পড়ুন
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                </a>
+                    <!-- Required Documents Section -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 space-y-4">
+                        <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <span>📁</span> প্রয়োজনীয় ডকুমেন্ট
+                        </h3>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">বৈধ পাসপোর্ট (কমপক্ষে ৬ মাস মেয়াদ)</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">পাসপোর্ট সাইজ ছবি</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">ভিসা আবেদন ফর্ম</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">ব্যাংক স্টেটমেন্ট (৬ মাস)</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">ইনকাম ট্যাক্স রিটার্ন</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">NOC / ছুটির অনুমতিপত্র</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">সম্পত্তির কাগজপত্র</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">ইনভিটেশন লেটার (যদি থাকে)</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">হোটেল বুকিং / হোস্টের ঠিকানা</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">ট্রাভেল ইন্স্যুরেন্স</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">বিস্তারিত ভ্রমণ পরিকল্পনা</span>
+                            </li>
+                            <li class="flex items-center gap-2 text-gray-700">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm">চাকরির প্রমাণপত্র / বিজনেস ডকুমেন্ট</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Visa Info Card -->
+                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-6 space-y-3">
+                        <h3 class="text-lg font-bold text-blue-800">ভিসার তথ্য</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-blue-600">ভিসার ধরন</p>
+                                <p class="font-semibold text-blue-900">${selectedCountry.visaType}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-blue-600">প্রসেসিং সময়</p>
+                                <p class="font-semibold text-blue-900">${selectedCountry.processingTime}</p>
                             </div>
                         </div>
                     </div>
-                    ` : ''}
 
-                    <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-4 sm:p-6 text-white space-y-3 sm:space-y-4">
-                        <h3 class="text-xl sm:text-2xl font-bold text-center">goFLY দিয়ে সহজ করুন</h3>
+                    <!-- goFLY Expert Support -->
+                    <div class="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-6 text-white space-y-4">
+                        <div class="text-center space-y-2">
+                            <h3 class="text-2xl font-bold">goFLY এক্সপার্ট সাপোর্ট নিন</h3>
+                            <p class="text-green-100">সঠিক গাইডেন্সে সাফল্য নিশ্চিত করুন</p>
+                        </div>
                         <div class="grid grid-cols-3 gap-2 py-3 border-y border-green-500/30">
                             <div class="text-center">
-                                <div class="text-lg sm:text-2xl font-bold">১০k+</div>
-                                <div class="text-xs leading-tight">কাস্টমার</div>
+                                <div class="text-2xl font-bold">১০,০০০+</div>
+                                <div class="text-xs text-green-200">সন্তুষ্ট কাস্টমার</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg sm:text-2xl font-bold">৪.৮⭐</div>
-                                <div class="text-xs leading-tight">রিভিউ</div>
+                                <div class="text-2xl font-bold">৪.৮⭐</div>
+                                <div class="text-xs text-green-200">৪৩১+ রিভিউ</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg sm:text-2xl font-bold">৯০%+</div>
-                                <div class="text-xs leading-tight">সাকসেস</div>
+                                <div class="text-2xl font-bold">৯০%+</div>
+                                <div class="text-xs text-green-200">সাকসেস রেট</div>
                             </div>
                         </div>
-                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                            <a href="https://wa.me/8801713289175?text=আমি ${selectedCountry.nameBn} ভিসার জন্য আগ্রহী। স্কোর: ${percentage}%" target="_blank" class="flex-1 bg-white text-green-700 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:bg-green-50 transition-all text-center text-sm sm:text-base">
-                                💬 WhatsApp
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://wa.me/8801713289170?text=আসসালামু আলাইকুম।%0A%0Aআমি ${selectedCountry.nameBn} ভিসার জন্য আগ্রহী।%0Aভিসা চেকার স্কোর: ${percentage}%25%0A%0Aবিস্তারিত জানতে চাই।" target="_blank" rel="noopener noreferrer" class="flex-1 bg-white text-green-700 px-6 py-4 rounded-xl font-bold hover:bg-green-50 transition-all text-center flex items-center justify-center gap-2">
+                                <span class="text-xl">💬</span><span>WhatsApp করুন</span>
                             </a>
-                            <a href="tel:+8809639203090" class="flex-1 bg-green-500 text-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:bg-green-400 transition-all text-center text-sm sm:text-base">
-                                📞 কল করুন
+                            <a href="tel:+8809639203090" class="flex-1 bg-green-500 text-white px-6 py-4 rounded-xl font-bold hover:bg-green-400 transition-all text-center flex items-center justify-center gap-2">
+                                <span class="text-xl">📞</span><span>09639-203090</span>
                             </a>
+                        </div>
+                        <p class="text-center text-green-200 text-sm">🏆 IATA: 42337956 | ৮+ বছরের অভিজ্ঞতা | ৭০% রিপিট কাস্টমার</p>
+                    </div>
+
+                    <!-- Premium Service Info -->
+                    <div class="bg-amber-50 border-2 border-amber-200 rounded-xl p-4">
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl">💎</span>
+                            <div>
+                                <h4 class="font-bold text-amber-800">goFLY প্রিমিয়াম ভিসা সার্ভিস</h4>
+                                <p class="text-sm text-amber-700 mt-1">
+                                    সার্ভিস ফি: ৳১২,০০০ - ৳২০,০০০ (এম্বাসি ফি আলাদা)<br>
+                                    <span class="font-semibold">✅ ফ্রি কনসালটেশন | ✅ ডকুমেন্ট রিভিউ | ✅ ইন্টারভিউ প্রিপারেশন</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                        <button onclick="resetApp()" class="w-full sm:flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-medium bg-gray-200 hover:bg-gray-300 transition-all text-sm sm:text-base">🔄 আবার শুরু</button>
-                        <button onclick="backToCountries()" class="w-full sm:flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-medium bg-green-600 text-white hover:bg-green-700 transition-all text-sm sm:text-base">🌍 অন্য দেশ</button>
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="backToCountries()" class="flex-1 px-6 py-4 rounded-xl font-medium bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all">
+                            🌍 অন্য দেশ দেখুন
+                        </button>
+                        <button onclick="resetApp()" class="flex-1 px-6 py-4 rounded-xl font-medium bg-green-600 text-white hover:bg-green-700 transition-all shadow-lg">
+                            🔄 আবার শুরু করুন
+                        </button>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+                        <p class="flex items-start gap-2">
+                            <span class="text-lg">⚠️</span>
+                            <span><strong>দ্রষ্টব্য:</strong> এই ফলাফল শুধুমাত্র একটি সাধারণ মূল্যায়ন। ভিসার চূড়ান্ত সিদ্ধান্ত সংশ্লিষ্ট দূতাবাস/কনস্যুলেটের উপর নির্ভরশীল। সর্বশেষ তথ্যের জন্য অফিসিয়াল ওয়েবসাইট দেখুন।</span>
+                        </p>
+                    </div>
+
+                    <!-- Customer Reviews Section -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 space-y-4">
+                        <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                            <span>⭐</span> goFLY কাস্টমার রিভিউ
+                            <span class="text-sm font-normal text-gray-500">(৪৩১+ Google Reviews)</span>
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="bg-gray-50 p-4 rounded-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-yellow-500">★★★★★</span>
+                                    <span class="font-medium text-gray-800">Ali Hossain</span>
+                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">USA Visa</span>
+                                </div>
+                                <p class="text-sm text-gray-600">"US tourist visa approved on first attempt! Their attention to detail was exceptional — fully prepared for my interview."</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-yellow-500">★★★★★</span>
+                                    <span class="font-medium text-gray-800">Tahbida Tahmim</span>
+                                    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Canada Visa</span>
+                                </div>
+                                <p class="text-sm text-gray-600">"Canada tourist visa without any delay. goFLY is truly reliable and trustworthy. They guided me through every step."</p>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-xl">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-yellow-500">★★★★★</span>
+                                    <span class="font-medium text-gray-800">Farjana</span>
+                                    <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">First Trip</span>
+                                </div>
+                                <p class="text-sm text-gray-600">"First international trip and I had so many questions. They explained every step with patience — visa to boarding. Never felt lost."</p>
+                            </div>
+                        </div>
+                        <a href="https://g.page/r/gofly-limited/review" target="_blank" rel="noopener noreferrer" class="block text-center text-green-600 hover:text-green-700 text-sm font-medium">
+                            সব ৪৩১+ রিভিউ দেখুন →
+                        </a>
                     </div>
                 </div>
             `;
