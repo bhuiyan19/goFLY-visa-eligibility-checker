@@ -902,6 +902,9 @@
             const questionsData = QUESTIONS[selectedCountry.difficulty];
             const percentage = Math.round((score / questionsData.maxScore) * 100);
 
+            // Calculate range-based score (±5% based on answer quality)
+            const scoreRange = getScoreRange(percentage);
+
             let result;
             if (percentage >= 80) result = {emoji:'🎉',title:'অভিনন্দন! শক্তিশালী প্রোফাইল!',subtitle:'Excellent Profile!',color:'text-green-600',bgColor:'bg-green-50 border-green-200',barColor:'bg-green-500'};
             else if (percentage >= 65) result = {emoji:'👍',title:'ভালো প্রোফাইল! সফল হওয়ার সম্ভাবনা আছে।',subtitle:'Good Profile!',color:'text-blue-600',bgColor:'bg-blue-50 border-blue-200',barColor:'bg-blue-500'};
@@ -928,8 +931,9 @@
                                 <span class="text-xl font-semibold text-gray-700">${selectedCountry.nameBn}</span>
                             </div>
                             <div class="bg-white rounded-xl p-4 shadow-sm">
-                                <div class="text-4xl font-bold text-gray-800">${percentage}%</div>
+                                <div class="text-4xl font-bold text-gray-800">${scoreRange.display}</div>
                                 <div class="text-sm text-gray-500">স্কোর: ${score}/${questionsData.maxScore}</div>
+                                <div class="text-xs text-gray-400 mt-1">${scoreRange.context}</div>
                                 <div class="mt-3 h-3 bg-gray-200 rounded-full overflow-hidden">
                                     <div class="h-full ${result.barColor} transition-all duration-500" style="width: ${percentage}%"></div>
                                 </div>
@@ -937,17 +941,43 @@
                         </div>
                     </div>
 
-                    <!-- Advice Section -->
+                    <!-- Personalized Checklist Section -->
                     <div class="bg-white rounded-2xl shadow-lg p-6 space-y-4">
                         <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                            <span>📋</span> আপনার জন্য পরামর্শ
+                            <span>✅</span> আপনার করণীয় চেকলিস্ট
                         </h3>
+                        <p class="text-sm text-gray-600">আপনার উত্তরের উপর ভিত্তি করে নির্দিষ্ট পদক্ষেপ:</p>
                         <ul class="space-y-3">
-                            ${getTips().map(tip => `
-                                <li class="flex items-start gap-2 text-gray-700 bg-gray-50 p-3 rounded-lg">${tip}</li>
+                            ${getPersonalizedChecklist().map(item => `
+                                <li class="flex items-start gap-3 text-gray-700 bg-gray-50 p-3 rounded-lg border-l-4 ${item.priority === 'high' ? 'border-red-400' : item.priority === 'medium' ? 'border-yellow-400' : 'border-blue-400'}">
+                                    <span class="text-xl flex-shrink-0">${item.icon}</span>
+                                    <div class="flex-1">
+                                        <p class="font-medium">${item.task}</p>
+                                        ${item.help ? `<p class="text-xs text-gray-500 mt-1">${item.help}</p>` : ''}
+                                    </div>
+                                </li>
                             `).join('')}
                         </ul>
                     </div>
+
+                    <!-- Alternative Country Suggestions (if applicable) -->
+                    ${percentage < 70 ? `
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-2xl p-6 space-y-4">
+                            <h3 class="text-xl font-bold text-purple-800 flex items-center gap-2">
+                                <span>🌏</span> বিকল্প সহজ দেশ
+                            </h3>
+                            <p class="text-sm text-purple-700">এই স্কোরে অন্য কোন দেশ আরো সহজ হতে পারে:</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                ${getAlternativeCountries().map(country => `
+                                    <button onclick="selectCountry('${country.id}')" class="bg-white hover:bg-purple-50 border-2 border-purple-200 hover:border-purple-400 rounded-xl p-4 text-center transition-all">
+                                        <div class="text-3xl mb-2">${country.flag}</div>
+                                        <div class="font-bold text-gray-800 text-sm">${country.nameBn}</div>
+                                        <div class="text-xs text-purple-600 mt-1">${country.difficulty === 'easy' ? '✅ সহজ' : '👍 মাঝারি'}</div>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
 
                     <!-- Required Documents Section -->
                     <div class="bg-white rounded-2xl shadow-lg p-6 space-y-4">
@@ -1448,6 +1478,215 @@
                     hideLoading();
                 }, 100);
             }
+        }
+
+        function getScoreRange(percentage) {
+            // Calculate confidence range based on answer quality
+            const variance = 5; // ±5% based on documentation and interview performance
+            const lowerBound = Math.max(0, percentage - variance);
+            const upperBound = Math.min(100, percentage + variance);
+
+            let context = '';
+            if (percentage >= 80) {
+                context = 'চমৎকার ডকুমেন্ট + ভালো ইন্টারভিউ = উচ্চ সাফল্যের সম্ভাবনা';
+            } else if (percentage >= 65) {
+                context = 'ভালো ডকুমেন্ট + প্রস্তুতি নিলে সফল হওয়ার সম্ভাবনা বেশি';
+            } else if (percentage >= 50) {
+                context = 'সঠিক গাইডেন্স + শক্তিশালী ডকুমেন্ট প্রয়োজন';
+            } else {
+                context = 'এক্সপার্ট সাহায্য + পূর্ণ প্রস্তুতি অত্যন্ত জরুরি';
+            }
+
+            return {
+                display: `${lowerBound}-${upperBound}%`,
+                lower: lowerBound,
+                upper: upperBound,
+                context: context
+            };
+        }
+
+        function getPersonalizedChecklist() {
+            const checklist = [];
+            const questionsData = QUESTIONS[selectedCountry.difficulty];
+
+            // Analyze each answer and provide specific actionable advice
+            questionsData.questions.forEach(question => {
+                const answer = answers[question.id];
+                if (!answer) return;
+
+                // Calculate if this is a weak point (scored less than 50% of weight)
+                let earnedScore = 0;
+                if (question.type === 'boolean') {
+                    earnedScore = answer ? question.weight : 0;
+                } else if (question.type === 'select') {
+                    const option = question.options.find(opt => opt.value === answer);
+                    earnedScore = option ? option.score : 0;
+                }
+
+                const percentage = (earnedScore / question.weight) * 100;
+
+                // Specific advice based on question and answer
+                if (question.id === 'passport_validity') {
+                    if (answer === 'less-3') {
+                        checklist.push({
+                            icon: '🚨',
+                            task: 'অবিলম্বে পাসপোর্ট রিনিউ করুন',
+                            help: '৩ মাসের কম মেয়াদ = ভিসা পাবেন না। goFLY দ্রুত রিনিউতে সাহায্য করে।',
+                            priority: 'high'
+                        });
+                    } else if (answer === '3-6' || answer === 'less-6') {
+                        checklist.push({
+                            icon: '⚠️',
+                            task: 'পাসপোর্ট রিনিউ করা ভালো হবে',
+                            help: '৬ মাসের বেশি মেয়াদ থাকলে আবেদন শক্তিশালী হয়।',
+                            priority: 'medium'
+                        });
+                    }
+                }
+
+                if (question.id === 'employment_status') {
+                    if (answer === 'unemployed') {
+                        checklist.push({
+                            icon: '💼',
+                            task: 'চাকরি/ব্যবসার প্রমাণ সংগ্রহ করুন',
+                            help: 'পার্ট-টাইম চাকরি, ফ্রিল্যান্সিং বা ব্যবসার প্রমাণ যোগ করুন। goFLY সাহায্য করবে।',
+                            priority: 'high'
+                        });
+                    } else if (answer === 'student') {
+                        checklist.push({
+                            icon: '🎓',
+                            task: 'স্টুডেন্ট আইডি + NOC নিন',
+                            help: 'শিক্ষা প্রতিষ্ঠান থেকে অনুমতি পত্র এবং ছাত্র প্রমাণ সংগ্রহ করুন।',
+                            priority: 'medium'
+                        });
+                    }
+                }
+
+                if (question.id === 'bank_balance') {
+                    if (answer === 'less-50k') {
+                        checklist.push({
+                            icon: '💰',
+                            task: '৬ মাসের ব্যাংক স্টেটমেন্ট প্রস্তুত করুন',
+                            help: 'নিয়মিত লেনদেন + স্থিতিশীল ব্যালেন্স দেখান। স্পন্সরশিপ লেটার যোগ করুন।',
+                            priority: 'high'
+                        });
+                    } else if (answer === '50k-2lakh') {
+                        checklist.push({
+                            icon: '📊',
+                            task: 'ব্যাংক স্টেটমেন্ট সুন্দরভাবে সাজান',
+                            help: '৬ মাসের স্টেটমেন্ট + স্পন্সরশিপ (পরিবার থেকে) যোগ করলে ভালো হবে।',
+                            priority: 'medium'
+                        });
+                    }
+                }
+
+                if (question.id === 'property_ownership') {
+                    if (answer === 'no') {
+                        checklist.push({
+                            icon: '🏠',
+                            task: 'পরিবারের সম্পত্তির কাগজ সংগ্রহ করুন',
+                            help: 'নিজের না থাকলেও পরিবারের সম্পত্তি দেখাতে পারবেন (বাবা/মা এর নামে)।',
+                            priority: 'medium'
+                        });
+                    }
+                }
+
+                if (question.id === 'previous_travel') {
+                    if (answer === 'never' || answer === 'no') {
+                        checklist.push({
+                            icon: '✈️',
+                            task: 'ট্রাভেল হিস্ট্রি না থাকা ব্যাখ্যা করুন',
+                            help: 'প্রথম ভ্রমণের উদ্দেশ্য স্পষ্ট করুন + পরিবারের সাথে সম্পর্ক দেখান।',
+                            priority: 'low'
+                        });
+                    }
+                }
+
+                if (question.id === 'return_ticket') {
+                    if (answer === false || answer === 'no') {
+                        checklist.push({
+                            icon: '🎫',
+                            task: 'রিফান্ডেবল রিটার্ন টিকেট বুক করুন',
+                            help: 'ভিসা অনুমোদনের আগে রিফান্ডেবল টিকেট বুক করুন। goFLY সাহায্য করবে।',
+                            priority: 'high'
+                        });
+                    }
+                }
+
+                if (question.id === 'hotel_booking') {
+                    if (answer === false || answer === 'no') {
+                        checklist.push({
+                            icon: '🏨',
+                            task: 'হোটেল রিজার্ভেশন করুন',
+                            help: 'ভিসার জন্য ফ্রি ক্যান্সেলযোগ্য হোটেল বুকিং দেখান।',
+                            priority: 'medium'
+                        });
+                    }
+                }
+
+                if (question.id === 'travel_insurance') {
+                    if (answer === false || answer === 'no') {
+                        checklist.push({
+                            icon: '🛡️',
+                            task: 'ট্রাভেল ইন্স্যুরেন্স করুন',
+                            help: 'অনেক দেশে বাধ্যতামূলক। goFLY কম খরচে সাহায্য করতে পারে।',
+                            priority: 'high'
+                        });
+                    }
+                }
+            });
+
+            // Always add these general items
+            checklist.push({
+                icon: '📸',
+                task: 'সকল ডকুমেন্টের স্ক্যান কপি প্রস্তুত রাখুন',
+                help: 'উচ্চ রেজোলিউশন PDF ফরম্যাটে সব কাগজ সাজান।',
+                priority: 'low'
+            });
+
+            if (selectedCountry.difficulty === 'hard' || selectedCountry.difficulty === 'very-hard') {
+                checklist.push({
+                    icon: '🎤',
+                    task: 'ইন্টারভিউ প্রস্তুতি নিন',
+                    help: 'goFLY-এর ফ্রি মক ইন্টারভিউ সেশনে যোগ দিন।',
+                    priority: 'high'
+                });
+            }
+
+            checklist.push({
+                icon: '☎️',
+                task: 'goFLY এর সাথে ফ্রি কনসালটেশন নিন',
+                help: '০৯৬৩৯-২০৩০৯০ এ কল করুন অথবা WhatsApp এ মেসেজ দিন।',
+                priority: 'low'
+            });
+
+            return checklist;
+        }
+
+        function getAlternativeCountries() {
+            // Find easier countries than currently selected
+            const currentDifficultyIndex = ['easy', 'medium', 'hard', 'very-hard'].indexOf(selectedCountry.difficulty);
+
+            // Get all countries with easier difficulty
+            const easierCountries = COUNTRIES.filter(country => {
+                const countryDifficultyIndex = ['easy', 'medium', 'hard', 'very-hard'].indexOf(country.difficulty);
+                return countryDifficultyIndex < currentDifficultyIndex;
+            });
+
+            // If current is already easy, suggest other easy countries
+            if (easierCountries.length === 0) {
+                return COUNTRIES.filter(country =>
+                    country.difficulty === 'easy' && country.id !== selectedCountry.id
+                ).slice(0, 3);
+            }
+
+            // Return top 3 easier countries (prioritize easy over medium)
+            return easierCountries
+                .sort((a, b) => {
+                    const diffOrder = ['easy', 'medium', 'hard', 'very-hard'];
+                    return diffOrder.indexOf(a.difficulty) - diffOrder.indexOf(b.difficulty);
+                })
+                .slice(0, 3);
         }
 
         function getTips() {
