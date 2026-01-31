@@ -13,10 +13,6 @@
           "value": "nosniff"
         },
         {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self' https://goflybd.com https://*.goflybd.com http://localhost:*"
-        },
-        {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
         },
