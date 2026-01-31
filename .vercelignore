@@ -14,3 +14,4 @@ fluent-forms-integration.js
 # System files
 .DS_Store
 Thumbs.db
+# Trigger Vercel deployment
