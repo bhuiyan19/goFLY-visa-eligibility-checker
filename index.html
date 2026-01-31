@@ -543,10 +543,10 @@
         };
 
         const DIFFICULTY_CONFIG = {
-            easy: {label:'সহজ ভিসা',sublabel:'দ্রুত সার্ভিস',emoji:'⚡',color:'text-green-700',bgColor:'bg-green-100 border-green-200',tabActive:'bg-green-600 text-white shadow-lg',salesTag:'২-৭ দিনে',description:'VOA বা eVisa, সহজ প্রসেস'},
-            medium: {label:'স্ট্যান্ডার্ড',sublabel:'গাইডেড সাপোর্ট',emoji:'📋',color:'text-blue-700',bgColor:'bg-blue-100 border-blue-200',tabActive:'bg-blue-500 text-white shadow-lg',salesTag:'৯৫% সাকসেস',description:'স্ট্যান্ডার্ড প্রসেস, ভালো ডকুমেন্ট দরকার'},
-            hard: {label:'প্রিমিয়াম',sublabel:'এক্সপার্ট সাপোর্ট',emoji:'⭐',color:'text-purple-700',bgColor:'bg-purple-100 border-purple-200',tabActive:'bg-purple-600 text-white shadow-lg',salesTag:'৯০% সাকসেস',description:'উন্নত দেশ, আমাদের বিশেষজ্ঞরা আছেন'},
-            'very-hard': {label:'এক্সক্লুসিভ',sublabel:'ভিআইপি সার্ভিস',emoji:'🏆',color:'text-orange-700',bgColor:'bg-gradient-to-r from-orange-100 to-amber-100 border-orange-300',tabActive:'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg',salesTag:'বিশেষজ্ঞ টিম',description:'USA/UK/Canada/Australia, ভিআইপি সাপোর্ট'}
+            easy: {label:'দ্রুত সার্ভিস',sublabel:'দ্রুত সার্ভিস (Quick)',emoji:'⚡',color:'text-green-700',bgColor:'bg-green-100 border-green-200',tabActive:'bg-green-600 text-white shadow-lg',salesTag:'২-৭ দিনে ভিসা',description:'দ্রুত ও ঝামেলামুক্ত প্রসেসিং'},
+            medium: {label:'গাইডেড',sublabel:'গাইডেড সাপোর্ট',emoji:'📋',color:'text-blue-700',bgColor:'bg-blue-100 border-blue-200',tabActive:'bg-blue-500 text-white shadow-lg',salesTag:'৯৫% সাকসেস রেট',description:'স্ট্যান্ডার্ড প্রসেস, সঠিক গাইডেন্স'},
+            hard: {label:'প্রিমিয়াম',sublabel:'প্রিমিয়াম সাপোর্ট',emoji:'⭐',color:'text-purple-700',bgColor:'bg-purple-100 border-purple-200',tabActive:'bg-purple-600 text-white shadow-lg',salesTag:'৯০% সাকসেস রেট',description:'উন্নত দেশ, এক্সপার্ট গাইডেন্স'},
+            'very-hard': {label:'এক্সপার্ট',sublabel:'এক্সপার্ট টিম',emoji:'🏆',color:'text-orange-700',bgColor:'bg-gradient-to-r from-orange-100 to-amber-100 border-orange-300',tabActive:'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-lg',salesTag:'বিশেষজ্ঞ সাপোর্ট',description:'USA/UK/Canada/Australia - ডেডিকেটেড এক্সপার্ট'}
         };
 
         // === STATE ===
@@ -633,7 +633,7 @@
                 <div class="space-y-6 animate-slide-in">
                     <div class="text-center space-y-3">
                         <h2 class="text-2xl md:text-3xl font-bold text-gray-800">কোন দেশে যেতে চান?</h2>
-                        <p class="text-gray-600">আপনার গন্তব্য দেশ নির্বাচন করুন</p>
+                        <p class="text-gray-600">আপনার গন্তব্য দেশ নির্বাচন করুন - ভিসার কঠিনতা অনুযায়ী সাজানো</p>
                     </div>
 
                     <div class="bg-white rounded-2xl shadow-lg p-2">
@@ -665,7 +665,7 @@
                             <span class="text-2xl sm:text-3xl" aria-hidden="true">${config.emoji}</span>
                             <div class="flex-1 min-w-0">
                                 <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                                    <h3 class="font-bold ${config.color} text-sm sm:text-base">${config.label}</h3>
+                                    <h3 class="font-bold ${config.color} text-sm sm:text-base">${config.sublabel}</h3>
                                     <span class="bg-white/80 text-xs font-semibold px-2 py-0.5 sm:py-1 rounded-full text-orange-600 self-start">🔥 ${config.salesTag}</span>
                                 </div>
                                 <p class="text-xs text-gray-600 leading-snug">${config.description}</p>
@@ -674,6 +674,19 @@
                                 <span class="text-xl sm:text-2xl font-bold ${config.color} block">${countries.length}</span>
                                 <span class="text-xs sm:text-sm text-gray-500">টি দেশ</span>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border-2 border-green-200 rounded-xl p-3 sm:p-4">
+                        <div class="flex items-start gap-2">
+                            <span class="text-green-600 text-lg flex-shrink-0">✅</span>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-700"><strong class="text-green-700">goFLY সুবিধা:</strong> ঝামেলামুক্ত আবেদন, ডকুমেন্ট চেক, ট্র্যাকিং সাপোর্ট</p>
+                            </div>
+                            <a href="https://wa.me/8809639203090" target="_blank" class="flex-shrink-0 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold px-3 py-2 rounded-lg transition-all flex items-center gap-1">
+                                <span>💬</span>
+                                <span>জিজ্ঞাসা করুন</span>
+                            </a>
                         </div>
                     </div>
 
