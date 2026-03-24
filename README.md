@@ -1,8 +1,9 @@
 # goFLY Visa Eligibility Checker
 
-**Version:** 1.0.0
+**Version:** 2.0 (Cleaned & Organized)
 **Rating:** 9.7/10 ⭐⭐⭐⭐⭐
 **Status:** ✅ Production Ready
+**Live URL:** https://bhuiyan19.github.io/goFLY-visa-eligibility-checker/
 
 A professional visa eligibility assessment tool for Bangladeshi passport holders, featuring 40 countries with intelligent scoring and lead capture.
 
@@ -74,15 +75,34 @@ Upload all files to your web server's public directory. That's it!
 
 ```
 goFLY-visa-eligibility-checker/
-├── index.html                          # Main application (all-in-one)
+├── index.html                          # Main application (117KB, production-ready)
 ├── vercel.json                         # Vercel configuration
-├── package.json                        # Project metadata
-├── FINAL_RATING.md                     # Comprehensive rating (9.7/10)
-├── FLUENT_FORMS_INTEGRATION.md         # Backend integration guide
-├── fluent-forms-integration.js         # Integration code
-├── wordpress-backend.php               # WordPress backend
-└── README.md                           # This file
+├── README.md                           # This file
+├── PROJECT_STRUCTURE.md                # Detailed project structure guide
+│
+├── api/
+│   └── api.php                         # Production API for WordPress
+│
+├── wordpress/
+│   ├── template-seo-optimized.php      # SEO-optimized template
+│   └── backend.php                     # WordPress backend handler
+│
+├── docs/                               # Essential documentation
+│   ├── FINAL_RATING.md                 # 9.7/10 rating analysis
+│   ├── FLUENT_FORMS_INTEGRATION.md     # Backend setup guide
+│   ├── FLUENT_FORMS_COMPLETE_FIELDS.md # Form field mapping
+│   ├── EMAIL_SETUP_COMPLETE_GUIDE.md   # Email configuration
+│   ├── SEO_GUIDE.md                    # SEO optimization
+│   └── DEPLOYMENT_READY.md             # Deployment checklist
+│
+└── archive/                            # Archived files (for reference)
+    ├── old-docs/                       # Old documentation
+    ├── old-apis/                       # Previous API versions
+    ├── old-wordpress/                  # Old WordPress templates
+    └── test-files/                     # Test files
 ```
+
+📘 **See [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) for detailed structure explanation**
 
 ---
 
@@ -104,31 +124,40 @@ goFLY-visa-eligibility-checker/
 
 For production lead capture, integrate with WordPress/Fluent Forms:
 
-1. **Read:** `FLUENT_FORMS_INTEGRATION.md`
-2. **Deploy:** `wordpress-backend.php` to your WordPress site
-3. **Configure:** Update `WORDPRESS_URL` and `FORM_ID`
-4. **Test:** Submit a test lead
+1. **Read:** `docs/FLUENT_FORMS_INTEGRATION.md`
+2. **Upload:** `api/api.php` to `/wp-content/themes/travel-agency/visa-checker-api/`
+3. **Configure:** Add 28 fields to Fluent Forms (Form ID: 12)
+4. **Setup Email:** Configure notifications to goflybd@gmail.com
+5. **Test:** Submit a test lead
 
-See complete guide in `FLUENT_FORMS_INTEGRATION.md`
+📘 **Complete guide:** [docs/FLUENT_FORMS_INTEGRATION.md](docs/FLUENT_FORMS_INTEGRATION.md)
 
 ---
 
 ## 📊 Performance
 
-- **File Size:** 45KB (extremely lightweight)
+- **File Size:** 117KB (optimized)
 - **Load Time:** <0.5s (First Contentful Paint)
 - **Mobile Score:** 9.9/10
 - **Accessibility:** WCAG 2.1 AA compliant
 - **SEO Score:** 9.5/10
+- **Countries:** 40 (strategically selected)
+- **Form Fields:** 28 (comprehensive lead capture)
 
 ---
 
 ## 🎓 Documentation
 
-- **FINAL_RATING.md** - Comprehensive 9.7/10 rating analysis
-- **FLUENT_FORMS_INTEGRATION.md** - Backend setup guide
-- **TOOL_RATING.md** - Initial 9.2/10 rating
-- **UI_UX_ANALYSIS.md** - Detailed UX analysis
+All documentation is organized in the `/docs` folder:
+
+- **[FINAL_RATING.md](docs/FINAL_RATING.md)** - Comprehensive 9.7/10 rating analysis
+- **[FLUENT_FORMS_INTEGRATION.md](docs/FLUENT_FORMS_INTEGRATION.md)** - Backend setup guide
+- **[FLUENT_FORMS_COMPLETE_FIELDS.md](docs/FLUENT_FORMS_COMPLETE_FIELDS.md)** - 28 form fields mapping
+- **[EMAIL_SETUP_COMPLETE_GUIDE.md](docs/EMAIL_SETUP_COMPLETE_GUIDE.md)** - Email notifications
+- **[SEO_GUIDE.md](docs/SEO_GUIDE.md)** - SEO optimization strategies
+- **[DEPLOYMENT_READY.md](docs/DEPLOYMENT_READY.md)** - Deployment checklist
+
+📁 **Old docs:** Archived in `/archive/old-docs` for reference
 
 ---
 
