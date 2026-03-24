@@ -5,8 +5,7 @@
   "description": "Visa eligibility checker for goFLY",
   "main": "index.html",
   "scripts": {
-    "dev": "vercel dev",
-    "build": "vercel build"
+    "dev": "vercel dev"
   },
   "keywords": [
     "visa",
