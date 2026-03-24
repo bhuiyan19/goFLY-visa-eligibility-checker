@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>বাংলাদেশী ভিসা চেকার | BD Visa Eligibility Tool - goFLY</title>
-    <meta name="description" content="বাংলাদেশী পাসপোর্ট ধারীদের জন্য ভিসা যোগ্যতা যাচাই টুল। ৪২টি দেশের জন্য। goFLY Limited - Since 2017">
+    <meta name="description" content="বাংলাদেশী পাসপোর্ট ধারীদের জন্য ভিসা যোগ্যতা যাচাই টুল। ৪০টি দেশের জন্য। goFLY Limited - Since 2017">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇧🇩</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -188,7 +188,7 @@
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                 <div class="bg-white rounded-lg p-3 shadow-sm">
                     <div class="text-lg font-bold text-amber-600">⭐ 4.8</div>
-                    <div class="text-xs text-gray-500">431+ Reviews</div>
+                    <div class="text-xs text-gray-500">450+ Reviews</div>
                 </div>
                 <div class="bg-white rounded-lg p-3 shadow-sm">
                     <div class="text-lg font-bold text-blue-600">👥 10k+</div>
@@ -222,7 +222,6 @@
         // === DATA ===
         const COUNTRIES = [
             {id:'nepal',name:'Nepal',nameBn:'নেপাল',flag:'🇳🇵',difficulty:'easy',visaType:'Visa on Arrival',processingTime:'তাৎক্ষণিক',description:'ভিসা অন অ্যারাইভাল'},
-            {id:'maldives',name:'Maldives',nameBn:'মালদ্বীপ',flag:'🇲🇻',difficulty:'easy',visaType:'Visa on Arrival',processingTime:'তাৎক্ষণিক',description:'৩০ দিন ফ্রি VOA'},
             {id:'sri-lanka',name:'Sri Lanka',nameBn:'শ্রীলঙ্কা',flag:'🇱🇰',difficulty:'easy',visaType:'ETA Online',processingTime:'১-২ দিন',description:'অনলাইন ETA'},
             {id:'vietnam',name:'Vietnam',nameBn:'ভিয়েতনাম',flag:'🇻🇳',difficulty:'easy',visaType:'e-Visa',processingTime:'৩-৫ দিন',description:'৯০ দিন | goFLY: ৯৫% সাকসেস'},
             {id:'turkey',name:'Turkey',nameBn:'তুরস্ক',flag:'🇹🇷',difficulty:'medium',visaType:'e-Visa (শর্তসাপেক্ষ)',processingTime:'৩-৫ দিন',description:'Schengen/US/UK visa লাগবে'},
@@ -241,7 +240,7 @@
             {id:'hong-kong',name:'Hong Kong',nameBn:'হংকং',flag:'🇭🇰',difficulty:'medium',visaType:'PAR',processingTime:'৩-৫ দিন',description:'১৪ দিন PAR'},
             {id:'pakistan',name:'Pakistan',nameBn:'পাকিস্তান',flag:'🇵🇰',difficulty:'medium',visaType:'eVisa',processingTime:'৫-৭ দিন',description:'৩০ দিন'},
             {id:'japan',name:'Japan',nameBn:'জাপান',flag:'🇯🇵',difficulty:'hard',visaType:'Tourist Visa',processingTime:'৭-১৫ দিন',description:'goFLY: ৯০%'},
-            {id:'schengen',name:'Schengen',nameBn:'শেনজেন',flag:'🇪🇺',difficulty:'hard',visaType:'Short Stay (Type C)',processingTime:'১৫-৬০ দিন',description:'২০২৬ থেকে অনলাইন | goFLY: ৯০%'},
+            {id:'schengen',name:'Schengen',nameBn:'শেনজেন',flag:'🇪🇺',difficulty:'hard',visaType:'Short Stay (Type C)',processingTime:'১৫-৬০ দিন',description:'goFLY: ৯০%'},
             {id:'france',name:'France',nameBn:'ফ্রান্স',flag:'🇫🇷',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
             {id:'germany',name:'Germany',nameBn:'জার্মানি',flag:'🇩🇪',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
             {id:'italy',name:'Italy',nameBn:'ইতালি',flag:'🇮🇹',difficulty:'hard',visaType:'Schengen',processingTime:'১৫-৩০ দিন',description:'goFLY: ৯০%'},
@@ -261,8 +260,7 @@
             {id:'uk',name:'United Kingdom',nameBn:'যুক্তরাজ্য (UK)',flag:'🇬🇧',difficulty:'very-hard',visaType:'Visitor Visa',processingTime:'১৫-২০ দিন',description:'goFLY: ৯০%'},
             {id:'usa',name:'United States',nameBn:'যুক্তরাষ্ট্র (USA)',flag:'🇺🇸',difficulty:'very-hard',visaType:'B1/B2 Visa',processingTime:'ইন্টারভিউ নির্ভর',description:'⚠️ Visa Bond $5k-$15k | Jan 2026 থেকে'},
             {id:'canada',name:'Canada',nameBn:'কানাডা',flag:'🇨🇦',difficulty:'very-hard',visaType:'Visitor (TRV)',processingTime:'৩০+ দিন',description:'goFLY: ৯০%'},
-            {id:'australia',name:'Australia',nameBn:'অস্ট্রেলিয়া',flag:'🇦🇺',difficulty:'very-hard',visaType:'Visitor (600)',processingTime:'২০-৪০ দিন',description:'goFLY: ৯০%'},
-            {id:'new-zealand',name:'New Zealand',nameBn:'নিউজিল্যান্ড',flag:'🇳🇿',difficulty:'very-hard',visaType:'Visitor',processingTime:'২০-৪৫ দিন',description:'এক্সপার্ট সার্ভিস'}
+            {id:'australia',name:'Australia',nameBn:'অস্ট্রেলিয়া',flag:'🇦🇺',difficulty:'very-hard',visaType:'Visitor (600)',processingTime:'২০-৪০ দিন',description:'goFLY: ৯০%'}
         ];
 
         // Country URL mapping for internal linking
@@ -830,8 +828,8 @@
                 <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6 animate-slide-in">
                     <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-4 sm:p-6 text-center space-y-3">
                         <span class="text-4xl sm:text-5xl">🎊</span>
-                        <h2 class="text-xl sm:text-2xl font-bold text-gray-800">অভিনন্দন! আপনার মূল্যায়ন সম্পন্ন!</h2>
-                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">আপনার রেজাল্ট দেখতে এবং বিশেষজ্ঞ পরামর্শ পেতে আপনার তথ্য দিন</p>
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-800">🎉 প্রায় শেষ! আপনার তথ্য দিন</h2>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">আপনার রেজাল্ট দেখতে এবং বিশেষজ্ঞ পরামর্শ পেতে নিচের তথ্য দিন</p>
                     </div>
 
                     <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 space-y-4">
@@ -884,7 +882,7 @@
                             <button
                                 type="submit"
                                 class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 sm:py-4 rounded-xl font-bold hover:from-green-700 hover:to-green-800 transition-all shadow-lg text-sm sm:text-base">
-                                📊 রেজাল্ট দেখুন (${percentage}%)
+                                📊 রেজাল্ট দেখুন
                             </button>
                         </form>
 
@@ -1038,7 +1036,7 @@
                             </div>
                             <div class="text-center">
                                 <div class="text-2xl font-bold">৪.৮⭐</div>
-                                <div class="text-xs text-green-200">৪৩১+ রিভিউ</div>
+                                <div class="text-xs text-green-200">৪৫০+ রিভিউ</div>
                             </div>
                             <div class="text-center">
                                 <div class="text-2xl font-bold">৯০%+</div>
@@ -1124,7 +1122,7 @@
                     <div class="bg-white rounded-2xl shadow-lg p-6 space-y-4">
                         <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
                             <span>⭐</span> goFLY কাস্টমার রিভিউ
-                            <span class="text-sm font-normal text-gray-500">(৪৩১+ Google Reviews)</span>
+                            <span class="text-sm font-normal text-gray-500">(৪৫০+ Google Reviews)</span>
                         </h3>
                         <div class="space-y-3">
                             <div class="bg-gray-50 p-4 rounded-xl">
@@ -1153,7 +1151,7 @@
                             </div>
                         </div>
                         <a href="https://g.page/r/gofly-limited/review" target="_blank" rel="noopener noreferrer" class="block text-center text-green-600 hover:text-green-700 text-sm font-medium">
-                            সব ৪৩১+ রিভিউ দেখুন →
+                            সব ৪৫০+ রিভিউ দেখুন →
                         </a>
                     </div>
                 </div>

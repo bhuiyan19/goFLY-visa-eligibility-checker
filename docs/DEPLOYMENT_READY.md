@@ -13,7 +13,7 @@
 ## What's Included
 
 ### Frontend (index.html)
-- ✅ Complete visa eligibility checker (42 countries)
+- ✅ Complete visa eligibility checker (40 countries)
 - ✅ Lead capture form (Name, Phone, Email)
 - ✅ WordPress integration via API
 - ✅ Sends all questions & answers to Fluent Forms

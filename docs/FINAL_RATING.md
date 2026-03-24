@@ -27,8 +27,8 @@ The goFLY Visa Eligibility Checker has evolved from an excellent tool (9.2/10) t
    - **Impact:** Expected 15-25% increase in premium service conversions
 
 2. **✅ Strategic Country Optimization** (+0.1)
-   - Reduced from 42 to 40 countries (removed Maldives, New Zealand)
-   - Focused on high-conversion markets
+   - Optimized to 40 countries (removed Maldives, New Zealand)
+   - Focused on high-conversion markets with goFLY support
    - **Impact:** Better resource allocation, improved user clarity
 
 3. **✅ SEO Internal Linking** (+0.2)

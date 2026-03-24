@@ -46,7 +46,7 @@ get_header();
   "name": "goFLY Visa Eligibility Checker",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web Browser",
-  "description": "Free AI-powered visa eligibility checker for Bangladeshi passport holders. Check eligibility for 42 countries including Malaysia, Dubai, Thailand, Singapore, USA, UK, Canada, Australia in 30 seconds.",
+  "description": "Free AI-powered visa eligibility checker for Bangladeshi passport holders. Check eligibility for 40 countries including Malaysia, Dubai, Thailand, Singapore, USA, UK, Canada, Australia in 30 seconds.",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -91,7 +91,7 @@ get_header();
     "AI-powered eligibility scoring",
     "Document checklist generator",
     "WhatsApp expert consultation",
-    "42 countries coverage"
+    "40 countries coverage"
   ],
   "screenshot": "https://goflybd.com/wp-content/uploads/visa-checker-screenshot.jpg"
 }
@@ -116,7 +116,7 @@ get_header();
       "name": "Which countries can I check visa eligibility for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "You can check visa eligibility for 42 countries across 4 categories: (1) Quick Service - Maldives, Bhutan, Nepal, Sri Lanka, Cambodia, Malaysia, Thailand, Vietnam, Indonesia, Philippines, (2) Guided Support - Turkey, Singapore, Georgia, UAE Dubai, Oman, Qatar, Saudi Arabia, Egypt, (3) Premium - Italy, France, Spain, Germany, Greece, Switzerland (Schengen), (4) Expert Team - USA, UK, Canada, Australia, New Zealand, Japan, South Korea."
+        "text": "You can check visa eligibility for 40 countries across 4 categories: (1) Quick Service - Maldives, Bhutan, Nepal, Sri Lanka, Cambodia, Malaysia, Thailand, Vietnam, Indonesia, Philippines, (2) Guided Support - Turkey, Singapore, Georgia, UAE Dubai, Oman, Qatar, Saudi Arabia, Egypt, (3) Premium - Italy, France, Spain, Germany, Greece, Switzerland (Schengen), (4) Expert Team - USA, UK, Canada, Australia, New Zealand, Japan, South Korea."
       }
     },
     {
@@ -153,13 +153,13 @@ get_header();
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "How to Check Visa Eligibility for Bangladesh Passport",
-  "description": "Step-by-step guide to check visa eligibility for 42 countries using goFLY free tool",
+  "description": "Step-by-step guide to check visa eligibility for 40 countries using goFLY free tool",
   "totalTime": "PT30S",
   "step": [
     {
       "@type": "HowToStep",
       "name": "Select Destination Country",
-      "text": "Choose your desired destination from 42 countries organized by difficulty: Quick Service (VOA/eVisa), Guided Support, Premium (Schengen), or Expert Team (USA/UK/Canada/Australia)",
+      "text": "Choose your desired destination from 40 countries organized by difficulty: Quick Service (VOA/eVisa), Guided Support, Premium (Schengen), or Expert Team (USA/UK/Canada/Australia)",
       "image": "https://goflybd.com/wp-content/uploads/step1-select-country.jpg"
     },
     {
@@ -386,7 +386,7 @@ h3{font-size:1.4rem!important;margin:0 0 12px;font-weight:600!important}
  <div class="container">
   <h2>Complete Guide: Visa Eligibility Checker for Bangladesh Passport Holders</h2>
 
-  <p><strong>Looking to check your visa eligibility for your dream destination?</strong> Our free AI-powered visa eligibility checker helps Bangladeshi passport holders instantly assess their chances of getting a visa for 42 countries including popular destinations like <strong>Malaysia, Dubai, Thailand, Singapore, USA, UK, Canada, and Australia</strong>. Get your personalized eligibility score, required documents checklist, and expert recommendations in just 30 seconds.</p>
+  <p><strong>Looking to check your visa eligibility for your dream destination?</strong> Our free AI-powered visa eligibility checker helps Bangladeshi passport holders instantly assess their chances of getting a visa for 40 countries including popular destinations like <strong>Malaysia, Dubai, Thailand, Singapore, USA, UK, Canada, and Australia</strong>. Get your personalized eligibility score, required documents checklist, and expert recommendations in just 30 seconds.</p>
 
   <h3>🌍 42 Countries You Can Check - Complete List with Visa Types</h3>
 

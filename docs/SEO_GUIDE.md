@@ -37,7 +37,7 @@ wordpress-template-SEO-OPTIMIZED.php
 
 ### 2️⃣ Hidden SEO Content ✅
 
-**৪২টি দেশের সম্পূর্ণ তালিকা** - visually hidden কিন্তু Google index করবে:
+**৪০টি দেশের সম্পূর্ণ তালিকা** - visually hidden কিন্তু Google index করবে:
 - মালদ্বীপ ভিসা, ভুটান ভিসা, নেপাল ভিসা...
 - USA ভিসা, UK ভিসা, Canada ভিসা...
 - সব category এবং country names
@@ -162,7 +162,7 @@ FAQ schema এর কারণে Google "People Also Ask" section এ show হ�
 <meta name="googlebot" content="index, follow">
 
 <!-- Open Graph for Social Sharing -->
-<meta property="og:title" content="goFLY Visa Checker - ৪২টি দেশের ভিসা চেক করুন">
+<meta property="og:title" content="goFLY Visa Checker - ৪০টি দেশের ভিসা চেক করুন">
 <meta property="og:description" content="বাংলাদেশী পাসপোর্ট ধারীদের জন্য ফ্রি ভিসা যোগ্যতা যাচাই টুল">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://gofly-visa-eligibility-checker.vercel.app/">
@@ -211,7 +211,7 @@ https://search.google.com/test/rich-results
 
 এই template ব্যবহার করলে:
 - ✅ Google আপনার page এর সব content index করবে
-- ✅ ৪২টি দেশের নাম searchable হবে
+- ✅ ৪০টি দেশের নাম searchable হবে
 - ✅ Rich results show হবে
 - ✅ Organic traffic বাড়বে
 - ✅ iframe functionality ঠিক থাকবে (কোন পরিবর্তন নাই)
