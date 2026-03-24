@@ -13,8 +13,5 @@
     "checker"
   ],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "resend": "^3.2.0"
-  }
+  "license": "ISC"
 }

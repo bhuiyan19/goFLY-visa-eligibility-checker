@@ -1308,6 +1308,9 @@
         }
 
         async function submitToWordPress(leadInfo) {
+            const WORDPRESS_URL = 'https://goflybd.com';
+            const THEME_NAME = 'travel-agency';
+
             // Get question details with answers
             const questionsData = QUESTIONS[selectedCountry.difficulty];
             const answersWithLabels = {};
@@ -1332,7 +1335,7 @@
 
             try {
                 const response = await fetch(
-                    '/api/submit',
+                    `${WORDPRESS_URL}/wp-content/themes/${THEME_NAME}/visa-checker-api/api.php`,
                     {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
