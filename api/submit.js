@@ -1,7 +1,9 @@
 /**
  * Visa Checker API - Vercel Serverless Function
- * Handles form submissions and stores data
+ * Handles form submissions and sends email notifications
  */
+
+import { Resend } from 'resend';
 
 export default async function handler(req, res) {
   // CORS headers
@@ -90,12 +92,61 @@ export default async function handler(req, res) {
         }
       };
 
-      // In a production environment, you would:
-      // 1. Save to a database (Vercel Postgres, MongoDB, etc.)
-      // 2. Send email notifications
-      // 3. Integrate with CRM/marketing tools
+      // Send email notification
+      try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
 
-      // For now, we'll just log and return success
+        // Format answers for email
+        let answersHtml = '';
+        if (answers && Object.keys(answers).length > 0) {
+          answersHtml = '<h3>প্রশ্ন ও উত্তর:</h3><ul>';
+          let qNum = 1;
+          for (const [qid, qdata] of Object.entries(answers)) {
+            if (qdata.question && qdata.answer) {
+              answersHtml += `<li><strong>Q${qNum}:</strong> ${qdata.question}<br><strong>উত্তর:</strong> ${qdata.answer}</li>`;
+              qNum++;
+            }
+          }
+          answersHtml += '</ul>';
+        }
+
+        await resend.emails.send({
+          from: 'goFLY Visa Checker <onboarding@resend.dev>',
+          to: ['goflybd@gmail.com'],
+          subject: `🎯 New Lead: ${name} - ${country || 'Country not selected'}`,
+          html: `
+            <h2>নতুন লিড সাবমিশন</h2>
+            <p><strong>Submission ID:</strong> ${submissionData.id}</p>
+            <hr>
+            <h3>ব্যক্তিগত তথ্য:</h3>
+            <ul>
+              <li><strong>নাম:</strong> ${name}</li>
+              <li><strong>ফোন:</strong> ${phone}</li>
+              <li><strong>ইমেইল:</strong> ${email || 'N/A'}</li>
+            </ul>
+            <h3>ভিসা তথ্য:</h3>
+            <ul>
+              <li><strong>দেশ:</strong> ${country || 'N/A'}</li>
+              <li><strong>Country ID:</strong> ${countryId || 'N/A'}</li>
+              <li><strong>Difficulty:</strong> ${difficulty || 'N/A'}</li>
+              <li><strong>Score:</strong> ${score}</li>
+              <li><strong>Percentage:</strong> ${percentage}%</li>
+            </ul>
+            ${answersHtml}
+            <hr>
+            <p><strong>IP:</strong> ${ip}</p>
+            <p><strong>User Agent:</strong> ${userAgent.substring(0, 100)}</p>
+            <p><strong>Submitted at:</strong> ${submissionData.metadata.submittedAt}</p>
+          `
+        });
+
+        console.log('✅ Email sent successfully');
+      } catch (emailError) {
+        // Log error but don't fail the request
+        console.error('⚠️ Email sending failed:', emailError.message);
+      }
+
+      // Log submission (backup)
       console.log('✅ Submission processed:', submissionData);
 
       // Return success response
