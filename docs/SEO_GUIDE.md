@@ -112,7 +112,7 @@ Sitemap: https://yoursite.com/sitemap.xml
 ### ✅ Indexed Content:
 
 1. **Main page title**: "Check Visa Options & Difficulty for 40+ Countries"
-2. **All 42 country names**: মালয়েশিয়া ভিসা, দুবাই ভিসা, USA ভিসা etc.
+2. **All 40 country names**: মালয়েশিয়া ভিসা, দুবাই ভিসা, USA ভিসা etc.
 3. **Services list**: All services আপনি provide করেন
 4. **FAQ content**: 4টি questions এবং answers
 5. **Benefits**: কেন goFLY বেছে নেবেন
@@ -130,7 +130,7 @@ Sitemap: https://yoursite.com/sitemap.xml
 ## 🎯 Expected SEO Benefits:
 
 ### 1. **Rich Results in Google:**
-- ⭐ Star ratings show হবে (4.8★ with 10,000 reviews)
+- ⭐ Star ratings show হবে (4.8★ with 463+ reviews)
 - ❓ FAQ accordion show হবে
 - 📱 Software application info show হবে
 

@@ -119,7 +119,7 @@ The goFLY Visa Eligibility Checker has evolved from an excellent tool (9.2/10) t
 **Major Updates:**
 - ✅ **2026 Verified Data:** All 40 countries updated with latest info
 - ✅ **USA Visa Bond:** $5k-$15k requirement from Jan 21, 2026
-- ✅ **Schengen 2026:** Online application note added
+- ✅ **Schengen:** Accurate visa info (online ETIAS note removed in March 2026 as it does not apply to Bangladeshi citizens)
 - ✅ **Turkey Conditional eVisa:** Correctly requires Schengen/US/UK visa
 - ✅ **Travel Insurance Accuracy:** Only shown for mandatory cases
 
@@ -157,7 +157,7 @@ The goFLY Visa Eligibility Checker has evolved from an excellent tool (9.2/10) t
 - ✅ Lead capture at perfect psychological moment (after commitment, before reward)
 - ✅ Only 2 required fields (name, phone)
 - ✅ Privacy assurance message
-- ✅ Score percentage on submit button (motivation)
+- ✅ Clean submit button copy "রেজাল্ট দেখুন" (percentage hidden until results — improved in March 2026 for higher conversion)
 - ✅ Social proof throughout (10k+ customers, 4.8 rating)
 - ✅ Urgency (জানুয়ারি অফার banner)
 - ✅ Multiple CTAs (WhatsApp, Call, Guide links)
